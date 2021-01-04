@@ -1,0 +1,335 @@
+@import "../../sass/Helper/_variables.scss";
+#moviesSection {
+  padding-top: 120px;
+}
+.moviesSection {
+  width: 100%;
+  .nav-tabs {
+    margin: 0;
+    padding-top: 75px;
+    display: flex;
+    justify-content: center;
+    border: 0;
+    padding: 50px 15px 30px;
+    .active {
+      color: $color-orange-0;
+      font-size: 24px;
+    }
+    a {
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 24px;
+      height: 24px;
+      border: 0;
+      transition: 0.3s all;
+      &:hover {
+        text-decoration: none;
+        font-size: 24px;
+        color: $color-orange-0;
+      }
+    }
+  }
+  .moviesList {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    .movieColumn {
+      padding: 20px 10px 0;
+      margin: 0;
+      margin-bottom: 25px;
+      cursor: pointer;
+      .img__bg {
+        height: 21vw;
+        width: 14vw;
+        border-radius: 5px;
+      }
+      .movie__image {
+        position: relative;
+        width: 100%;
+        img:nth-child(1) {
+          height: 100%;
+          width: 100%;
+          border-radius: 5px;
+        }
+        #moviesLabel {
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 70%;
+          transform: translate(-50%, -50%);
+        }
+        .movie__point__label {
+          font-size: 16px;
+          background-color: rgba(12, 27, 54, 0.8);
+          border: 1px solid #1f2e46;
+          border-radius: 4px;
+          padding: 2px;
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          color: #fff;
+          text-align: center;
+          line-height: 1.1;
+          .movie__star {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            img {
+              width: 8px;
+              height: 8px;
+            }
+          }
+        }
+        .black__overlay {
+          position: absolute;
+          top: 0;
+          width: 14vw;
+          height: 21vw;
+          left: 0;
+          opacity: 0;
+          background: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0));
+          display: flex;
+          border-radius: 5px;
+          align-items: center;
+          justify-content: center;
+          button {
+            display: block;
+            width: 60px;
+            height: 60px;
+            border: 2px solid white;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            background: rgba(0, 0, 0, 0.39);
+            opacity: 0;
+            transition: 0.5s all;
+            svg {
+              color: white;
+            }
+          }
+        }
+      }
+      .movie__content {
+        position: relative;
+        .movie__name {
+          height: 42px;
+          max-height: 42px;
+          font-size: 16px;
+          color: #000;
+          line-height: 22px;
+          margin-bottom: 0;
+          margin: 15px 0;
+          font-weight: 500;
+          h4 {
+            font-weight: 500;
+            display: inline;
+          }
+          #redLabel {
+            color: #fff;
+            background-color: $color-orange-0;
+            border: 1px solid $color-orange-0;
+            border-radius: 5px;
+            margin-right: 8px;
+            padding: 0 5px;
+          }
+          #greenLabel {
+            color: #fff;
+            background-color: $color-green-0;
+            border: 1px solid $color-green-0;
+            border-radius: 5px;
+            margin-right: 8px;
+            padding: 0 5px;
+          }
+        }
+        .getTicket {
+          position: absolute;
+          top: -4px;
+          width: 100%;
+          button {
+            opacity: 0;
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+
+            font-size: 18px !important;
+            padding: 10px;
+            text-align: center;
+            background: linear-gradient(to left, #fb4226, #ce3017 100%);
+          }
+        }
+      }
+      &:hover {
+        .movie__image {
+          .black__overlay {
+            opacity: 1;
+            button {
+              opacity: 1;
+              outline: none;
+            }
+          }
+        }
+        .movie__content {
+          p {
+            opacity: 0;
+          }
+          .getTicket {
+            button {
+              opacity: 1;
+              outline: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  .listMovie__control {
+    position: relative;
+    .a__control {
+      cursor: pointer;
+      transform: translateY(-50%);
+      font-size: 60px;
+      opacity: 0.1;
+
+      &:hover {
+        color: $color-orange-0;
+        opacity: 1;
+      }
+      .fa-angle-left {
+        position: absolute;
+        left: -80px;
+        top: 50%;
+      }
+      .fa-angle-right {
+        position: absolute;
+        right: -80px;
+        top: 50%;
+      }
+    }
+  }
+}
+@media screen and (max-width: 576px) {
+  .comingSoon {
+    padding: 0;
+    .comingSoon__content {
+      .bookTicket {
+        display: none;
+      }
+      .moviesSection {
+        .nav-tabs {
+          margin-top: 100px;
+          .nav-item {
+            padding: 0;
+          }
+        }
+        #home-tab {
+          font-size: 16px;
+          &:focus {
+            font-size: 18px;
+          }
+        }
+        #myTabContent {
+          .moviesList {
+            .movieColumn {
+              // .movie__image {
+              //     // height: 125px;
+              // }
+              .movie__content {
+                display: none;
+                .getTicket {
+                  display: none;
+                }
+              }
+              &:hover {
+                .movie__image {
+                  .black__overlay {
+                    opacity: 1;
+                  }
+                }
+                .movie__content {
+                  p {
+                    opacity: 0;
+                  }
+                  .getTicket {
+                    button {
+                      opacity: 1;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .comingSoon {
+    padding: 0 100px;
+    .comingSoon__content {
+      .moviesSection {
+        .nav-tabs {
+          // margin-top: 100px;
+          .nav-item {
+            padding: 0;
+          }
+        }
+        #home-tab {
+          font-size: 16px;
+          &:focus {
+            font-size: 18px;
+          }
+        }
+        #myTabContent {
+          #playingMoviesCarousel,
+          #comingMoviesCarousel {
+            .left__control {
+              display: none;
+              .ion-ios-arrow-left {
+                display: none;
+              }
+            }
+            .right__control {
+              display: none;
+              .ion-ios-arrow-right {
+                display: none;
+              }
+            }
+          }
+          .moviesList {
+            .movieColumn {
+              // .movie__image {
+              //     // height: 125px;
+              // }
+              .movie__content {
+                display: none;
+                .getTicket {
+                  display: none;
+                }
+              }
+              &:hover {
+                .movie__image {
+                  .black__overlay {
+                    opacity: 1;
+                  }
+                }
+                .movie__content {
+                  p {
+                    opacity: 0;
+                  }
+                  .getTicket {
+                    button {
+                      opacity: 1;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,96 @@
+@import "../../sass/Helper/variables.scss";
+.apps {
+  .apps__bg {
+    background: url(../../Assets/Images/apps/backapp.jpg);
+    padding: 120px 0 80px 0;
+    background-size: contain;
+    // height: 600px;
+    .tix__container {
+      height: 100%;
+      margin: 0 auto;
+      max-width: 940px;
+      // padding: 0 20px;
+      @media screen and (max-width: 950px) {
+        padding: 0 15px;
+      }
+    }
+  }
+  .apps__row {
+    height: 100%;
+    h2 {
+      font-weight: 700;
+      font-size: xx-large;
+    }
+    button {
+      background-color: $color-red-0;
+      padding: 10px 20px;
+      color: $color-white-0;
+      font-size: medium;
+      font-weight: 700;
+      border: none;
+      border-radius: 4px;
+    }
+    p {
+      font-size: medium;
+      a {
+        color: $color-white-0;
+        border-bottom: 1px solid $color-white-0;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+    .textAppUnder {
+      font-size: smaller;
+    }
+    @media screen and (max-width: 992px) {
+      text-align: center;
+      > div {
+        display: block !important;
+      }
+    }
+  }
+  .apps__img {
+    color: $color-red-0;
+    position: relative;
+    transition: all 0.5s;
+    .apps__carousel {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 186px;
+      overflow: hidden;
+      border-radius: 17px;
+    }
+    .img__items {
+      position: relative;
+      height: 404px;
+
+      img {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        height: 100%;
+        width: 100%;
+        border-radius: 17px;
+      }
+    }
+    .img__bg {
+      height: 420px;
+      position: relative;
+    }
+  }
+  @media screen and (max-width: 992px) {
+    .apps__carousel {
+      width: 38vw !important;
+      border-radius: 4vw !important;
+    }
+    .img__bg {
+      height: 85vw !important;
+    }
+    .img__items {
+      height: 82vw !important;
+    }
+  }
+}

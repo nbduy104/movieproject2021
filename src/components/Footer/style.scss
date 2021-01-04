@@ -1,0 +1,54 @@
+@import "../../sass/Helper/variables.scss";
+footer {
+  .tix__container {
+    border-top: 1px solid #4a4a4a;
+    padding: 0px;
+  }
+  .footer__content {
+    display: flex;
+    justify-content: space-between;
+    @media screen and (max-width: 768px) {
+      display: block;
+      .footer__logo {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+    }
+  }
+  .footer__logo {
+    img {
+      width: 80px !important;
+      border-radius: 7px;
+    }
+  }
+  .footer__text {
+    padding: 0 15px;
+  }
+  .footer__label {
+    font-weight: 700;
+  }
+  .footer__bct {
+    width: 130px;
+  }
+  p {
+    font-size: 12px;
+    line-height: 1.8;
+    font-size: 12px;
+    font-weight: 400;
+    margin: 0;
+  }
+  a {
+    color: $color-red-0;
+    transition: all 0.2s;
+    &:hover {
+      text-decoration: none;
+      opacity: 0.9;
+      color: $color-red-0;
+    }
+  }
+  @media screen and (max-width: 992px) {
+    .footer__text {
+      text-align: center;
+    }
+  }
+}

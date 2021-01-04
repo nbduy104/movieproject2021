@@ -1,0 +1,126 @@
+:export {
+  colorOrange0: #fb4226;
+}
+
+.header__bg {
+  height: 60px;
+}
+
+.header {
+  position: fixed;
+  padding: 0px 20px !important;
+  width: 100%;
+  z-index: 100;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.header .header__content .themeMode {
+  border: none;
+  background-color: transparent;
+}
+
+.header .header__content .themeMode:focus {
+  outline: none;
+}
+
+.header .header__content .themeMode:hover {
+  color: #fb4226;
+}
+
+.header .header__content .selCity {
+  border: none;
+}
+
+.header .header__content .navbar .navbar-brand img {
+  width: 50px;
+  height: 50px;
+}
+
+.header .header__content .navbar #navbarSupportedContent {
+  position: relative;
+}
+
+.header .header__content .navbar #navbarSupportedContent .header__center {
+  position: absolute;
+  top: 50%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+}
+
+.header .header__content .navbar #navbarSupportedContent .header__center ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+
+.header .header__content .navbar #navbarSupportedContent .header__center ul li a {
+  transition: all 0.2s;
+  text-decoration: none;
+  margin-right: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.42857143;
+  margin-right: 20px;
+}
+
+.header .header__content .navbar #navbarSupportedContent .header__center ul li a:hover {
+  color: #fb4226;
+}
+
+.header .header__content .navbar #navbarSupportedContent .header__right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.header .header__content .navbar #navbarSupportedContent .header__right img {
+  height: auto;
+  width: 30px;
+  border-radius: 25px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.header .header__content .navbar #navbarSupportedContent .header__right span {
+  position: relative;
+  cursor: pointer;
+}
+
+.header .header__content .navbar #navbarSupportedContent .header__right .dropdown {
+  display: inline-block;
+}
+
+.header .header__content .navbar #navbarSupportedContent .header__right .dropdown .btn:focus {
+  box-shadow: none;
+}
+
+.header .header__content .navbar #navbarSupportedContent .header__right .dropdown i {
+  color: #9b9b9b;
+}
+
+.header .header__content .navbar #navbarSupportedContent .header__right .dropdown #dropdownMenuButton {
+  position: relative;
+  border: 0;
+  margin-left: 10px;
+  padding: 6px 25px;
+  border-radius: 0;
+  border-left: 1px solid #9b9b9b;
+}
+
+.header .header__content .navbar #navbarSupportedContent .header__right .dropdown #dropdownMenuButton::after {
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  transform: translateY(-50%);
+  color: #9b9b9b;
+}
+
+@media screen and (max-width: 576px) {
+  .header {
+    position: relative;
+  }
+}
+/*# sourceMappingURL=style.css.map */

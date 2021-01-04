@@ -1,0 +1,75 @@
+@import "../../sass/Helper/variables.scss";
+.partners {
+  padding-top: 80px !important;
+  padding-bottom: 30px !important;
+  .div__tix {
+    padding-left: 2.5rem;
+  }
+  a {
+    font-size: 12px !important;
+    font-weight: 700;
+    white-space: nowrap;
+    // color: #949494;
+    display: block;
+    transition: all 0.2s;
+    line-height: 2.3;
+    padding-right: 7.5px;
+    &:hover {
+      color: $color-orange-0;
+      text-decoration: none;
+    }
+  }
+  h3 {
+    // color: $color-white-0;
+    font-size: 80%;
+  }
+  .partners__img img {
+    width: 11%;
+    margin-right: 20px;
+  }
+  .img__border {
+    display: block;
+    text-align: center;
+    line-height: 48px;
+    border: 1px solid rgba(104, 99, 99, 0.274);
+    border-radius: 50%;
+    background: $color-white-0;
+  }
+  .img__123go {
+    background: transparent !important;
+  }
+  .index__none {
+    opacity: 0;
+  }
+  .partners__app {
+    img {
+      background: 0 0;
+      height: 30px;
+      width: auto;
+      margin: 7.5px;
+    }
+    div {
+      justify-content: center;
+    }
+  }
+  .partners__item2 {
+    @media screen and (max-width: 992px) {
+      justify-content: center !important;
+      div {
+        text-align: center;
+      }
+    }
+  }
+  .partners__item3 {
+    img {
+      cursor: pointer;
+      transition: all 0.2s;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+  .partners__item4 {
+    cursor: pointer;
+  }
+}
