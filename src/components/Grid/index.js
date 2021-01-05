@@ -44,3 +44,6 @@ export const GridSide = styled(Grid)`
   margin-right: auto;
   margin-left: auto;
 `;
+export const GridBorder = styled(Grid)`
+  border-bottom: 1px dashed ${(props) => props.theme.borderColor};
+`;

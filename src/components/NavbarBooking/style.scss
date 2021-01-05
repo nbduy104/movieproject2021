@@ -87,6 +87,9 @@
           &:hover {
             background-color: $color-orange-0;
           }
+          a:hover {
+            color: white;
+          }
         }
       }
       @media screen and (max-width: 992px) {

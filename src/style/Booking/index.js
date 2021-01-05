@@ -107,20 +107,93 @@ export const useStyles = makeStyles((theme) => ({
   },
   p__sumMoney: {
     textAlign: "center",
-    padding: "20px 0",
     color: "green",
     fontSize: 30,
     fontWeight: 700,
-    borderBottom: "1px dashed red",
   },
   div__tenPhim: {
-    borderBottom: "1px dashed red",
-    padding: "0 10px 10px",
+    padding: "10px 20px",
   },
   span__label: {
     backgroundColor: "red",
     color: "white",
     padding: "0px 4px",
     borderRadius: 3,
+  },
+
+  position__rightSide: {
+    position: "fixed",
+    overflowY: "scroll",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
+    top: 0,
+    right: 0,
+    width: "25%",
+    boxShadow: "0 0 15px rgba(0, 0, 0, 0.3)",
+    zIndex: 1,
+    height: "100%",
+  },
+  div__content: {
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "20px 20px",
+    "& p": {
+      marginBottom: 0,
+    },
+  },
+  textfield__salesoff: {
+    border: "none !important",
+    "& :before": {
+      display: "none",
+    },
+    "& :after": {
+      display: "none",
+    },
+    "& div": {
+      marginTop: "8px",
+    },
+    "& label": {
+      top: "-10px",
+    },
+    "& label.Mui-focused": {
+      color: "#fb4226",
+    },
+  },
+  btn__booking: {
+    // width: "100%",
+    position: "fixed",
+    bottom: 2,
+    "& div": {
+      padding: "0 20px 20px",
+      textAlign: "center",
+    },
+    "& button": {
+      width: "100%",
+    },
+    "& img": {
+      width: 20,
+      height: 20,
+      marginRight: 5,
+    },
+  },
+  label__payment: {
+    "&.Mui-focused": {
+      color: "#fb4226",
+    },
+  },
+  payment: {
+    justyfyContent: "space-around",
+    alignItems: "center",
+    "& label": {
+      marginBottom: 0,
+      marginRight: 0,
+    },
+    "& img": {
+      width: 40,
+      height: 40,
+      marginRight: 10,
+      borderRadius: 5,
+    },
   },
 }));

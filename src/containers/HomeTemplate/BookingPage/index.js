@@ -12,12 +12,29 @@ import { actChangeTheme } from "components/NavbarHome/modules/action";
 import Popovers from "components/Popovers/index";
 import clsx from "clsx";
 import screen from "../../../Assets/Images/screen.png";
-import { GridNav, GridSide, GridBG } from "../../../components/Grid";
+import {
+  GridNav,
+  GridSide,
+  GridBG,
+  GridBorder,
+} from "../../../components/Grid";
 import "./index.scss";
 import { actListBookingChair, actBookingTicket } from "./modules/action.js";
-import { CssTextField } from "../../../style/SignUp";
-import { TextFieldM } from "../../../components/TextField";
+import { TextFieldM, LabelM } from "../../../components/TextField";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+
 function BookingPage(props) {
+  //radioBtn hình thức thanh toán
+  const [value, setValue] = React.useState("zaloPay");
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
   const [state, setstate] = useState({
     isSetPage: false,
     listBookingChair: [],
@@ -26,15 +43,7 @@ function BookingPage(props) {
     sumMoney: 0,
   });
   useEffect(() => {
-    let pathArray = window.location.pathname.split("/");
-    let arr = pathArray.filter((item) => isNumber(item));
-    if (arr.length > 0) {
-      props.fetchListBookingChair(parseInt(arr[0]));
-      setstate({
-        ...state,
-        maLichChieu: parseInt(arr[0]),
-      });
-    }
+    props.fetchListBookingChair(props.match.params.id);
   }, []);
 
   const isNumber = (n) => {
@@ -83,6 +92,7 @@ function BookingPage(props) {
     const { danhSachGhe } = props.data;
     let tenGhe = handleNumberChair(word, number);
     tenGhe = tenGhe < 10 ? "0" + tenGhe : tenGhe.toString();
+    if (!danhSachGhe) return;
     return danhSachGhe.find((item) => {
       return item.tenGhe === tenGhe;
     });
@@ -174,6 +184,7 @@ function BookingPage(props) {
   const renderThongTinRap = () => {
     if (!props.data) return;
     const { thongTinPhim } = props.data;
+    if (!thongTinPhim) return;
     return (
       <>
         <img src={thongTinPhim.hinhAnh} alt={thongTinPhim.tenPhim} />
@@ -205,16 +216,17 @@ function BookingPage(props) {
     props.handleBookingTicket(ticket);
   };
   const renderTenPhim = () => {
-    const { data } = props;
-    if (!data) return;
+    if (!props.data) return;
+    const { thongTinPhim } = props.data;
+    if (!thongTinPhim) return;
     return (
-      <div className={classes.div__tenPhim}>
+      <GridBorder className={classes.div__tenPhim}>
         <span className={classes.span__label}>C18</span>
-        <span> {data.thongTinPhim.tenPhim}</span>
+        <span> {thongTinPhim.tenPhim}</span>
         <br />
-        <span>{data.thongTinPhim.tenCumRap}</span>
-        <span>{` - ${data.thongTinPhim.tenRap}`}</span>
-      </div>
+        <span>{thongTinPhim.tenCumRap}</span>
+        <span>{` - ${thongTinPhim.tenRap}`}</span>
+      </GridBorder>
     );
   };
   return (
@@ -268,19 +280,28 @@ function BookingPage(props) {
           </Grid>
         </Grid>
         <Grid container>
-          <GridSide item xs={1}></GridSide>
-          <GridBG item xs={11} container style={{ position: "relative" }}>
+          <Grid item xs={1}></Grid>
+          <GridBG
+            item
+            xs={11}
+            container
+            style={{
+              position: "relative",
+              paddingBottom: 40,
+              overflow: "auto",
+            }}
+          >
             <Grid item xs={6} className={classes.infoTheater}>
               {renderThongTinRap()}
             </Grid>
             <Grid item xs={6} style={{ textAlign: "end" }}>
               Thời gian giữ ghế
             </Grid>
-            <Grid item xs={12} style={{ position: "relative", height: 500 }}>
+            <Grid item xs={12} style={{ position: "relative" }}>
               <img src={screen} className={classes.screen} />
               <GridSide item xs={12} className={classes.screenLine}></GridSide>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} style={{ position: "relative", height: 400 }}>
               <div className="theatre">
                 <div className="cinema-seats left">
                   <div className="cinema-row row-0">{renderLableChair()}</div>
@@ -314,14 +335,101 @@ function BookingPage(props) {
           </GridBG>
         </Grid>
       </Grid>
-
-      <Grid item xs={3}>
-        <p className={classes.p__sumMoney}>
-          {`${state.sumMoney.toLocaleString()} đ`}
-        </p>
-        {renderTenPhim()}
-        <Button onClick={handleBooking}>Mua Vé</Button>
-      </Grid>
+      <div className={classes.position__rightSide}>
+        <Grid item xs={12}>
+          <GridBorder className={classes.div__content}>
+            <p className={classes.p__sumMoney}>
+              {`${state.sumMoney.toLocaleString()} đ`}
+            </p>
+          </GridBorder>
+          {renderTenPhim()}
+          <GridBorder container className={classes.div__content}>
+            <p>Vui lòng chọn ghế</p>
+            <p>0 đ</p>
+          </GridBorder>
+          <GridBorder container className={classes.div__content}>
+            <a>Chọn combo</a>
+            <p>0 đ</p>
+          </GridBorder>
+          <GridBorder container className={classes.div__content}>
+            <TextFieldM
+              label="Mã giảm giá"
+              className={classes.textfield__salesoff}
+            ></TextFieldM>
+            <button className="btn btn-danger" disabled>
+              Áp dụng
+            </button>
+          </GridBorder>
+          <GridBorder className={classes.div__content}>
+            <FormControl component="fieldset">
+              <LabelM component="legend" className={classes.label__payment}>
+                Hình thức thanh toán
+              </LabelM>
+              <RadioGroup
+                aria-label="payment"
+                name="payment"
+                value={value}
+                onChange={handleChange}
+              >
+                <FormControlLabel
+                  value="zaloPay"
+                  control={<Radio />}
+                  label={
+                    <Grid container className={classes.payment}>
+                      <img
+                        src={process.env.PUBLIC_URL + "/img/zalopay_icon.png"}
+                        alt="ZaloPay"
+                      />
+                      <p>Thanh toán qua ZaloPay</p>
+                    </Grid>
+                  }
+                />
+                <FormControlLabel
+                  value="visaMaster"
+                  control={<Radio />}
+                  label={
+                    <Grid container className={classes.payment}>
+                      <img
+                        src={
+                          process.env.PUBLIC_URL + "/img/visa_mastercard.png"
+                        }
+                        alt="visa"
+                      />
+                      <p>Visa, Master, JCB</p>
+                    </Grid>
+                  }
+                />
+                <FormControlLabel
+                  value="atm"
+                  control={<Radio />}
+                  label={
+                    <Grid container className={classes.payment}>
+                      <img
+                        src={process.env.PUBLIC_URL + "/img/atm.png"}
+                        alt="atm"
+                      />
+                      <p>Thẻ ATM nội địa</p>
+                    </Grid>
+                  }
+                />
+              </RadioGroup>
+            </FormControl>
+          </GridBorder>
+          <Grid item className={classes.btn__booking}>
+            <div>
+              <img
+                src={process.env.PUBLIC_URL + "/img/exclamation.png"}
+                alt="exclamation"
+              />
+              <span>
+                Vé đã mua không thể đổi hoặc hoàn tiền Mã vé sẽ được gửi qua tin
+                nhắn ZMS (tin nhắn Zalo) và Email đã nhập.
+              </span>
+            </div>
+            <Button onClick={handleBooking}>Mua Vé</Button>
+          </Grid>
+        </Grid>
+      </div>
     </GridNav>
   );
 }

@@ -43,7 +43,7 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: "20px !important",
   },
   link: {
-    color: "rgb(63,81,181)",
+    color: "rgb(63,81,181) !important",
   },
   disableBtn: {
     backgroundColor: "rgba(63,81,181) !important",
