@@ -2,7 +2,7 @@ import { DarkTheme } from "Themes/DarkTheme";
 import { LightTheme } from "Themes/LightTheme";
 import { THEME_MODE, HIDE_NAVBAR } from "./constants";
 const initialState = {
-  themeMode: LightTheme,
+  themeMode: DarkTheme,
   isHidden: false,
 };
 

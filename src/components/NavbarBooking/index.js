@@ -302,7 +302,10 @@ class NavbarBooking extends Component {
               </Select>
             </FormControl>
             <div className="col-2 bookTicket__button text-center">
-              <Button className="btn__BuyTicket">
+              <Button
+                className="btn__BuyTicket"
+                disabled={!this.state.isShowSuat ? true : false}
+              >
                 <StyledLinkPage to={`/booking/${this.state.maLichChieu}`}>
                   MUA VÉ NGAY
                 </StyledLinkPage>

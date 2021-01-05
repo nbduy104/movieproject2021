@@ -15,13 +15,7 @@ export default class Carousel extends Component {
         "https://s3img.vcdn.vn/123phim/2020/09/ac-quy-doi-dau-deliver-us-from-evil-c16-15994546580686.jpg",
     },
   ];
-  componentWillMount() {
-    document.body.style.backgroundColor = "green";
-  }
 
-  // componentWillUnmount: function(){
-  //     document.body.style.backgroundColor = null;
-  // }
   render() {
     return (
       <section className="carouselSection">

@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 import { actSignUpHomeApi } from "./modules/action";
 function Copyright() {
   return (
-    <Typography variant="body2" align="center">
+    <Typography variant="body2" align="center" style={{ paddingBottom: 10 }}>
       {"Copyright © "}
       <StyledLinkPage style={{ color: "white" }} to="/" exact="true">
         tix.vn
@@ -27,6 +27,14 @@ function Copyright() {
 }
 
 function SignUp(props) {
+  useEffect(() => {
+    document.body.style.background = "url(./img/bg2.jpg) center center";
+    document.body.style.backgroundSize = "contain";
+    document.body.style.backgroundAttachment = "fixed";
+    return () => {
+      document.body.style.backgroundColor = null;
+    };
+  }, []);
   const [state, setstate] = useState({
     values: {
       taiKhoan: "",

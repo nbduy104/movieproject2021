@@ -13,5 +13,5 @@ export const LightTheme = {
   borderRadiusButton: "none",
   hoverTextColor: "#fff",
   hoverBgColor: "#343a40",
-  borderColor: "#343a40",
+  borderColor: "#d2d3d3",
 };

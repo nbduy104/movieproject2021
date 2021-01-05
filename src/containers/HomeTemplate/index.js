@@ -1,6 +1,5 @@
 import NavbarHome from "components/NavbarHome";
 import React from "react";
-import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 function LayoutHome(props) {
   return (
@@ -25,4 +24,4 @@ function HomeTemplate({ Component, ...props }) {
   );
 }
 
-export default (HomeTemplate);
+export default HomeTemplate;

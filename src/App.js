@@ -25,11 +25,12 @@ function App(props) {
     <ThemeProvider theme={props.themeMode}>
       <Switch>
         {showLayout(routesHome, HomeTemplate)}
-        <Route path="/booking" component={BookingPage} />
+        <Route path="/booking/:id" component={BookingPage} />
         <Route path="/sign-up" component={SignUpPage} />
         <Route path="/sign-in" component={SignInPage} />
         <Route path="" component={PageNotFound} />
-      </Switch></ThemeProvider >
+      </Switch>
+    </ThemeProvider>
   );
 }
 const mapStateToProps = (state) => ({
