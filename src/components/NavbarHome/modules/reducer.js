@@ -1,9 +1,10 @@
 import { DarkTheme } from "Themes/DarkTheme";
 import { LightTheme } from "Themes/LightTheme";
-import { THEME_MODE, HIDE_NAVBAR } from "./constants";
+import { THEME_MODE, HIDE_NAVBAR, SHOW_ALERT, HIDE_ALERT } from "./constants";
 const initialState = {
   themeMode: DarkTheme,
   isHidden: false,
+  isShowAlert: false,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -17,6 +18,12 @@ export default (state = initialState, { type, payload }) => {
       return { ...state };
     case HIDE_NAVBAR:
       state.isHidden = payload;
+      return { ...state };
+    case SHOW_ALERT:
+      state.isShowAlert = payload;
+      return { ...state };
+    case HIDE_ALERT:
+      state.isShowAlert = payload;
       return { ...state };
     // case THEME_MODE:
     // switch (payload) {

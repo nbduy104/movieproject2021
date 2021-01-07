@@ -1,3 +1,4 @@
 export const NAV_BOOKING_REQUEST = "navBooking/NAV_BOOKING_REQUEST";
 export const NAV_BOOKING_SUCCESS = "navBooking/NAV_BOOKING_SUCCESS";
 export const NAV_BOOKING_FAILED = "navBooking/NAV_BOOKING_FAILED";
+export const NAV_BOOKING_CHECK_ACCOUNT = "navBooking/NAV_BOOKING_CHECK_ACCOUNT";

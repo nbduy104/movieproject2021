@@ -11,9 +11,11 @@ import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import BrightnessMediumIcon from "@material-ui/icons/BrightnessMedium";
 import { DarkTheme } from "Themes/DarkTheme";
 import { ContainerNav } from "../Container";
-import { StyledLink, StyledLinkPage } from "../Link";
+import { StyledLink } from "../Link";
 import { Link } from "react-router-dom";
 import Popovers from "../Popovers";
+import "reactjs-popup/dist/index.css";
+import AlertRodal from "../RodalSignOut";
 class NavbarHome extends Component {
   _handleShowNavBar = (isHidden) => {
     this.props.handleShowNavbar(isHidden);
@@ -52,8 +54,8 @@ class NavbarHome extends Component {
                   </ul>
                 </div>
               ) : (
-                  ""
-                )}
+                ""
+              )}
 
               <div className="nav-item header__right">
                 <div className="div__header__right">
@@ -67,8 +69,8 @@ class NavbarHome extends Component {
                     {this.props.themeMode === DarkTheme ? (
                       <BrightnessMediumIcon />
                     ) : (
-                        <BrightnessHighIcon />
-                      )}
+                      <BrightnessHighIcon />
+                    )}
                   </Button>
                   <Icon
                     className="fa fa-map-marker-alt"
@@ -90,8 +92,10 @@ class NavbarHome extends Component {
                 </div>
               </div>
             </nav>
-          </div>
+          </div>{" "}
+          <AlertRodal />
         </ContainerNav>
+
         <div className="header__bg"></div>
       </>
     );

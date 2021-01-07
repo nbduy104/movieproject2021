@@ -3,7 +3,7 @@ import { Container, ContainerNav, ContainerBG } from "../Container";
 import Button from "../Button";
 import "./style.scss";
 import { connect } from "react-redux";
-import { actNavBookingApi } from "./modules/action";
+import { actNavBookingApi, actCheckAccount } from "./modules/action";
 import { MenuItem, FormControl } from "@material-ui/core";
 import Select from "../Select";
 import { StyledLinkPage } from "../Link";
@@ -22,7 +22,7 @@ class NavbarBooking extends Component {
       suatChieu: "",
       dataNgayChieu: [],
       dataSuatChieu: [],
-      maLichChieu: 0,
+      // maLichChieu: 0,
     };
   }
 
@@ -188,9 +188,10 @@ class NavbarBooking extends Component {
                 new Date(movie.ngayChieuGioChieu).toLocaleTimeString() ===
                   this.state.suatChieu
             );
-            this.setState({
-              maLichChieu: dataFind[0].maLichChieu,
-            });
+            this.props.handleMalichChieu(dataFind[0].maLichChieu);
+            // this.setState({
+            //   maLichChieu: dataFind[0].maLichChieu,
+            // });
           }
         });
       });
@@ -306,9 +307,13 @@ class NavbarBooking extends Component {
                 className="btn__BuyTicket"
                 disabled={!this.state.isShowSuat ? true : false}
               >
-                <StyledLinkPage to={`/booking/${this.state.maLichChieu}`}>
-                  MUA VÉ NGAY
-                </StyledLinkPage>
+                {localStorage.getItem("User") ? (
+                  <StyledLinkPage to={`/booking/${this.props.maLichChieu}`}>
+                    MUA VÉ NGAY
+                  </StyledLinkPage>
+                ) : (
+                  <StyledLinkPage to="/sign-in"> MUA VÉ NGAY</StyledLinkPage>
+                )}
               </Button>
             </div>
           </ContainerNav>
@@ -320,10 +325,14 @@ class NavbarBooking extends Component {
 const mapStateToProps = (state) => ({
   data: state.navBookingReducer.data,
   dataNow: state.listMovieReducer.dataNow,
+  maLichChieu: state.navBookingReducer.maLichChieu,
 });
 const mapDispatchToprops = (dispatch) => ({
   fetchBooking: (maPhim) => {
     dispatch(actNavBookingApi(maPhim));
+  },
+  handleMalichChieu: (maLichChieu) => {
+    dispatch(actCheckAccount(maLichChieu));
   },
 });
 export default connect(mapStateToProps, mapDispatchToprops)(NavbarBooking);

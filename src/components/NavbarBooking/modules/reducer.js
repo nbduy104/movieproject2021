@@ -3,6 +3,7 @@ const initialState = {
   loading: false,
   data: null,
   err: null,
+  maLichChieu: 0,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -22,7 +23,9 @@ export default (state = initialState, { type, payload }) => {
       state.data = null;
       state.err = payload;
       return { ...state };
-
+    case ActionType.NAV_BOOKING_CHECK_ACCOUNT:
+      state.maLichChieu = payload;
+      return { ...state };
     default:
       return state;
   }

@@ -13,8 +13,9 @@ import { actUpdateInfoUserApi } from "./modules/action";
 import { actHideNavbar } from "components/NavbarHome/modules/action";
 
 function Copyright() {
+  const classes = useStyles();
   return (
-    <Typography variant="body2" align="center">
+    <Typography variant="body2" align="center" className={classes.copyRight}>
       {"Copyright © "}
       <StyledLinkPage style={{ color: "white" }} to="/" exact="true">
         tix.vn
@@ -26,6 +27,14 @@ function Copyright() {
 }
 
 function InfoUserPage(props) {
+  useEffect(() => {
+    document.body.style.background = "url(./img/bg2.jpg) center center";
+    document.body.style.backgroundSize = "contain";
+    document.body.style.backgroundAttachment = "fixed";
+    return () => {
+      document.body.style.backgroundColor = null;
+    };
+  }, []);
   const [state, setState] = useState({
     values: {
       taiKhoan: "",

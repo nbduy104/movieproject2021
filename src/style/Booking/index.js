@@ -1,4 +1,4 @@
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme) => ({
   // bgColor: {
   //     backgroundColor: "white",
@@ -68,9 +68,12 @@ export const useStyles = makeStyles((theme) => ({
     height: 12,
     position: "absolute",
   },
+  info: {
+    padding: "40px 0px 15px",
+  },
   infoTheater: {
     display: "flex",
-    padding: "40px 0px 15px",
+
     "& img": {
       borderRadius: 5,
       marginRight: 5,
@@ -82,6 +85,12 @@ export const useStyles = makeStyles((theme) => ({
     },
     "& p": {
       fontSize: 15,
+    },
+  },
+  timeAccess: {
+    textAlign: "end",
+    "& h3": {
+      color: "#fb4226",
     },
   },
   infoChair: {
@@ -132,7 +141,7 @@ export const useStyles = makeStyles((theme) => ({
     width: "25%",
     boxShadow: "0 0 15px rgba(0, 0, 0, 0.3)",
     zIndex: 1,
-    height: "100%",
+    height: "90vh",
   },
   div__content: {
     justifyContent: "space-between",
@@ -160,21 +169,25 @@ export const useStyles = makeStyles((theme) => ({
       color: "#fb4226",
     },
   },
-  btn__booking: {
-    // width: "100%",
-    position: "fixed",
-    bottom: 2,
+  info__booking: {
     "& div": {
-      padding: "0 20px 20px",
+      padding: "20px 20px",
       textAlign: "center",
-    },
-    "& button": {
-      width: "100%",
     },
     "& img": {
       width: 20,
       height: 20,
       marginRight: 5,
+    },
+  },
+  btn__booking: {
+    width: "25%",
+    position: "fixed",
+    right: 0,
+    bottom: 2,
+    "& button": {
+      width: "100%",
+      padding: "25px 0",
     },
   },
   label__payment: {
@@ -195,5 +208,26 @@ export const useStyles = makeStyles((theme) => ({
       marginRight: 10,
       borderRadius: 5,
     },
+  },
+  rodal__containt: {
+    textAlign: "center",
+
+    "& img": {
+      margin: "20px 0",
+      width: 80,
+      height: 80,
+    },
+    "& h2": {
+      color: "#595959",
+      fontSize: 30,
+      fontWeight: 500,
+      lineHeight: 1.2,
+    },
+    "& button": {
+      margin: "10px 10px 10px 0",
+    },
+  },
+  leftSide: {
+    background: "none",
   },
 }));

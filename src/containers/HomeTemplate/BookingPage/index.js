@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Grid from "@material-ui/core/Grid";
 import { useStyles } from "../../../style/Booking/index";
 import { Link } from "react-router-dom";
@@ -25,22 +25,26 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-
+import AlertRodal from "../../../components/RodalSignOut";
+import Countdown from "react-countdown";
+import ButtonM from "@material-ui/core/Button";
+import Rodal from "rodal";
+import DrawerBookingCombo from "../../../components/DrawerBookingCombo";
 function BookingPage(props) {
+  const TIME_COUNTDOWN = 90000;
   //radioBtn hình thức thanh toán
   const [value, setValue] = React.useState("zaloPay");
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
-
   const [state, setstate] = useState({
     isSetPage: false,
     listBookingChair: [],
     listNumberChair: [],
     maLichChieu: 0,
-    sumMoney: 0,
+    sumMoneyChair: 0,
+    visible: false,
   });
   useEffect(() => {
     props.fetchListBookingChair(props.match.params.id);
@@ -99,13 +103,13 @@ function BookingPage(props) {
   };
   const hanldeChooseChair = (word, number) => {
     let flag = false;
-    let { listBookingChair, listNumberChair, sumMoney } = state;
+    let { listBookingChair, listNumberChair, sumMoneyChair } = state;
     // let tenGhe = handleNumberChair(word, number);
     let chairInfo = getInfoChair(word, number);
     if (!chairInfo || chairInfo.daDat === true) return;
     listBookingChair.map((item, index) => {
       if (item.maGhe === chairInfo.maGhe) {
-        sumMoney -= chairInfo.giaVe;
+        sumMoneyChair -= chairInfo.giaVe;
         listBookingChair.splice(index, 1);
         listNumberChair.splice(index, 1);
         flag = true;
@@ -115,13 +119,13 @@ function BookingPage(props) {
     if (!flag) {
       listBookingChair.push({ maGhe: chairInfo.maGhe, giaVe: chairInfo.giaVe });
       listNumberChair.push(word + number);
-      sumMoney += chairInfo.giaVe;
+      sumMoneyChair += chairInfo.giaVe;
     }
     setstate({
       ...state,
       listBookingChair,
       listNumberChair,
-      sumMoney,
+      sumMoneyChair,
     });
   };
   const classes = useStyles();
@@ -212,7 +216,6 @@ function BookingPage(props) {
       danhSachVe: state.listBookingChair,
       taiKhoanNguoiDung: props.dataUser.taiKhoan,
     };
-    console.log(ticket);
     props.handleBookingTicket(ticket);
   };
   const renderTenPhim = () => {
@@ -229,10 +232,52 @@ function BookingPage(props) {
       </GridBorder>
     );
   };
+
+  const renderer = ({ minutes, seconds }) => {
+    // Render a countdown
+    return (
+      <h3>
+        {minutes < 10 ? `0${minutes}` : minutes}:
+        {seconds < 10 ? `0${seconds}` : seconds}
+      </h3>
+    );
+  };
+  const alertHide = () => {
+    setstate({
+      ...state,
+      visible: false,
+    });
+    // props.history.replace("/");
+  };
+  const refeshPage = () => {
+    window.location.reload();
+  };
+  const alertShow = () => {
+    setstate({
+      ...state,
+      visible: true,
+    });
+  };
+  const getDate = () => {
+    return Date.now() + TIME_COUNTDOWN;
+  };
+  const getDateMemo = useMemo(getDate, []);
+  const fetchBookChair = () => {
+    if (state.listNumberChair[0]) {
+      return state.listNumberChair.map((item) => {
+        return <span key={item}>{item}, </span>;
+      });
+    } else return <p>Vui lòng chọn ghế</p>;
+  };
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openSideCombo = () => {
+    setIsOpen(!isOpen);
+  };
   return (
-    <GridNav container>
+    <Grid container>
       <Grid item xs={9}>
-        <Grid item xs={12} container>
+        <GridNav item xs={12} container>
           <Grid item xs={2}>
             <Link exact="true" to="/">
               <img className={classes.logo} src={Logo} alt="logo" />
@@ -278,9 +323,9 @@ function BookingPage(props) {
               )}
             </Button>
           </Grid>
-        </Grid>
+        </GridNav>
         <Grid container>
-          <Grid item xs={1}></Grid>
+          <Grid item xs={1} className={classes.leftSide}></Grid>
           <GridBG
             item
             xs={11}
@@ -291,11 +336,19 @@ function BookingPage(props) {
               overflow: "auto",
             }}
           >
-            <Grid item xs={6} className={classes.infoTheater}>
-              {renderThongTinRap()}
-            </Grid>
-            <Grid item xs={6} style={{ textAlign: "end" }}>
-              Thời gian giữ ghế
+            <Grid container className={classes.info}>
+              <Grid item xs={8} className={classes.infoTheater}>
+                {renderThongTinRap()}
+              </Grid>
+              <Grid item xs={4} className={classes.timeAccess}>
+                <span>Thời gian giữ ghế</span>
+                <Countdown
+                  date={getDateMemo}
+                  renderer={renderer}
+                  zeroPadTime={2}
+                  onComplete={alertShow}
+                />
+              </Grid>
             </Grid>
             <Grid item xs={12} style={{ position: "relative" }}>
               <img src={screen} className={classes.screen} />
@@ -313,6 +366,7 @@ function BookingPage(props) {
                 </div>
               </div>
             </Grid>
+            <DrawerBookingCombo open={isOpen} />
             <Grid container>
               {/* <Grid item xs={2}></Grid> */}
               <Grid item xs={3} className={classes.infoChair}>
@@ -335,20 +389,27 @@ function BookingPage(props) {
           </GridBG>
         </Grid>
       </Grid>
-      <div className={classes.position__rightSide}>
+      <GridNav className={classes.position__rightSide}>
         <Grid item xs={12}>
           <GridBorder className={classes.div__content}>
             <p className={classes.p__sumMoney}>
-              {`${state.sumMoney.toLocaleString()} đ`}
+              {`${state.sumMoneyChair.toLocaleString()} đ`}
             </p>
           </GridBorder>
           {renderTenPhim()}
           <GridBorder container className={classes.div__content}>
-            <p>Vui lòng chọn ghế</p>
-            <p>0 đ</p>
+            <div>
+              {state.listNumberChair[0] ? <span>Ghế: </span> : ""}
+              {fetchBookChair()}
+            </div>
+            <p>{`${state.sumMoneyChair.toLocaleString()} đ`} đ</p>
           </GridBorder>
           <GridBorder container className={classes.div__content}>
-            <a>Chọn combo</a>
+            {/* Start Drawer */}
+            <Button variant="contained" color="primary" onClick={openSideCombo}>
+              Chọn combo
+            </Button>
+            {/* End Drawer */}
             <p>0 đ</p>
           </GridBorder>
           <GridBorder container className={classes.div__content}>
@@ -415,7 +476,7 @@ function BookingPage(props) {
               </RadioGroup>
             </FormControl>
           </GridBorder>
-          <Grid item className={classes.btn__booking}>
+          <GridBorder className={classes.info__booking}>
             <div>
               <img
                 src={process.env.PUBLIC_URL + "/img/exclamation.png"}
@@ -426,11 +487,35 @@ function BookingPage(props) {
                 nhắn ZMS (tin nhắn Zalo) và Email đã nhập.
               </span>
             </div>
+          </GridBorder>
+          <Grid item className={classes.btn__booking}>
             <Button onClick={handleBooking}>Mua Vé</Button>
           </Grid>
         </Grid>
-      </div>
-    </GridNav>
+      </GridNav>
+      <AlertRodal />
+      <Rodal
+        visible={state.visible}
+        onClose={alertHide}
+        animation="flip"
+        showCloseButton={false}
+        height={250}
+      >
+        <div className={classes.rodal__containt}>
+          <img
+            src={process.env.PUBLIC_URL + "/img/questionIcons.webp"}
+            alt="Question"
+          />
+          <h2>Bạn có muốn đặt vé lại</h2>
+          <ButtonM onClick={refeshPage} variant="contained" color="primary">
+            Đồng ý
+          </ButtonM>
+          <ButtonM onClick={alertHide} variant="contained">
+            Hủy
+          </ButtonM>
+        </div>
+      </Rodal>
+    </Grid>
   );
 }
 const mapStateToProps = (state) => ({

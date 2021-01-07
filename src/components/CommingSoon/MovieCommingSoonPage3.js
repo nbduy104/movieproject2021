@@ -8,35 +8,34 @@ import Slider from "react-slick";
 import { Container, ContainerBG } from "../Container";
 import Button from "../Button";
 import { StyledLink } from "../Link";
-import { Heading3, Heading4, Heading5 } from "../Heading";
+import { Heading4 } from "../Heading";
 import Loader from "components/Loader";
-import Skeleton from "@material-ui/lab/Skeleton";
 export const renderStar = (movie) => {
   if (movie.danhGia > 9) {
     return (
       <>
-        <img src={Star} />
-        <img src={Star} />
-        <img src={Star} />
-        <img src={Star} />
-        <img src={Star} />
+        <img src={Star} alt="Star" />
+        <img src={Star} alt="Star" />
+        <img src={Star} alt="Star" />
+        <img src={Star} alt="Star" />
+        <img src={Star} alt="Star" />
       </>
     );
   } else if (movie.danhGia > 7) {
     return (
       <>
-        <img src={Star} />
-        <img src={Star} />
-        <img src={Star} />
-        <img src={Star} />
+        <img src={Star} alt="Star" />
+        <img src={Star} alt="Star" />
+        <img src={Star} alt="Star" />
+        <img src={Star} alt="Star" />
       </>
     );
   } else if (movie.danhGia >= 5) {
     return (
       <>
-        <img src={Star} />
-        <img src={Star} />
-        <img src={Star} />
+        <img src={Star} alt="Star" />
+        <img src={Star} alt="Star" />
+        <img src={Star} alt="Star" />
       </>
     );
   }

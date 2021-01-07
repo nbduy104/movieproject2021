@@ -14,8 +14,9 @@ import "./style.scss";
 import { connect } from "react-redux";
 import { actSignUpHomeApi } from "./modules/action";
 function Copyright() {
+  const classes = useStyles();
   return (
-    <Typography variant="body2" align="center" style={{ paddingBottom: 10 }}>
+    <Typography variant="body2" align="center" className={classes.copyRight}>
       {"Copyright © "}
       <StyledLinkPage style={{ color: "white" }} to="/" exact="true">
         tix.vn
