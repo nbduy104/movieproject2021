@@ -188,10 +188,9 @@ class NavbarBooking extends Component {
                 new Date(movie.ngayChieuGioChieu).toLocaleTimeString() ===
                   this.state.suatChieu
             );
-            this.props.handleMalichChieu(dataFind[0].maLichChieu);
-            // this.setState({
-            //   maLichChieu: dataFind[0].maLichChieu,
-            // });
+            if (dataFind[0]) {
+              this.props.handleMalichChieu(dataFind[0].maLichChieu);
+            }
           }
         });
       });

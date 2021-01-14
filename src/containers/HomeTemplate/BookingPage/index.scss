@@ -241,3 +241,37 @@
     }
   }
 }
+// Collapse Combo
+.collapse__Combo {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  overflow-y: scroll;
+  position: absolute;
+  right: 0;
+  height: 100%;
+}
+
+.collapse {
+  visibility: hidden;
+}
+.collapse.show {
+  visibility: visible;
+}
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition-property: height, visibility;
+  transition-property: height, visibility;
+  -webkit-transition-duration: 0.35s;
+  transition-duration: 0.35s;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
+}
+.collapsing.width {
+  -webkit-transition-property: width, visibility;
+  transition-property: width, visibility;
+  width: 0;
+  height: auto;
+}

@@ -3,6 +3,12 @@ export const useStyles = makeStyles((theme) => ({
   // bgColor: {
   //     backgroundColor: "white",
   // },
+  navbar: {
+    boxShadow: "0 0 15px rgba(0, 0, 0, 0.3)",
+    zIndex: 3,
+    position: "fixed",
+    width: "75%",
+  },
   logo: {
     width: 50,
     height: 50,
@@ -54,6 +60,10 @@ export const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  contain__screen: {
+    position: "relative",
+    zIndex: "-1",
+  },
   screen: {
     width: "100%",
     borderRadius: 5,
@@ -70,6 +80,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   info: {
     padding: "40px 0px 15px",
+    zIndex: "-1",
   },
   infoTheater: {
     display: "flex",
@@ -140,7 +151,7 @@ export const useStyles = makeStyles((theme) => ({
     right: 0,
     width: "25%",
     boxShadow: "0 0 15px rgba(0, 0, 0, 0.3)",
-    zIndex: 1,
+    zIndex: 3,
     height: "90vh",
   },
   div__content: {
@@ -170,10 +181,10 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   info__booking: {
-    "& div": {
-      padding: "20px 20px",
-      textAlign: "center",
-    },
+    display: "flex",
+    alignItems: "start",
+    padding: "20px 10px",
+
     "& img": {
       width: 20,
       height: 20,
@@ -188,6 +199,9 @@ export const useStyles = makeStyles((theme) => ({
     "& button": {
       width: "100%",
       padding: "25px 0",
+      "&.Mui-disabled": {
+        color: "#fb422693",
+      },
     },
   },
   label__payment: {
@@ -227,7 +241,67 @@ export const useStyles = makeStyles((theme) => ({
       margin: "10px 10px 10px 0",
     },
   },
+  leftSide__contain: {
+    position: "relative",
+    paddingBottom: "40px !important",
+    overflow: "auto",
+    zIndex: 2,
+  },
   leftSide: {
     background: "none",
+  },
+  contain__chair: {
+    position: "relative",
+    height: 400,
+    zIndex: "-1",
+  },
+  overlay: {
+    position: "fixed",
+    width: "100%",
+    height: "100%",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    backgroundColor: "rgba(0,0,0,.2)",
+    zIndex: "-1",
+  },
+  combo: {
+    padding: "20px !important",
+    "& h3": {
+      marginBottom: 15,
+    },
+  },
+  detailCombo: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 15,
+    "& img": {
+      width: 50,
+      height: 50,
+      borderRadius: 5,
+    },
+    "& a": {
+      fontSize: 20,
+      fontWeight: 500,
+    },
+    "& p": {
+      marginBottom: 0,
+      fontSize: 13,
+    },
+  },
+  priceCombo: {
+    color: "green",
+    fontSize: 16,
+    display: "block",
+    fontWeight: 400,
+  },
+  number__Combo: {
+    alignItems: "center",
+    justifyContent: "space-between",
+    "& button": {
+      minWidth: 0,
+    },
   },
 }));

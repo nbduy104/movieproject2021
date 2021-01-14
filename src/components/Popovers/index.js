@@ -16,9 +16,9 @@ function Popovers(props) {
   useEffect(() => {
     props.handleTryLogin(props.history);
   }, []);
+  const user = JSON.parse(localStorage.getItem("User"));
   const _handleHideNavbar = (isHidden) => {
     props.handleHideNavbar(isHidden);
-    const user = JSON.parse(localStorage.getItem("User"));
     const userNew = {
       taiKhoan: user.taiKhoan,
     };
@@ -29,15 +29,16 @@ function Popovers(props) {
     props.handleShowAlert(true);
     setShow(!show);
   };
+
   return (
     <>
       <a ref={target} onClick={() => setShow(!show)}>
-        {!props.data ? (
+        {!user ? (
           <img src={avatar} alt="avatar" />
         ) : (
           <>
             <img src="https://loremflickr.com/500/500/girl/all" alt="avatar" />
-            <span style={{ cursor: "pointer" }}>{props.data.hoTen}</span>
+            <span style={{ cursor: "pointer" }}>{user.hoTen}</span>
           </>
         )}
       </a>

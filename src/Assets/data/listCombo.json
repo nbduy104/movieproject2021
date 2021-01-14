@@ -1,0 +1,250 @@
+[
+  {
+    "numberCombo": "c1",
+    "styleCombo": "NƯỚC LON/CHAI",
+    "arrayCombo": [
+      {
+        "nameCombo": "Nước suối Dasani 500ml",
+        "gia": 13000,
+        "detail": "Nước suối Dasani 500ml",
+        "count": 0
+      },
+      {
+        "nameCombo": "Nước Trái Cây Nutriboost",
+        "gia": 20000,
+        "detail": "Nước Trái Cây Nutriboost",
+        "count": 0
+      },
+      {
+        "nameCombo": "Nước Cam Teppy",
+        "gia": 26000,
+        "detail": "Nước Cam Teppy",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "numberCombo": "c2",
+    "styleCombo": "SNACK - KẸO",
+    "arrayCombo": [
+      {
+        "nameCombo": "Trái Cây Sấy 20gr",
+        "gia": 15000,
+        "detail": "Trái Cây Sấy 20gr",
+        "count": 0
+      },
+      { "nameCombo": "Kẹo MnM", "gia": 25000, "detail": "Kẹo MnM", "count": 0 },
+      {
+        "nameCombo": "Kẹo Snickers",
+        "gia": 25000,
+        "detail": "Kẹo Snickers",
+        "count": 0
+      },
+      {
+        "nameCombo": "Đậu Phộng OiShi 100gr",
+        "gia": 39000,
+        "detail": "Đậu Phộng OiShi 100gr",
+        "count": 0
+      },
+      {
+        "nameCombo": "Khoai Tây Lay's Stax",
+        "gia": 50000,
+        "detail": "Khoai Tây Lay's Stax",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "numberCombo": "c3",
+    "styleCombo": "POCA",
+    "arrayCombo": [
+      {
+        "nameCombo": "Poca Partyz",
+        "gia": 18000,
+        "detail": "Poca Partyz",
+        "count": 0
+      },
+      {
+        "nameCombo": "Poca Khoai Tây 54gr",
+        "gia": 20000,
+        "detail": "Poca Khoai Tây 54gr",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "numberCombo": "c4",
+    "styleCombo": "MÓN MỚI",
+    "arrayCombo": [
+      {
+        "nameCombo": "Trà Chanh Nestea (500ml)",
+        "gia": 21000,
+        "detail": "Trà Chanh Nestea (500ml)",
+        "count": 0
+      },
+      {
+        "nameCombo": "Milo Tươi (500ml)",
+        "gia": 28000,
+        "detail": "Milo Tươi (500ml)",
+        "count": 0
+      },
+      {
+        "nameCombo": "Combo Nestea",
+        "gia": 60000,
+        "detail": "1 Bắp Nấm 60oz - Caramel + 1 Trà Chanh Nestea (500ml)",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "numberCombo": "c5",
+    "styleCombo": "COMBO MỚI",
+    "arrayCombo": [
+      { "nameCombo": "Hotdog", "gia": 25000, "detail": "Hotdog", "count": 0 },
+      {
+        "nameCombo": "Combo Hotdog (Mới)",
+        "gia": 40000,
+        "detail": "1 Coke 22oz + 1 Hotdog",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "numberCombo": "c6",
+    "styleCombo": "NƯỚC NGỌT LY",
+    "arrayCombo": [
+      {
+        "nameCombo": "Coke 22oz",
+        "gia": 25000,
+        "detail": "Coke 22oz",
+        "count": 0
+      },
+      {
+        "nameCombo": "Fanta 22oz",
+        "gia": 25000,
+        "detail": "Fanta 22oz",
+        "count": 0
+      },
+      {
+        "nameCombo": "Sprite 22oz",
+        "gia": 25000,
+        "detail": "Sprite 22oz",
+        "count": 0
+      },
+      {
+        "nameCombo": "Coke Zero 22oz",
+        "gia": 25000,
+        "detail": "Coke Zero 22oz",
+        "count": 0
+      },
+      {
+        "nameCombo": "Coke 32oz",
+        "gia": 28000,
+        "detail": "Coke 32oz",
+        "count": 0
+      },
+      {
+        "nameCombo": "Fanta 32oz",
+        "gia": 28000,
+        "detail": "Fanta 32oz",
+        "count": 0
+      },
+      {
+        "nameCombo": "Sprite 32oz",
+        "gia": 28000,
+        "detail": "Sprite 32oz",
+        "count": 0
+      },
+      {
+        "nameCombo": "Coke Zero 32oz",
+        "gia": 28000,
+        "detail": "Coke Zero 32oz",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "numberCombo": "c7",
+    "styleCombo": "BẮP RANG",
+    "arrayCombo": [
+      {
+        "nameCombo": "Bắp Rang 60oz",
+        "gia": 40000,
+        "detail": "Bắp Rang 60oz",
+        "count": 0
+      },
+      {
+        "nameCombo": "Bắp Nấm 60oz - Caramel",
+        "gia": 45000,
+        "detail": "Bắp Nấm 60oz - Caramel",
+        "count": 0
+      },
+      {
+        "nameCombo": "Bắp Nấm 60oz - Phô Mai",
+        "gia": 45000,
+        "detail": "Bắp Nấm 60oz - Phô Mai",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "numberCombo": "c8",
+    "styleCombo": "COMBO BẮP",
+    "arrayCombo": [
+      {
+        "nameCombo": "Combo 1 HCM",
+        "gia": 65000,
+        "detail": "1 Coke 22oz + 1 Poca Partyz + 1 Bắp Rang 60oz",
+        "count": 0
+      },
+      {
+        "nameCombo": "Combo 2 HCM",
+        "gia": 85000,
+        "detail": "1 Coke 22oz + 1 Kẹo MnM + 1 Bắp Rang 60oz + 1 Trà Sữa Trân Châu Size M",
+        "count": 0
+      },
+      {
+        "nameCombo": "Combo 3 HCM",
+        "gia": 170000,
+        "detail": "4 Coke 22oz + 1 Lay's Stax Tôm + 2 Bắp Rang 60oz",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "numberCombo": "c9",
+    "styleCombo": "BEER",
+    "arrayCombo": [
+      {
+        "nameCombo": "Bia Heineken 330ml",
+        "gia": 40000,
+        "detail": "Bia Heineken 330ml",
+        "count": 0
+      },
+      {
+        "nameCombo": "Bia Strongbow 330ml",
+        "gia": 40000,
+        "detail": "Bia Strongbow 330ml",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "numberCombo": "c10",
+    "styleCombo": "COMBO BEER",
+    "arrayCombo": [
+      {
+        "nameCombo": "Combo Beer 1",
+        "gia": 60000,
+        "detail": "1 Hotdog + 1 Bia Heineken 330ml",
+        "count": 0
+      },
+      {
+        "nameCombo": "Combo Beer 2",
+        "gia": 60000,
+        "detail": "1 Bắp Rang 60oz + 1 Bia Heineken 330ml",
+        "count": 0
+      }
+    ]
+  }
+]

@@ -29,7 +29,9 @@ export const tryLogin = (history) => {
     if (!localStorage.getItem("User")) return;
     const date = new Date().getTime();
     const exp = localStorage.getItem("TimeExpire");
+    if (!exp) return;
     const user = JSON.parse(localStorage.getItem("User"));
+    // console.log(date, exp, date > exp);
     exp && date > exp ? actLogout(history) : setTimeLogout(exp - date, history);
     setHeaders(user.accessToken);
     dispatch(actionName(ActionType.SIGN_IN_HOME_SUCCESS, user));
@@ -44,6 +46,7 @@ export const actLogout = (history) => {
   localStorage.removeItem("User");
   localStorage.removeItem("UserInfo");
   localStorage.removeItem("TimeExpire");
+
   history.replace("/");
   return (dispatch) => {
     dispatch(actionName(ActionType.SIGN_IN_HOME_CLEAR_DATA));

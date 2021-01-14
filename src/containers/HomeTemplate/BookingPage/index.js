@@ -29,7 +29,9 @@ import AlertRodal from "../../../components/RodalSignOut";
 import Countdown from "react-countdown";
 import ButtonM from "@material-ui/core/Button";
 import Rodal from "rodal";
-import DrawerBookingCombo from "../../../components/DrawerBookingCombo";
+import listCombo from "../../../Assets/data/listCombo.json";
+import { StyledLink } from "../../../components/Link";
+import Checkbox from "@material-ui/core/Checkbox";
 function BookingPage(props) {
   const TIME_COUNTDOWN = 90000;
   //radioBtn hình thức thanh toán
@@ -42,17 +44,26 @@ function BookingPage(props) {
     isSetPage: false,
     listBookingChair: [],
     listNumberChair: [],
-    maLichChieu: 0,
     sumMoneyChair: 0,
+    sumMoneyCombo: 0,
+    sumMoney: 0,
     visible: false,
+    isBookingCompleted: false,
+    isChangeStateSumCombo: false,
+    isChecked: false,
+    listComboDetail: [],
   });
   useEffect(() => {
+    document.body.style.background = "url(../img/bg2.jpg) center center";
+    document.body.style.backgroundSize = "contain";
+    document.body.style.backgroundAttachment = "fixed";
     props.fetchListBookingChair(props.match.params.id);
+    return () => {
+      document.body.style.backgroundColor = null;
+    };
   }, []);
+  //Sum Money Booking
 
-  const isNumber = (n) => {
-    return /^-?[\d.]+(?:e-?\d+)?$/.test(n);
-  };
   const handleNumberChair = (word, number) => {
     let tenGhe = 0;
     switch (word) {
@@ -212,10 +223,14 @@ function BookingPage(props) {
   const handleBooking = () => {
     if (!state || !props.dataUser) return;
     let ticket = {
-      maLichCHieu: state.maLichChieu,
+      maLichCHieu: props.match.params.id,
       danhSachVe: state.listBookingChair,
       taiKhoanNguoiDung: props.dataUser.taiKhoan,
     };
+    setstate({
+      ...state,
+      isBookingCompleted: true,
+    });
     props.handleBookingTicket(ticket);
   };
   const renderTenPhim = () => {
@@ -247,7 +262,7 @@ function BookingPage(props) {
       ...state,
       visible: false,
     });
-    // props.history.replace("/");
+    props.history.replace("/");
   };
   const refeshPage = () => {
     window.location.reload();
@@ -257,6 +272,13 @@ function BookingPage(props) {
       ...state,
       visible: true,
     });
+  };
+  const alertComplete = () => {
+    setstate({
+      ...state,
+      isBookingCompleted: false,
+    });
+    props.history.replace("/");
   };
   const getDate = () => {
     return Date.now() + TIME_COUNTDOWN;
@@ -269,15 +291,133 @@ function BookingPage(props) {
       });
     } else return <p>Vui lòng chọn ghế</p>;
   };
-  const [isOpen, setIsOpen] = useState(false);
+  const handleCountCombo = (number, combo) => {
+    let { listComboDetail, isChangeStateSumCombo } = state;
 
-  const openSideCombo = () => {
-    setIsOpen(!isOpen);
+    if (!listComboDetail[0]) {
+      if (number === 1) {
+        combo.count++;
+        isChangeStateSumCombo = !isChangeStateSumCombo;
+      }
+      setstate({
+        ...state,
+        listComboDetail: [...listComboDetail, combo],
+      });
+      return;
+    }
+    let isLastCombo = false;
+    for (let i = 0; i < listComboDetail.length; i++) {
+      if (listComboDetail[i].nameCombo === combo.nameCombo) {
+        if (number === -1 && listComboDetail[i].count === 0) {
+          listComboDetail[i].count = 0;
+        } else if (number === -1 && listComboDetail[i].count >= 0) {
+          listComboDetail[i].count--;
+          isChangeStateSumCombo = !isChangeStateSumCombo;
+        } else if (number === 1) {
+          listComboDetail[i].count++;
+          isChangeStateSumCombo = !isChangeStateSumCombo;
+        }
+        isLastCombo = true;
+        break;
+      } else {
+        isLastCombo = false;
+      }
+    }
+    if (!isLastCombo) {
+      if (number === 1) {
+        combo.count++;
+        isChangeStateSumCombo = !isChangeStateSumCombo;
+      }
+      listComboDetail = [...listComboDetail, combo];
+    }
+    setstate({
+      ...state,
+      isChangeStateSumCombo,
+      listComboDetail,
+    });
+  };
+  const renderDetailCombo = (combo) => {
+    if (!combo) return;
+    return combo.arrayCombo.map((item, index) => (
+      <Grid container key={index} className={classes.detailCombo}>
+        <Grid container item xs={10}>
+          <Grid item xs={2}>
+            <img
+              src={process.env.PUBLIC_URL + "/img/popcorn.png"}
+              alt="popcorn"
+            />
+          </Grid>
+          <Grid item xs={10} className="pl-2">
+            <StyledLink
+              data-toggle="collapse"
+              href={`#${combo.numberCombo + index}`}
+              role="button"
+            >
+              {item.nameCombo}
+            </StyledLink>
+            <p id={`${combo.numberCombo + index}`} className="collapse">
+              {item.detail}
+            </p>
+            <span
+              className={classes.priceCombo}
+            >{`${item.gia.toLocaleString()} đ`}</span>
+          </Grid>
+        </Grid>
+        <Grid container item xs={2} className={classes.number__Combo}>
+          <Button
+            onClick={() => {
+              handleCountCombo(-1, item);
+            }}
+          >
+            -
+          </Button>
+          <span>{item.count}</span>
+          <Button
+            onClick={() => {
+              handleCountCombo(1, item);
+            }}
+          >
+            +
+          </Button>
+        </Grid>
+      </Grid>
+    ));
+  };
+  const renderCombo = () => {
+    return listCombo.map((combo, index) => {
+      return (
+        <GridBorder key={index} className={classes.combo}>
+          <h3>{combo.styleCombo}</h3>
+          {renderDetailCombo(combo)}
+        </GridBorder>
+      );
+    });
+  };
+  useEffect(() => {
+    let { sumMoneyChair, listComboDetail } = state;
+    let sumMoney = 0;
+    let sumMoneyCombo = 0;
+    listComboDetail.map((item) => {
+      sumMoneyCombo += item.gia * item.count;
+    });
+    sumMoney = sumMoneyChair + sumMoneyCombo;
+    setstate({
+      ...state,
+      sumMoneyCombo,
+      sumMoney,
+    });
+  }, [state.sumMoneyChair, state.isChangeStateSumCombo, state.listComboDetail]);
+  const renderSumMoney = () => {
+    return (
+      <p className={classes.p__sumMoney}>
+        {`${state.sumMoney.toLocaleString()}`}
+      </p>
+    );
   };
   return (
     <Grid container>
       <Grid item xs={9}>
-        <GridNav item xs={12} container>
+        <GridNav item xs={12} container className={classes.navbar}>
           <Grid item xs={2}>
             <Link exact="true" to="/">
               <img className={classes.logo} src={Logo} alt="logo" />
@@ -324,18 +464,10 @@ function BookingPage(props) {
             </Button>
           </Grid>
         </GridNav>
-        <Grid container>
-          <Grid item xs={1} className={classes.leftSide}></Grid>
-          <GridBG
-            item
-            xs={11}
-            container
-            style={{
-              position: "relative",
-              paddingBottom: 40,
-              overflow: "auto",
-            }}
-          >
+        <Grid item xs={12} style={{ height: 50 }}></Grid>
+        <Grid item xs={12} container>
+          <Grid item xs={1}></Grid>
+          <GridBG item xs={11} container className={classes.leftSide__contain}>
             <Grid container className={classes.info}>
               <Grid item xs={8} className={classes.infoTheater}>
                 {renderThongTinRap()}
@@ -350,11 +482,11 @@ function BookingPage(props) {
                 />
               </Grid>
             </Grid>
-            <Grid item xs={12} style={{ position: "relative" }}>
-              <img src={screen} className={classes.screen} />
+            <Grid item xs={12} className={classes.contain__screen}>
+              <img src={screen} className={classes.screen} alt="screen" />
               <GridSide item xs={12} className={classes.screenLine}></GridSide>
             </Grid>
-            <Grid item xs={12} style={{ position: "relative", height: 400 }}>
+            <Grid item xs={12} className={classes.contain__chair}>
               <div className="theatre">
                 <div className="cinema-seats left">
                   <div className="cinema-row row-0">{renderLableChair()}</div>
@@ -366,7 +498,20 @@ function BookingPage(props) {
                 </div>
               </div>
             </Grid>
-            <DrawerBookingCombo open={isOpen} />
+            <GridNav className="collapse__Combo">
+              <div id="collapse__Combo" className="collapse width">
+                <div style={{ width: 400 }}>
+                  {renderCombo()}
+                  <div
+                    role="button"
+                    data-toggle="collapse"
+                    data-target="#collapse__Combo"
+                    className={classes.overlay}
+                  ></div>
+                </div>
+              </div>
+            </GridNav>
+
             <Grid container>
               {/* <Grid item xs={2}></Grid> */}
               <Grid item xs={3} className={classes.infoChair}>
@@ -392,9 +537,7 @@ function BookingPage(props) {
       <GridNav className={classes.position__rightSide}>
         <Grid item xs={12}>
           <GridBorder className={classes.div__content}>
-            <p className={classes.p__sumMoney}>
-              {`${state.sumMoneyChair.toLocaleString()} đ`}
-            </p>
+            {renderSumMoney()}
           </GridBorder>
           {renderTenPhim()}
           <GridBorder container className={classes.div__content}>
@@ -402,15 +545,19 @@ function BookingPage(props) {
               {state.listNumberChair[0] ? <span>Ghế: </span> : ""}
               {fetchBookChair()}
             </div>
-            <p>{`${state.sumMoneyChair.toLocaleString()} đ`} đ</p>
+            <p>{`${state.sumMoneyChair.toLocaleString()} đ`}</p>
           </GridBorder>
           <GridBorder container className={classes.div__content}>
             {/* Start Drawer */}
-            <Button variant="contained" color="primary" onClick={openSideCombo}>
-              Chọn combo
+            <Button
+              role="button"
+              data-toggle="collapse"
+              data-target="#collapse__Combo"
+            >
+              <p> Chọn combo</p>
             </Button>
             {/* End Drawer */}
-            <p>0 đ</p>
+            <p>{`${state.sumMoneyCombo.toLocaleString()} đ`}</p>
           </GridBorder>
           <GridBorder container className={classes.div__content}>
             <TextFieldM
@@ -477,6 +624,16 @@ function BookingPage(props) {
             </FormControl>
           </GridBorder>
           <GridBorder className={classes.info__booking}>
+            <Checkbox
+              // checked={checked}
+              onChange={(e) => {
+                setstate({
+                  ...state,
+                  isChecked: e.target.checked,
+                });
+              }}
+              inputProps={{ "aria-label": "primary checkbox" }}
+            />
             <div>
               <img
                 src={process.env.PUBLIC_URL + "/img/exclamation.png"}
@@ -489,7 +646,14 @@ function BookingPage(props) {
             </div>
           </GridBorder>
           <Grid item className={classes.btn__booking}>
-            <Button onClick={handleBooking}>Mua Vé</Button>
+            <Button
+              onClick={handleBooking}
+              disabled={
+                !state.isChecked || !state.listBookingChair[0] ? true : false
+              }
+            >
+              Mua Vé
+            </Button>
           </Grid>
         </Grid>
       </GridNav>
@@ -512,6 +676,28 @@ function BookingPage(props) {
           </ButtonM>
           <ButtonM onClick={alertHide} variant="contained">
             Hủy
+          </ButtonM>
+        </div>
+      </Rodal>
+      <Rodal
+        visible={state.isBookingCompleted}
+        onClose={alertComplete}
+        animation="flip"
+        showCloseButton={false}
+        height={250}
+      >
+        <div className={classes.rodal__containt}>
+          <img
+            src={process.env.PUBLIC_URL + "/img/completed.webp"}
+            alt="Completed"
+          />
+          <h2>Đặt vé thành công</h2>
+          <ButtonM
+            onClick={alertComplete}
+            variant="contained"
+            color="secondary"
+          >
+            Về trang chủ
           </ButtonM>
         </div>
       </Rodal>
