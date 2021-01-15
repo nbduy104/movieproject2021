@@ -63,8 +63,8 @@ function InfoUserPage(props) {
     formValid: false,
   });
   useEffect(() => {
-    if (!localStorage.getItem("UserInfo")) return;
-    const user = JSON.parse(localStorage.getItem("UserInfo"));
+    if (!localStorage.getItem("User")) return;
+    const user = JSON.parse(localStorage.getItem("User"));
 
     setState({
       ...state,
@@ -141,7 +141,6 @@ function InfoUserPage(props) {
       case "matKhau":
         if (value && value.length < 6) {
           mess = "*Mật khẩu phải từ 6 ký tự!";
-          console.log(state.values.checkmatKhau);
         }
         matKhauValid = mess !== "" ? false : true;
         checkmatKhau = "";

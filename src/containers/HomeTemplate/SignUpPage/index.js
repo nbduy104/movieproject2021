@@ -101,7 +101,7 @@ function SignUp(props) {
       maLoaiNguoiDung,
       hoTen: lastName + " " + firstName,
     };
-    props.handleSubmit(user);
+    props.handleSubmit(user, props.history);
   };
   const handleErrors = (e) => {
     const { name, value, checked } = e.target;
@@ -196,12 +196,20 @@ function SignUp(props) {
         notifyValid,
     });
   };
+
   return (
     <Container className={classes.container} component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <img className={classes.avatar} src="./img/group@2x.png" />
         <form onSubmit={_handleSubmit} className={classes.form} noValidate>
+          {props.err && props.err.response ? (
+            <Alert className={classes.alertSignIn} severity="error">
+              {props.err.response.data}
+            </Alert>
+          ) : (
+            ""
+          )}
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <CssTextField
@@ -397,12 +405,16 @@ function SignUp(props) {
     </Container>
   );
 }
-
+const mapStateToProps = (state) => {
+  return {
+    err: state.signUpHomeReducer.err,
+  };
+};
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSubmit: (user) => {
-      dispatch(actSignUpHomeApi(user));
+    handleSubmit: (user, history) => {
+      dispatch(actSignUpHomeApi(user, history));
     },
   };
 };
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

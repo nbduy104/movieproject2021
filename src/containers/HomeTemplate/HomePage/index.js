@@ -8,6 +8,7 @@ import ShowTime from "../../../components/ShowTime";
 import Apps from "../../../components/Apps";
 import Partners from "../../../components/Partners";
 import Infomation from "components/Infomation";
+import ListMovie from "components/listMovie";
 
 export default class HomePage extends Component {
   render() {
@@ -18,6 +19,7 @@ export default class HomePage extends Component {
         <CommingSoon />
         <CommingSoonPage2 />
         <CommingSoonPage3 />
+        {/* <ListMovie /> */}
         <ShowTime />
         <Infomation />
         <Apps />

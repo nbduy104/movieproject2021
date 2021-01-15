@@ -1,10 +1,53 @@
 import React, { useState } from "react";
 import "./style.scss";
-import { StyledLink } from "../Link";
+import { StyledLink, StyledLinkPage } from "../Link";
 import { Container, ContainerBG } from "../Container";
 import Button from "../Button";
+import listInfoFilm from "../../Assets/data/listInfoFilm.json";
+import listInfoSmall from "../../Assets/data/listInfoSmall.json";
 export default function Infomation() {
   const [watchMore, setWatchMore] = useState(0);
+  const renderInfoFilm = (item) => {
+    return (
+      <div className="col-sm-6 info__items">
+        <div>
+          <StyledLink href={item.link}>
+            <img className="img-fluid" src={item.img} alt="infomation" />
+            <h5>{item.title}</h5>
+          </StyledLink>
+          <p>{item.detail}</p>
+          <div className="d-flex mb-3">
+            <div className="info__like">
+              <img src="./img/like.png" />
+              <span>1</span>
+            </div>
+            <div className="info__like">
+              <img src="./img/comment.png" />
+              <span>1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  const renderInfoSmall = () => {
+    return listInfoSmall.map((item, index) => {
+      return (
+        <div className="row mb-3" key={index}>
+          <div className="col-2 col-sm-3">
+            <img
+              className="img-fluid info__img--small"
+              src={item.img}
+              alt="infoSmall"
+            />
+          </div>
+          <div className="col-10 col-sm-9 info__text--small">
+            <span>{item.detail}</span>
+          </div>
+        </div>
+      );
+    });
+  };
   return (
     <ContainerBG id="info" className="info">
       <Container className="info__content px-2">
@@ -58,164 +101,17 @@ export default function Infomation() {
           >
             <div id="dienAnh24hContent1" className="pt-2">
               <div className="info__top">
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie10.png" />
-                    <h5>
-                      TENET công bố ngày khởi chiếu chính thức tại Việt Nam
-                    </h5>
-                    <p>
-                      Đêm qua theo giờ Việt Nam, hãng phim Warner Bros. đưa ra
-                      thông báo chính thức về ngày khởi chiếu cho bom tấn TENET
-                      tại các thị trường bên ngoài Bắc Mỹ, trong đó có Việt Nam.
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie11.png" />
-                    <h5>Khi phụ nữ không còn ở thế trốn chạy của nạn nhân</h5>
-                    <p>
-                      Là bộ phim tâm lý li kỳ với chủ đề tội phạm, Bằng Chứng Vô
-                      Hình mang đến một góc nhìn mới về hình ảnh những người phụ
-                      nữ thời hiện đại. Điều đó được thể hiện qua câu chuyện về
-                      hai người phụ nữ cùng hợp sức để vạch mặt tên tội{" "}
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {renderInfoFilm(listInfoFilm[0])}
+                {renderInfoFilm(listInfoFilm[1])}
               </div>
               <div className="info_bot row">
                 <div className="col-sm-8">
                   <div className="info__top">
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie8.png" />
-                        <h5>
-                          Dàn mỹ nhân trong thế giới điện ảnh của quái kiệt
-                          Christopher Nolan
-                        </h5>
-                        <p>
-                          Làng phim đương đại những năm qua chứng kiến sự lên
-                          ngôi của cái tên Christopher Nolan, được biết tới như
-                          một trong những đạo diễn thiên tài với khả năng tạo ra
-                          siêu phẩm bạc tỉ chất lượng.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie9.png" />
-                        <h5>
-                          Truy Cùng Giết Tận - Cuộc tái ngộ của hai 'ông hoàng
-                          phòng vé' xứ Hàn
-                        </h5>
-                        <p>
-                          Sau 7 năm kể từ New World – bộ phim đạt thành tích hơn
-                          4.68 triệu vé, hai tên tuổi lão làng trong làng điện
-                          ảnh Hàn Quốc mới tiếp tục tái hợp trong Truy Cùng Giết
-                          Tận – một bộ phim hành động siêu “nặng đô”.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    {renderInfoFilm(listInfoFilm[2])}
+                    {renderInfoFilm(listInfoFilm[3])}
                   </div>
                 </div>
-                <div className="col-sm-4">
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms1.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        6 đạo diễn tỉ đô làm nên thành công của những bom tấn
-                        đình đám nhất Hollywood
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms2.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Gái Già Lắm Chiêu V – Những cuộc đời vương giả
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms3.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Kaity Nguyễn trở thành mỹ nhân mới của vũ trụ Gái Già
-                        Lắm Chiêu
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms4.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        5 lý do khiến bạn không thể bỏ qua bộ phim Cậu Bé Người
-                        Gỗ Pinocchio
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <div className="col-sm-4">{renderInfoSmall()}</div>
               </div>
             </div>
             <div
@@ -224,164 +120,17 @@ export default function Infomation() {
               style={watchMore > 0 ? { display: "block" } : { display: "none" }}
             >
               <div className="info__top">
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie3.png" />
-                    <h5>
-                      TENET công bố ngày khởi chiếu chính thức tại Việt Nam
-                    </h5>
-                    <p>
-                      Đêm qua theo giờ Việt Nam, hãng phim Warner Bros. đưa ra
-                      thông báo chính thức về ngày khởi chiếu cho bom tấn TENET
-                      tại các thị trường bên ngoài Bắc Mỹ, trong đó có Việt Nam.
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie2.png" />
-                    <h5>Khi phụ nữ không còn ở thế trốn chạy của nạn nhân</h5>
-                    <p>
-                      Là bộ phim tâm lý li kỳ với chủ đề tội phạm, Bằng Chứng Vô
-                      Hình mang đến một góc nhìn mới về hình ảnh những người phụ
-                      nữ thời hiện đại. Điều đó được thể hiện qua câu chuyện về
-                      hai người phụ nữ cùng hợp sức để vạch mặt tên tội{" "}
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {renderInfoFilm(listInfoFilm[4])}
+                {renderInfoFilm(listInfoFilm[5])}
               </div>
               <div className="info_bot row">
                 <div className="col-sm-8">
                   <div className="info__top">
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie1.png" />
-                        <h5>
-                          Dàn mỹ nhân trong thế giới điện ảnh của quái kiệt
-                          Christopher Nolan
-                        </h5>
-                        <p>
-                          Làng phim đương đại những năm qua chứng kiến sự lên
-                          ngôi của cái tên Christopher Nolan, được biết tới như
-                          một trong những đạo diễn thiên tài với khả năng tạo ra
-                          siêu phẩm bạc tỉ chất lượng.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie11.png" />
-                        <h5>
-                          Truy Cùng Giết Tận - Cuộc tái ngộ của hai 'ông hoàng
-                          phòng vé' xứ Hàn
-                        </h5>
-                        <p>
-                          Sau 7 năm kể từ New World – bộ phim đạt thành tích hơn
-                          4.68 triệu vé, hai tên tuổi lão làng trong làng điện
-                          ảnh Hàn Quốc mới tiếp tục tái hợp trong Truy Cùng Giết
-                          Tận – một bộ phim hành động siêu “nặng đô”.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    {renderInfoFilm(listInfoFilm[6])}
+                    {renderInfoFilm(listInfoFilm[7])}
                   </div>
                 </div>
-                <div className="col-sm-4">
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms1.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        6 đạo diễn tỉ đô làm nên thành công của những bom tấn
-                        đình đám nhất Hollywood
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms2.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Gái Già Lắm Chiêu V – Những cuộc đời vương giả
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms3.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Kaity Nguyễn trở thành mỹ nhân mới của vũ trụ Gái Già
-                        Lắm Chiêu
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms4.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        5 lý do khiến bạn không thể bỏ qua bộ phim Cậu Bé Người
-                        Gỗ Pinocchio
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <div className="col-sm-4">{renderInfoSmall()}</div>
               </div>
             </div>
             <div
@@ -390,164 +139,17 @@ export default function Infomation() {
               style={watchMore > 1 ? { display: "block" } : { display: "none" }}
             >
               <div className="info__top">
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie12.png" />
-                    <h5>
-                      TENET công bố ngày khởi chiếu chính thức tại Việt Nam
-                    </h5>
-                    <p>
-                      Đêm qua theo giờ Việt Nam, hãng phim Warner Bros. đưa ra
-                      thông báo chính thức về ngày khởi chiếu cho bom tấn TENET
-                      tại các thị trường bên ngoài Bắc Mỹ, trong đó có Việt Nam.
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie9.png" />
-                    <h5>Khi phụ nữ không còn ở thế trốn chạy của nạn nhân</h5>
-                    <p>
-                      Là bộ phim tâm lý li kỳ với chủ đề tội phạm, Bằng Chứng Vô
-                      Hình mang đến một góc nhìn mới về hình ảnh những người phụ
-                      nữ thời hiện đại. Điều đó được thể hiện qua câu chuyện về
-                      hai người phụ nữ cùng hợp sức để vạch mặt tên tội{" "}
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {renderInfoFilm(listInfoFilm[8])}
+                {renderInfoFilm(listInfoFilm[9])}
               </div>
               <div className="info_bot row">
                 <div className="col-sm-8">
                   <div className="info__top">
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie7.png" />
-                        <h5>
-                          Dàn mỹ nhân trong thế giới điện ảnh của quái kiệt
-                          Christopher Nolan
-                        </h5>
-                        <p>
-                          Làng phim đương đại những năm qua chứng kiến sự lên
-                          ngôi của cái tên Christopher Nolan, được biết tới như
-                          một trong những đạo diễn thiên tài với khả năng tạo ra
-                          siêu phẩm bạc tỉ chất lượng.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie5.png" />
-                        <h5>
-                          Truy Cùng Giết Tận - Cuộc tái ngộ của hai 'ông hoàng
-                          phòng vé' xứ Hàn
-                        </h5>
-                        <p>
-                          Sau 7 năm kể từ New World – bộ phim đạt thành tích hơn
-                          4.68 triệu vé, hai tên tuổi lão làng trong làng điện
-                          ảnh Hàn Quốc mới tiếp tục tái hợp trong Truy Cùng Giết
-                          Tận – một bộ phim hành động siêu “nặng đô”.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    {renderInfoFilm(listInfoFilm[10])}
+                    {renderInfoFilm(listInfoFilm[11])}
                   </div>
                 </div>
-                <div className="col-sm-4">
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms1.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        6 đạo diễn tỉ đô làm nên thành công của những bom tấn
-                        đình đám nhất Hollywood
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms2.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Gái Già Lắm Chiêu V – Những cuộc đời vương giả
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms3.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Kaity Nguyễn trở thành mỹ nhân mới của vũ trụ Gái Già
-                        Lắm Chiêu
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms4.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        5 lý do khiến bạn không thể bỏ qua bộ phim Cậu Bé Người
-                        Gỗ Pinocchio
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <div className="col-sm-4">{renderInfoSmall()}</div>
               </div>
             </div>
             <div className="text-center pb-2">
@@ -570,164 +172,17 @@ export default function Infomation() {
           >
             <div id="reViewContent1" className="pt-2">
               <div className="info__top">
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie3.png" />
-                    <h5>
-                      TENET công bố ngày khởi chiếu chính thức tại Việt Nam
-                    </h5>
-                    <p>
-                      Đêm qua theo giờ Việt Nam, hãng phim Warner Bros. đưa ra
-                      thông báo chính thức về ngày khởi chiếu cho bom tấn TENET
-                      tại các thị trường bên ngoài Bắc Mỹ, trong đó có Việt Nam.
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie2.png" />
-                    <h5>Khi phụ nữ không còn ở thế trốn chạy của nạn nhân</h5>
-                    <p>
-                      Là bộ phim tâm lý li kỳ với chủ đề tội phạm, Bằng Chứng Vô
-                      Hình mang đến một góc nhìn mới về hình ảnh những người phụ
-                      nữ thời hiện đại. Điều đó được thể hiện qua câu chuyện về
-                      hai người phụ nữ cùng hợp sức để vạch mặt tên tội{" "}
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {renderInfoFilm(listInfoFilm[6])}
+                {renderInfoFilm(listInfoFilm[7])}
               </div>
               <div className="info_bot row">
                 <div className="col-sm-8">
                   <div className="info__top">
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie1.png" />
-                        <h5>
-                          Dàn mỹ nhân trong thế giới điện ảnh của quái kiệt
-                          Christopher Nolan
-                        </h5>
-                        <p>
-                          Làng phim đương đại những năm qua chứng kiến sự lên
-                          ngôi của cái tên Christopher Nolan, được biết tới như
-                          một trong những đạo diễn thiên tài với khả năng tạo ra
-                          siêu phẩm bạc tỉ chất lượng.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie11.png" />
-                        <h5>
-                          Truy Cùng Giết Tận - Cuộc tái ngộ của hai 'ông hoàng
-                          phòng vé' xứ Hàn
-                        </h5>
-                        <p>
-                          Sau 7 năm kể từ New World – bộ phim đạt thành tích hơn
-                          4.68 triệu vé, hai tên tuổi lão làng trong làng điện
-                          ảnh Hàn Quốc mới tiếp tục tái hợp trong Truy Cùng Giết
-                          Tận – một bộ phim hành động siêu “nặng đô”.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    {renderInfoFilm(listInfoFilm[8])}
+                    {renderInfoFilm(listInfoFilm[9])}
                   </div>
                 </div>
-                <div className="col-sm-4">
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms1.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        6 đạo diễn tỉ đô làm nên thành công của những bom tấn
-                        đình đám nhất Hollywood
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms2.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Gái Già Lắm Chiêu V – Những cuộc đời vương giả
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms3.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Kaity Nguyễn trở thành mỹ nhân mới của vũ trụ Gái Già
-                        Lắm Chiêu
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms4.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        5 lý do khiến bạn không thể bỏ qua bộ phim Cậu Bé Người
-                        Gỗ Pinocchio
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <div className="col-sm-4">{renderInfoSmall()} </div>
               </div>
             </div>
             <div
@@ -736,164 +191,17 @@ export default function Infomation() {
               style={watchMore > 0 ? { display: "block" } : { display: "none" }}
             >
               <div className="info__top">
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie10.png" />
-                    <h5>
-                      TENET công bố ngày khởi chiếu chính thức tại Việt Nam
-                    </h5>
-                    <p>
-                      Đêm qua theo giờ Việt Nam, hãng phim Warner Bros. đưa ra
-                      thông báo chính thức về ngày khởi chiếu cho bom tấn TENET
-                      tại các thị trường bên ngoài Bắc Mỹ, trong đó có Việt Nam.
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie11.png" />
-                    <h5>Khi phụ nữ không còn ở thế trốn chạy của nạn nhân</h5>
-                    <p>
-                      Là bộ phim tâm lý li kỳ với chủ đề tội phạm, Bằng Chứng Vô
-                      Hình mang đến một góc nhìn mới về hình ảnh những người phụ
-                      nữ thời hiện đại. Điều đó được thể hiện qua câu chuyện về
-                      hai người phụ nữ cùng hợp sức để vạch mặt tên tội{" "}
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {renderInfoFilm(listInfoFilm[10])}
+                {renderInfoFilm(listInfoFilm[11])}
               </div>
               <div className="info_bot row">
                 <div className="col-sm-8">
                   <div className="info__top">
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie8.png" />
-                        <h5>
-                          Dàn mỹ nhân trong thế giới điện ảnh của quái kiệt
-                          Christopher Nolan
-                        </h5>
-                        <p>
-                          Làng phim đương đại những năm qua chứng kiến sự lên
-                          ngôi của cái tên Christopher Nolan, được biết tới như
-                          một trong những đạo diễn thiên tài với khả năng tạo ra
-                          siêu phẩm bạc tỉ chất lượng.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie9.png" />
-                        <h5>
-                          Truy Cùng Giết Tận - Cuộc tái ngộ của hai 'ông hoàng
-                          phòng vé' xứ Hàn
-                        </h5>
-                        <p>
-                          Sau 7 năm kể từ New World – bộ phim đạt thành tích hơn
-                          4.68 triệu vé, hai tên tuổi lão làng trong làng điện
-                          ảnh Hàn Quốc mới tiếp tục tái hợp trong Truy Cùng Giết
-                          Tận – một bộ phim hành động siêu “nặng đô”.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    {renderInfoFilm(listInfoFilm[0])}
+                    {renderInfoFilm(listInfoFilm[1])}
                   </div>
                 </div>
-                <div className="col-sm-4">
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms1.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        6 đạo diễn tỉ đô làm nên thành công của những bom tấn
-                        đình đám nhất Hollywood
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms2.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Gái Già Lắm Chiêu V – Những cuộc đời vương giả
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms3.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Kaity Nguyễn trở thành mỹ nhân mới của vũ trụ Gái Già
-                        Lắm Chiêu
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms4.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        5 lý do khiến bạn không thể bỏ qua bộ phim Cậu Bé Người
-                        Gỗ Pinocchio
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <div className="col-sm-4">{renderInfoSmall()} </div>
               </div>
             </div>
             <div
@@ -902,164 +210,17 @@ export default function Infomation() {
               style={watchMore > 1 ? { display: "block" } : { display: "none" }}
             >
               <div className="info__top">
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie12.png" />
-                    <h5>
-                      TENET công bố ngày khởi chiếu chính thức tại Việt Nam
-                    </h5>
-                    <p>
-                      Đêm qua theo giờ Việt Nam, hãng phim Warner Bros. đưa ra
-                      thông báo chính thức về ngày khởi chiếu cho bom tấn TENET
-                      tại các thị trường bên ngoài Bắc Mỹ, trong đó có Việt Nam.
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie9.png" />
-                    <h5>Khi phụ nữ không còn ở thế trốn chạy của nạn nhân</h5>
-                    <p>
-                      Là bộ phim tâm lý li kỳ với chủ đề tội phạm, Bằng Chứng Vô
-                      Hình mang đến một góc nhìn mới về hình ảnh những người phụ
-                      nữ thời hiện đại. Điều đó được thể hiện qua câu chuyện về
-                      hai người phụ nữ cùng hợp sức để vạch mặt tên tội{" "}
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {renderInfoFilm(listInfoFilm[2])}
+                {renderInfoFilm(listInfoFilm[3])}
               </div>
               <div className="info_bot row">
                 <div className="col-sm-8">
                   <div className="info__top">
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie7.png" />
-                        <h5>
-                          Dàn mỹ nhân trong thế giới điện ảnh của quái kiệt
-                          Christopher Nolan
-                        </h5>
-                        <p>
-                          Làng phim đương đại những năm qua chứng kiến sự lên
-                          ngôi của cái tên Christopher Nolan, được biết tới như
-                          một trong những đạo diễn thiên tài với khả năng tạo ra
-                          siêu phẩm bạc tỉ chất lượng.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie5.png" />
-                        <h5>
-                          Truy Cùng Giết Tận - Cuộc tái ngộ của hai 'ông hoàng
-                          phòng vé' xứ Hàn
-                        </h5>
-                        <p>
-                          Sau 7 năm kể từ New World – bộ phim đạt thành tích hơn
-                          4.68 triệu vé, hai tên tuổi lão làng trong làng điện
-                          ảnh Hàn Quốc mới tiếp tục tái hợp trong Truy Cùng Giết
-                          Tận – một bộ phim hành động siêu “nặng đô”.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    {renderInfoFilm(listInfoFilm[4])}
+                    {renderInfoFilm(listInfoFilm[5])}
                   </div>
                 </div>
-                <div className="col-sm-4">
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms1.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        6 đạo diễn tỉ đô làm nên thành công của những bom tấn
-                        đình đám nhất Hollywood
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms2.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Gái Già Lắm Chiêu V – Những cuộc đời vương giả
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms3.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Kaity Nguyễn trở thành mỹ nhân mới của vũ trụ Gái Già
-                        Lắm Chiêu
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms4.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        5 lý do khiến bạn không thể bỏ qua bộ phim Cậu Bé Người
-                        Gỗ Pinocchio
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <div className="col-sm-4">{renderInfoSmall()} </div>
               </div>
             </div>
             <div className="text-center pb-2">
@@ -1082,164 +243,17 @@ export default function Infomation() {
           >
             <div id="khuyenMaiContent1" className="pt-2">
               <div className="info__top">
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie12.png" />
-                    <h5>
-                      TENET công bố ngày khởi chiếu chính thức tại Việt Nam
-                    </h5>
-                    <p>
-                      Đêm qua theo giờ Việt Nam, hãng phim Warner Bros. đưa ra
-                      thông báo chính thức về ngày khởi chiếu cho bom tấn TENET
-                      tại các thị trường bên ngoài Bắc Mỹ, trong đó có Việt Nam.
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie9.png" />
-                    <h5>Khi phụ nữ không còn ở thế trốn chạy của nạn nhân</h5>
-                    <p>
-                      Là bộ phim tâm lý li kỳ với chủ đề tội phạm, Bằng Chứng Vô
-                      Hình mang đến một góc nhìn mới về hình ảnh những người phụ
-                      nữ thời hiện đại. Điều đó được thể hiện qua câu chuyện về
-                      hai người phụ nữ cùng hợp sức để vạch mặt tên tội{" "}
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {renderInfoFilm(listInfoFilm[2])}
+                {renderInfoFilm(listInfoFilm[3])}
               </div>
               <div className="info_bot row">
                 <div className="col-sm-8">
                   <div className="info__top">
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie7.png" />
-                        <h5>
-                          Dàn mỹ nhân trong thế giới điện ảnh của quái kiệt
-                          Christopher Nolan
-                        </h5>
-                        <p>
-                          Làng phim đương đại những năm qua chứng kiến sự lên
-                          ngôi của cái tên Christopher Nolan, được biết tới như
-                          một trong những đạo diễn thiên tài với khả năng tạo ra
-                          siêu phẩm bạc tỉ chất lượng.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie5.png" />
-                        <h5>
-                          Truy Cùng Giết Tận - Cuộc tái ngộ của hai 'ông hoàng
-                          phòng vé' xứ Hàn
-                        </h5>
-                        <p>
-                          Sau 7 năm kể từ New World – bộ phim đạt thành tích hơn
-                          4.68 triệu vé, hai tên tuổi lão làng trong làng điện
-                          ảnh Hàn Quốc mới tiếp tục tái hợp trong Truy Cùng Giết
-                          Tận – một bộ phim hành động siêu “nặng đô”.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    {renderInfoFilm(listInfoFilm[4])}
+                    {renderInfoFilm(listInfoFilm[5])}
                   </div>
                 </div>
-                <div className="col-sm-4">
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms1.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        6 đạo diễn tỉ đô làm nên thành công của những bom tấn
-                        đình đám nhất Hollywood
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms2.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Gái Già Lắm Chiêu V – Những cuộc đời vương giả
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms3.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Kaity Nguyễn trở thành mỹ nhân mới của vũ trụ Gái Già
-                        Lắm Chiêu
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms4.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        5 lý do khiến bạn không thể bỏ qua bộ phim Cậu Bé Người
-                        Gỗ Pinocchio
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <div className="col-sm-4">{renderInfoSmall()} </div>
               </div>
             </div>
             <div
@@ -1248,164 +262,17 @@ export default function Infomation() {
               style={watchMore > 0 ? { display: "block" } : { display: "none" }}
             >
               <div className="info__top">
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie10.png" />
-                    <h5>
-                      TENET công bố ngày khởi chiếu chính thức tại Việt Nam
-                    </h5>
-                    <p>
-                      Đêm qua theo giờ Việt Nam, hãng phim Warner Bros. đưa ra
-                      thông báo chính thức về ngày khởi chiếu cho bom tấn TENET
-                      tại các thị trường bên ngoài Bắc Mỹ, trong đó có Việt Nam.
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie11.png" />
-                    <h5>Khi phụ nữ không còn ở thế trốn chạy của nạn nhân</h5>
-                    <p>
-                      Là bộ phim tâm lý li kỳ với chủ đề tội phạm, Bằng Chứng Vô
-                      Hình mang đến một góc nhìn mới về hình ảnh những người phụ
-                      nữ thời hiện đại. Điều đó được thể hiện qua câu chuyện về
-                      hai người phụ nữ cùng hợp sức để vạch mặt tên tội{" "}
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {renderInfoFilm(listInfoFilm[6])}
+                {renderInfoFilm(listInfoFilm[7])}
               </div>
               <div className="info_bot row">
                 <div className="col-sm-8">
                   <div className="info__top">
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie8.png" />
-                        <h5>
-                          Dàn mỹ nhân trong thế giới điện ảnh của quái kiệt
-                          Christopher Nolan
-                        </h5>
-                        <p>
-                          Làng phim đương đại những năm qua chứng kiến sự lên
-                          ngôi của cái tên Christopher Nolan, được biết tới như
-                          một trong những đạo diễn thiên tài với khả năng tạo ra
-                          siêu phẩm bạc tỉ chất lượng.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie9.png" />
-                        <h5>
-                          Truy Cùng Giết Tận - Cuộc tái ngộ của hai 'ông hoàng
-                          phòng vé' xứ Hàn
-                        </h5>
-                        <p>
-                          Sau 7 năm kể từ New World – bộ phim đạt thành tích hơn
-                          4.68 triệu vé, hai tên tuổi lão làng trong làng điện
-                          ảnh Hàn Quốc mới tiếp tục tái hợp trong Truy Cùng Giết
-                          Tận – một bộ phim hành động siêu “nặng đô”.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    {renderInfoFilm(listInfoFilm[8])}
+                    {renderInfoFilm(listInfoFilm[9])}
                   </div>
                 </div>
-                <div className="col-sm-4">
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms1.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        6 đạo diễn tỉ đô làm nên thành công của những bom tấn
-                        đình đám nhất Hollywood
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms2.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Gái Già Lắm Chiêu V – Những cuộc đời vương giả
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms3.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Kaity Nguyễn trở thành mỹ nhân mới của vũ trụ Gái Già
-                        Lắm Chiêu
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms4.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        5 lý do khiến bạn không thể bỏ qua bộ phim Cậu Bé Người
-                        Gỗ Pinocchio
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <div className="col-sm-4">{renderInfoSmall()} </div>
               </div>
             </div>
             <div
@@ -1414,164 +281,17 @@ export default function Infomation() {
               style={watchMore > 1 ? { display: "block" } : { display: "none" }}
             >
               <div className="info__top">
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie3.png" />
-                    <h5>
-                      TENET công bố ngày khởi chiếu chính thức tại Việt Nam
-                    </h5>
-                    <p>
-                      Đêm qua theo giờ Việt Nam, hãng phim Warner Bros. đưa ra
-                      thông báo chính thức về ngày khởi chiếu cho bom tấn TENET
-                      tại các thị trường bên ngoài Bắc Mỹ, trong đó có Việt Nam.
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 info__items">
-                  <div>
-                    <img className="img-fluid" src="./img/movie2.png" />
-                    <h5>Khi phụ nữ không còn ở thế trốn chạy của nạn nhân</h5>
-                    <p>
-                      Là bộ phim tâm lý li kỳ với chủ đề tội phạm, Bằng Chứng Vô
-                      Hình mang đến một góc nhìn mới về hình ảnh những người phụ
-                      nữ thời hiện đại. Điều đó được thể hiện qua câu chuyện về
-                      hai người phụ nữ cùng hợp sức để vạch mặt tên tội{" "}
-                    </p>
-                    <div className="d-flex mb-3">
-                      <div className="info__like">
-                        <img src="./img/like.png" />
-                        <span>1</span>
-                      </div>
-                      <div className="info__like">
-                        <img src="./img/comment.png" />
-                        <span>1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {renderInfoFilm(listInfoFilm[10])}
+                {renderInfoFilm(listInfoFilm[11])}
               </div>
               <div className="info_bot row">
                 <div className="col-sm-8">
                   <div className="info__top">
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie1.png" />
-                        <h5>
-                          Dàn mỹ nhân trong thế giới điện ảnh của quái kiệt
-                          Christopher Nolan
-                        </h5>
-                        <p>
-                          Làng phim đương đại những năm qua chứng kiến sự lên
-                          ngôi của cái tên Christopher Nolan, được biết tới như
-                          một trong những đạo diễn thiên tài với khả năng tạo ra
-                          siêu phẩm bạc tỉ chất lượng.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 info__items">
-                      <div>
-                        <img className="img-fluid" src="./img/movie11.png" />
-                        <h5>
-                          Truy Cùng Giết Tận - Cuộc tái ngộ của hai 'ông hoàng
-                          phòng vé' xứ Hàn
-                        </h5>
-                        <p>
-                          Sau 7 năm kể từ New World – bộ phim đạt thành tích hơn
-                          4.68 triệu vé, hai tên tuổi lão làng trong làng điện
-                          ảnh Hàn Quốc mới tiếp tục tái hợp trong Truy Cùng Giết
-                          Tận – một bộ phim hành động siêu “nặng đô”.
-                        </p>
-                        <div className="d-flex mb-3">
-                          <div className="info__like">
-                            <img src="./img/like.png" />
-                            <span>1</span>
-                          </div>
-                          <div className="info__like">
-                            <img src="./img/comment.png" />
-                            <span>1</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    {renderInfoFilm(listInfoFilm[0])}
+                    {renderInfoFilm(listInfoFilm[1])}
                   </div>
                 </div>
-                <div className="col-sm-4">
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms1.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        6 đạo diễn tỉ đô làm nên thành công của những bom tấn
-                        đình đám nhất Hollywood
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms2.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Gái Già Lắm Chiêu V – Những cuộc đời vương giả
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms3.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        Kaity Nguyễn trở thành mỹ nhân mới của vũ trụ Gái Già
-                        Lắm Chiêu
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-2 col-sm-3">
-                      <img
-                        className="img-fluid info__img--small"
-                        src="./img/ms4.png"
-                      />
-                    </div>
-                    <div className="col-10 col-sm-9 info__text--small">
-                      <span>
-                        5 lý do khiến bạn không thể bỏ qua bộ phim Cậu Bé Người
-                        Gỗ Pinocchio
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <div className="col-sm-4">{renderInfoSmall()} </div>
               </div>
             </div>
             <div className="text-center pb-2">

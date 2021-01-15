@@ -1,0 +1,25 @@
+@import "../../sass/Helper/_variables.scss";
+.listMovie__control {
+  position: relative;
+  .a__control {
+    cursor: pointer;
+    transform: translateY(-50%);
+    font-size: 60px;
+    opacity: 0.1;
+
+    &:hover {
+      color: $color-orange-0;
+      opacity: 1;
+    }
+    .fa-angle-left {
+      position: absolute;
+      left: -80px;
+      top: 50%;
+    }
+    .fa-angle-right {
+      position: absolute;
+      right: -80px;
+      top: 50%;
+    }
+  }
+}
