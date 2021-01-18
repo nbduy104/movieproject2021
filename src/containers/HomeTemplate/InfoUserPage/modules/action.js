@@ -9,7 +9,7 @@ export const actShowInfoUserApi = (user) => {
       .post("/QuanLyNguoiDung/ThongTinTaiKhoan", user)
       .then((res) => {
         dispatch(actionName(ActionType.SHOW_INFO_USER_SUCCESS, res.data));
-        localStorage.setItem("UserInfo", JSON.stringify(res.data));
+        // localStorage.setItem("UserInfo", JSON.stringify(res.data));
       })
       .catch((err) => {
         dispatch(actionName(ActionType.UPDATE_INFO_USER_FAILED, err));
@@ -28,7 +28,7 @@ export const actUpdateInfoUserApi = (user, history) => {
           taiKhoan: res.data.taiKhoan,
           matKhau: user.matKhau,
         };
-        dispatch(actSignInHomeApi(userUpdate, history));
+        dispatch(actSignInHomeApi(userUpdate, history, 0));
       })
       .catch((err) => {
         dispatch(actionName(ActionType.UPDATE_INFO_USER_FAILED, err));

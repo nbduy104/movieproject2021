@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="tix__container px-3 py-4">
         <div className="footer__content">
           <div className="footer__logo">
-            <img src={zion} />
+            <img src={zion} alt="zion" />
           </div>
           <div className="footer__text">
             <p className="footer__label">
@@ -30,7 +30,11 @@ export default function Footer() {
             </a>
           </div>
           <div className="text-center">
-            <img className="footer__bct" src={bocongthuong} />
+            <img
+              className="footer__bct"
+              src={bocongthuong}
+              alt="bocongthuong"
+            />
           </div>
         </div>
       </div>

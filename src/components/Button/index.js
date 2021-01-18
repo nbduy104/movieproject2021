@@ -11,9 +11,11 @@ export default styled(({ color, ...otherProps }) => <Button {...otherProps} />)`
   padding: 0.25em 0.5em;
   transition: all 0.5s;
   font-size: 15px;
+
   &:hover {
     color: ${(props) => props.theme.hoverTextColor};
-    background-color: ${(props) => props.theme.hoverBgColor};
+    background-color: #fb4226;
+    // background-color: ${(props) => props.theme.hoverBgColor};
     border: ${(props) => props.theme.borderButton};
   }
 `;

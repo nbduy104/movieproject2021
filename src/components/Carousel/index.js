@@ -14,6 +14,10 @@ export default class Carousel extends Component {
       hinhAnh:
         "https://s3img.vcdn.vn/123phim/2020/09/ac-quy-doi-dau-deliver-us-from-evil-c16-15994546580686.jpg",
     },
+    {
+      hinhAnh:
+        "https://s3img.vcdn.vn/123phim/2020/09/dong-gia-1k-ve-khi-mua-ve-qua-tix-16011908558560.jpg",
+    },
   ];
 
   render() {
@@ -36,15 +40,14 @@ export default class Carousel extends Component {
               <li data-target="#carouselExampleIndicators" data-slide-to={3} />
             </ol>
             <div className="carousel-inner">
-              <div className="carousel-item active">
-                <img src="https://s3img.vcdn.vn/123phim/2020/09/dong-gia-1k-ve-khi-mua-ve-qua-tix-16011908558560.jpg" />
-                <button className="js-video-button" data-video-id="XRm1P7oGpMQ">
-                  <i className="fa fa-play" style={{ color: "white" }} />
-                </button>
-              </div>
               {this.listBannerMovie.map((banner, index) => (
-                <div className="carousel-item" key={index}>
-                  <img src={banner.hinhAnh} loading="lazy" />
+                <div
+                  className={
+                    index !== 0 ? "carousel-item" : "carousel-item active"
+                  }
+                  key={index}
+                >
+                  <img src={banner.hinhAnh} alt="banner" />
                   <button
                     className="js-video-button"
                     data-video-id="XRm1P7oGpMQ"

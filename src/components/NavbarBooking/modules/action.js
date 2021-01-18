@@ -13,6 +13,10 @@ export const actNavBookingApi = (maPhim) => {
       });
   };
 };
+export const actCheckAccount = (payload) => ({
+  type: ActionType.NAV_BOOKING_CHECK_ACCOUNT,
+  payload,
+});
 const actionName = (type, payload) => ({
   type,
   payload,

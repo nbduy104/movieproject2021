@@ -36,6 +36,7 @@ function Apps() {
                 <p className="textAppUnder">
                   TIX có hai phiên bản
                   <a
+                    rel="noreferrer"
                     className="tagA"
                     target="_blank"
                     href="https://itunes.apple.com/us/app/123phim-mua-ve-lien-tay-chon/id615186197?mt=8"
@@ -45,6 +46,7 @@ function Apps() {
                   </a>{" "}
                   &amp;&nbsp;
                   <a
+                    rel="noreferrer"
                     className="tagA"
                     target="_blank"
                     href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123"
@@ -55,14 +57,14 @@ function Apps() {
               </div>
             </div>
             <div className="col-lg-6 apps__img text-center">
-              <img className="img__bg" src={mobile} />
+              <img className="img__bg" src={mobile} alt="mobile" />
               <div className="apps__carousel">
                 <Slider {...settings} className="slick__carousel">
-                  <img className="img__items" src={slide1} />
-                  <img className="img__items" src={slide2} />
-                  <img className="img__items" src={slide3} />
-                  <img className="img__items" src={slide4} />
-                  <img className="img__items" src={slide5} />
+                  <img className="img__items" src={slide1} alt="slide1" />
+                  <img className="img__items" src={slide2} alt="slide2" />
+                  <img className="img__items" src={slide3} alt="slide3" />
+                  <img className="img__items" src={slide4} alt="slide4" />
+                  <img className="img__items" src={slide5} alt="slide5" />
                 </Slider>
               </div>
             </div>

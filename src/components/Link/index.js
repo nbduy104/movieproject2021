@@ -15,8 +15,6 @@ export const SLink = ({ className, children, ...resprops }) => (
 );
 
 export const StyledLink = styled(SLink)`
-  //   background-color: red;
-  //   font-weight: bold;
   color: ${(props) => props.theme.color};
   &:hover {
     color: #fb4226;
