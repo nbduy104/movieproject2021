@@ -124,7 +124,7 @@ function BookingPage(props) {
         listBookingChair.splice(index, 1);
         listNumberChair.splice(index, 1);
         flag = true;
-        return;
+        return flag;
       }
     });
     if (!flag) {

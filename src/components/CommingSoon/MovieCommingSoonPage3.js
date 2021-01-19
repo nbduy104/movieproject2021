@@ -92,6 +92,8 @@ export const renderPageMovie = (data, loading) => {
             <div className="moviesList">{renderListMovie(item)}</div>
           </div>
         );
+      } else {
+        return "";
       }
     });
   }

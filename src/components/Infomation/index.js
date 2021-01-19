@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./style.scss";
-import { StyledLink, StyledLinkPage } from "../Link";
+import { StyledLink } from "../Link";
 import { Container, ContainerBG } from "../Container";
 import Button from "../Button";
 import listInfoFilm from "../../Assets/data/listInfoFilm.json";
@@ -18,11 +18,11 @@ export default function Infomation() {
           <p>{item.detail}</p>
           <div className="d-flex mb-3">
             <div className="info__like">
-              <img src="./img/like.png" />
+              <img src="./img/like.png" alt="like" />
               <span>1</span>
             </div>
             <div className="info__like">
-              <img src="./img/comment.png" />
+              <img src="./img/comment.png" alt="comment" />
               <span>1</span>
             </div>
           </div>

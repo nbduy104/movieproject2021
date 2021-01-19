@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
 import { Container, ContainerBG } from "../Container";
 import {
   actShowCumRapApi,
@@ -18,6 +17,7 @@ function ShowTime(props) {
     props.fetchCumRap("BHDStar");
     props.fetchLichChieuHTR("BHDStar");
   }, []);
+
   const { data } = props;
   const renderHeThongRap = () => {
     if (data) {
@@ -57,7 +57,7 @@ function ShowTime(props) {
                 }
               }}
             >
-              <img src={htRap.logo} />
+              <img src={htRap.logo} alt="logo" />
             </a>
           </li>
         );
@@ -135,7 +135,7 @@ function ShowTime(props) {
                 <StyledLink data-toggle="collapse" href={`#P${movie.maPhim}`}>
                   <div className="movie__info movie__info__top">
                     <div className="movie__img">
-                      <img src={movie.hinhAnh} />
+                      <img src={movie.hinhAnh} alt="hinhAnh" />
                     </div>
                     <div className="movie__name">
                       <div className="d-flex">

@@ -98,6 +98,8 @@ class NavbarBooking extends Component {
               ];
               return dataNgayChieu;
             });
+          } else {
+            return "";
           }
         });
       });
@@ -123,18 +125,19 @@ class NavbarBooking extends Component {
     let dataSuatChieu = [];
     let dataNgayGioChieu = [];
     let dataSuatChieuTheoNgay = [];
-    if (data) {
-      data.heThongRapChieu.map((item) => {
-        return item.cumRapChieu.map((rapChieu) => {
-          if (rapChieu.maCumRap === this.state.maCumRap) {
-            return rapChieu.lichChieuPhim.map((movie) => {
-              dataNgayGioChieu = [...dataNgayGioChieu, movie.ngayChieuGioChieu];
-              return dataNgayGioChieu;
-            });
-          }
-        });
+    if (!data) return;
+    data.heThongRapChieu.map((item) => {
+      return item.cumRapChieu.map((rapChieu) => {
+        if (rapChieu.maCumRap === this.state.maCumRap) {
+          return rapChieu.lichChieuPhim.map((movie) => {
+            dataNgayGioChieu = [...dataNgayGioChieu, movie.ngayChieuGioChieu];
+            return dataNgayGioChieu;
+          });
+        } else {
+          return "";
+        }
       });
-    }
+    });
     for (let i = 0; i < dataNgayChieu.length; i++) {
       dataNgayGioChieu.map((lichChieu) => {
         if (dataNgayChieu[i] === new Date(lichChieu).toLocaleDateString()) {
@@ -167,6 +170,8 @@ class NavbarBooking extends Component {
             </MenuItem>
           );
         });
+      } else {
+        return "";
       }
     });
   };
@@ -192,6 +197,7 @@ class NavbarBooking extends Component {
               this.props.handleMalichChieu(dataFind[0].maLichChieu);
             }
           }
+          return "";
         });
       });
     }

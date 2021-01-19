@@ -2,6 +2,7 @@ import "./style.scss";
 import React from "react";
 import zion from "../../Assets/Images/zion-logo.jpg";
 import bocongthuong from "../../Assets/Images/bocongthuong.png";
+import { StyledLinkPage } from "../Link";
 export default function Footer() {
   return (
     <footer>
@@ -25,9 +26,9 @@ export default function Footer() {
             </p>
             <p>Số Điện Thoại (Hotline): 1900 545 436</p>
             <p className="d-inline">Email: </p>
-            <a className="d-inline" href="#">
+            <StyledLinkPage className="d-inline" to="/">
               support@tix.vn
-            </a>
+            </StyledLinkPage>
           </div>
           <div className="text-center">
             <img
