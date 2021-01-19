@@ -7,7 +7,7 @@ const initialState = {
   isShowMovie: true,
 };
 
-export default (state = initialState, { type, payload }) => {
+const listMovieReducer = (state = initialState, { type, payload }) => {
   let { dataNow, dataComming } = state;
   switch (type) {
     case ActionType.LIST_MOVIE_REQUEST:
@@ -37,3 +37,4 @@ export default (state = initialState, { type, payload }) => {
       return state;
   }
 };
+export default listMovieReducer;

@@ -66,7 +66,7 @@ function SignIn(props) {
     <Container className={classes.container} component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <img className={classes.avatar} src="./img/group@2x.png" />
+        <img className={classes.avatar} src="./img/group@2x.png" alt="avatar" />
         <form onSubmit={_handleSubmit} className={classes.form} noValidate>
           {props.err && props.err.response ? (
             <Alert className={classes.alertSignIn} severity="error">
@@ -88,7 +88,7 @@ function SignIn(props) {
                 onChange={handleOnchange}
               />{" "}
             </Grid>
-            <Grid item item xs={12}>
+            <Grid item xs={12}>
               <CssTextField
                 variant="outlined"
                 required

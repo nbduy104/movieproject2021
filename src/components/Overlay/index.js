@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import { Overlay, Tooltip } from "react-bootstrap";
+import { Tooltip } from "react-bootstrap";
 
 export const StyledTooltip = styled(Tooltip)`
   font-weight: bold;
