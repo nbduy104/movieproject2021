@@ -3,28 +3,24 @@ const initialState = {
   loading: false,
   data: null,
   err: null,
-  maLichChieu: 0,
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case ActionType.NAV_BOOKING_REQUEST:
+    case ActionType.LIST_MOVIE_NEW_REQUEST:
       state.loading = true;
       state.data = null;
       state.err = null;
       return { ...state };
-    case ActionType.NAV_BOOKING_SUCCESS:
+    case ActionType.LIST_MOVIE_NEW_SUCCESS:
       state.loading = false;
       state.data = payload;
       state.err = null;
       return { ...state };
-    case ActionType.NAV_BOOKING_FAILED:
+    case ActionType.LIST_MOVIE_NEW_FAILED:
       state.loading = false;
       state.data = null;
       state.err = payload;
-      return { ...state };
-    case ActionType.NAV_BOOKING_CHECK_ACCOUNT:
-      state.maLichChieu = payload;
       return { ...state };
     default:
       return state;

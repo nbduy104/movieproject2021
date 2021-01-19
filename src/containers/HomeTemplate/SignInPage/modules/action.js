@@ -2,7 +2,7 @@ import api from "api/index";
 import * as ActionType from "./constants";
 import setHeaders from "../../../../utils/setHeaders";
 const TIME_EXP = 3600000;
-export const actSignInHomeApi = (user, history) => {
+export const actSignInHomeApi = (user, history, maLichChieu) => {
   return (dispatch) => {
     dispatch(actionName(ActionType.SIGN_IN_HOME_REQUEST));
     api
@@ -11,7 +11,9 @@ export const actSignInHomeApi = (user, history) => {
         dispatch(actionName(ActionType.SIGN_IN_HOME_SUCCESS, res.data));
         localStorage.setItem("User", JSON.stringify(res.data));
         setHeaders(res.data.accessToken);
-        history.replace("/");
+        maLichChieu === 0
+          ? history.replace("/")
+          : history.replace(`/booking/${maLichChieu}`);
         const date = new Date().getTime();
         const exp = date + TIME_EXP;
         localStorage.setItem("TimeExpire", exp);
@@ -27,7 +29,9 @@ export const tryLogin = (history) => {
     if (!localStorage.getItem("User")) return;
     const date = new Date().getTime();
     const exp = localStorage.getItem("TimeExpire");
+    if (!exp) return;
     const user = JSON.parse(localStorage.getItem("User"));
+    // console.log(date, exp, date > exp);
     exp && date > exp ? actLogout(history) : setTimeLogout(exp - date, history);
     setHeaders(user.accessToken);
     dispatch(actionName(ActionType.SIGN_IN_HOME_SUCCESS, user));
@@ -42,6 +46,7 @@ export const actLogout = (history) => {
   localStorage.removeItem("User");
   localStorage.removeItem("UserInfo");
   localStorage.removeItem("TimeExpire");
+
   history.replace("/");
   return (dispatch) => {
     dispatch(actionName(ActionType.SIGN_IN_HOME_CLEAR_DATA));

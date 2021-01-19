@@ -13,8 +13,9 @@ import Alert from "@material-ui/lab/Alert";
 import { connect } from "react-redux";
 import { actSignInHomeApi } from "./modules/action";
 function Copyright() {
+  const classes = useStyles();
   return (
-    <Typography variant="body2" align="center" style={{ paddingBottom: 10 }}>
+    <Typography variant="body2" align="center" className={classes.copyRight}>
       {"Copyright © "}
       <StyledLinkPage style={{ color: "white" }} to="/" exact="true">
         tix.vn
@@ -58,7 +59,7 @@ function SignIn(props) {
       taiKhoan,
       matKhau,
     };
-    props.handleSubmit(user, props.history);
+    props.handleSubmit(user, props.history, props.maLichChieu);
   };
 
   return (
@@ -151,11 +152,12 @@ function SignIn(props) {
 const mapStateToProps = (state) => ({
   err: state.signInHomeReducer.err,
   data: state.signInHomeReducer.data,
+  maLichChieu: state.navBookingReducer.maLichChieu,
 });
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSubmit: (user, history) => {
-      dispatch(actSignInHomeApi(user, history));
+    handleSubmit: (user, history, maLichChieu) => {
+      dispatch(actSignInHomeApi(user, history, maLichChieu));
     },
   };
 };

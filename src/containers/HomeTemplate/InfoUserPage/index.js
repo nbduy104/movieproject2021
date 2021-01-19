@@ -13,8 +13,9 @@ import { actUpdateInfoUserApi } from "./modules/action";
 import { actHideNavbar } from "components/NavbarHome/modules/action";
 
 function Copyright() {
+  const classes = useStyles();
   return (
-    <Typography variant="body2" align="center">
+    <Typography variant="body2" align="center" className={classes.copyRight}>
       {"Copyright © "}
       <StyledLinkPage style={{ color: "white" }} to="/" exact="true">
         tix.vn
@@ -26,6 +27,14 @@ function Copyright() {
 }
 
 function InfoUserPage(props) {
+  useEffect(() => {
+    document.body.style.background = "url(./img/bg2.jpg) center center";
+    document.body.style.backgroundSize = "contain";
+    document.body.style.backgroundAttachment = "fixed";
+    return () => {
+      document.body.style.backgroundColor = null;
+    };
+  }, []);
   const [state, setState] = useState({
     values: {
       taiKhoan: "",
@@ -54,8 +63,8 @@ function InfoUserPage(props) {
     formValid: false,
   });
   useEffect(() => {
-    if (!localStorage.getItem("UserInfo")) return;
-    const user = JSON.parse(localStorage.getItem("UserInfo"));
+    if (!localStorage.getItem("User")) return;
+    const user = JSON.parse(localStorage.getItem("User"));
 
     setState({
       ...state,
@@ -132,7 +141,6 @@ function InfoUserPage(props) {
       case "matKhau":
         if (value && value.length < 6) {
           mess = "*Mật khẩu phải từ 6 ký tự!";
-          console.log(state.values.checkmatKhau);
         }
         matKhauValid = mess !== "" ? false : true;
         checkmatKhau = "";

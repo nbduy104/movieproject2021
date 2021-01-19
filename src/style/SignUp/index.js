@@ -50,6 +50,9 @@ export const useStyles = makeStyles((theme) => ({
     color: "white !important",
     opacity: "0.5",
   },
+  copyRight: {
+    paddingBottom: 10,
+  },
 }));
 export const CssTextField = withStyles({
   root: {
