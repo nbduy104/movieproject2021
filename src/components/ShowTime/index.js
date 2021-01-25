@@ -9,15 +9,18 @@ import {
 import "./style.scss";
 import { StyledLink } from "../Link";
 import Loader from "../Loader";
+import { useMediaQuery } from "react-responsive";
+import Alert from "@material-ui/lab/Alert";
 function ShowTime(props) {
   const [isShowHeThongRap, setIsShowHeThongRap] = useState("BHDStar");
   const [isShowCumRap, setIsShowCumRap] = useState("bhd-star-cineplex-bitexco");
+
   useEffect(() => {
     props.fetchHeThongRap();
     props.fetchCumRap("BHDStar");
     props.fetchLichChieuHTR("BHDStar");
-  }, []);
-
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const isSM = useMediaQuery({ query: "(max-width: 776px)" });
   const { data } = props;
   const renderHeThongRap = () => {
     if (data) {
@@ -25,6 +28,7 @@ function ShowTime(props) {
         return (
           <li key={htRap.maHeThongRap}>
             <a
+              href="#!"
               className={
                 isShowHeThongRap === htRap.maHeThongRap ? "active" : "none"
               }
@@ -64,6 +68,7 @@ function ShowTime(props) {
       });
     }
   };
+  console.log(isShowCumRap);
   const renderCumRap = () => {
     const { dataCumRap } = props;
     if (dataCumRap) {
@@ -74,26 +79,56 @@ function ShowTime(props) {
               className={
                 isShowCumRap === cumRap.maCumRap
                   ? "showtheature__img active"
-                  : "showtheature__img"
+                  : "showtheature__img "
               }
               onClick={() => {
                 setIsShowCumRap(cumRap.maCumRap);
               }}
             >
-              <a>
-                <img
-                  src={`https://picsum.photos/id/${Math.floor(
-                    Math.random() * 100 + 1
-                  )}/200/200`}
-                />
-              </a>
-              <div className="px-1">
-                <a>
-                  <p className="pname__theature ">{cumRap.tenCumRap}</p>
-                  <p className="pinfo__theature">{cumRap.diaChi}</p>
+              <div
+                data-toggle="collapse"
+                type="button"
+                href={`#${cumRap.maCumRap}`}
+                className="div__showtheature__img"
+              >
+                <a href="#!">
+                  <img
+                    src={`https://picsum.photos/id/${Math.floor(
+                      Math.random() * 100 + 1
+                    )}/200/200`}
+                    alt="CumRap"
+                  />
                 </a>
-                <a className="adetail__theature">[chi tiết]</a>
+                <div className="px-1">
+                  <div>
+                    <p className="pname__theature ">{cumRap.tenCumRap}</p>
+                    <p className="pinfo__theature">{cumRap.diaChi}</p>
+                  </div>
+                  <a href="#!" className="adetail__theature">
+                    [chi tiết]
+                  </a>
+                </div>
               </div>
+              {isSM && (
+                <div
+                  id={`${cumRap.maCumRap}`}
+                  className={
+                    isShowCumRap === cumRap.maCumRap
+                      ? "collapse multi-collapse theater__movies "
+                      : "collapse multi-collapse theater__movies show"
+                  }
+                >
+                  <div className="tab-content" id="nav-tabContent">
+                    <div
+                      className="tab-pane fade active show"
+                      role="tabpanel"
+                      aria-labelledby="nav-home-tab"
+                    >
+                      {renderListMovieHTR(cumRap.maCumRap)}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </li>
         );
@@ -121,77 +156,94 @@ function ShowTime(props) {
             </p>
           </ContainerBG>
         );
+      } else {
+        return "";
       }
     });
   };
-  const renderListMovieHTR = () => {
+  const renderListMovieHTRChild = () => {
     const { dataLichChieuHTR } = props;
-    if (dataLichChieuHTR) {
-      return dataLichChieuHTR[0].lstCumRap.map((item) => {
-        if (item.maCumRap === isShowCumRap) {
-          return item.danhSachPhim.map((movie, index) => {
-            return (
-              <div key={index}>
-                <StyledLink data-toggle="collapse" href={`#P${movie.maPhim}`}>
-                  <div className="movie__info movie__info__top">
-                    <div className="movie__img">
-                      <img src={movie.hinhAnh} alt="hinhAnh" />
-                    </div>
-                    <div className="movie__name">
-                      <div className="d-flex">
-                        <span id="greenLabel">P</span>
-                        <p className="p__movie__name"> {movie.tenPhim}</p>
-                      </div>
-                      <p className="p__movie__time">
-                        109 phút - TIX 9.4 - IMDb 8.7
-                      </p>
-                    </div>
+    let flagExistFilm = false;
+    if (!dataLichChieuHTR) return;
+    return dataLichChieuHTR[0].lstCumRap.map((item, i) => {
+      if (item.maCumRap === isShowCumRap) {
+        flagExistFilm = true;
+        return item.danhSachPhim.map((movie, index) => {
+          return (
+            <div key={index}>
+              <StyledLink data-toggle="collapse" href={`#P${movie.maPhim}`}>
+                <div className="movie__info movie__info__top">
+                  <div className="movie__img">
+                    <img src={movie.hinhAnh} alt="hinhAnh" />
                   </div>
-                </StyledLink>
-                <div
-                  className="collapse movie__collapse show"
-                  id={`P${movie.maPhim}`}
-                >
-                  <h1>2D Digital</h1>
-                  <div className="movie__show__times row">
-                    {renderTimeMovie(movie.lstLichChieuTheoPhim)}
+                  <div className="movie__name">
+                    <div className="d-flex">
+                      <span id="greenLabel">P</span>
+                      <p className="p__movie__name"> {movie.tenPhim}</p>
+                    </div>
+                    <p className="p__movie__time">
+                      109 phút - TIX 9.4 - IMDb 8.7
+                    </p>
                   </div>
                 </div>
+              </StyledLink>
+              <div
+                className="collapse movie__collapse "
+                id={`P${movie.maPhim}`}
+              >
+                <h1>2D Digital</h1>
+                <div className="movie__show__times row">
+                  {renderTimeMovie(movie.lstLichChieuTheoPhim)}
+                </div>
               </div>
-            );
-          });
-        }
-      });
-    }
+            </div>
+          );
+        });
+      } else if (
+        dataLichChieuHTR[0].lstCumRap.length - 1 === i &&
+        !flagExistFilm
+      ) {
+        return (
+          <Alert className="alert__movietime" severity="error" key={i}>
+            Cụm Rạp này không có lịch chiếu hôm nay
+          </Alert>
+        );
+      } else {
+        return "";
+      }
+    });
+  };
+  const renderListMovieHTR = (maCumRap) => {
+    if (isSM && maCumRap === isShowCumRap) {
+      return renderListMovieHTRChild();
+    } else if (!isSM) return renderListMovieHTRChild();
   };
   return (
     <ContainerBG id="showtimes" className="showtimes">
       <Container className="showtimes__container row">
-        {/* <div className="col-sm-5 d-flex pl-0 mr-0 tix__content__col"> */}
-        <div className="px-0 showtimetheature__cover">
+        <div className="px-0 showtimetheature__cover ">
           <ul className="showtheature__myTab">{renderHeThongRap()}</ul>
         </div>
         {props.loading ? (
           <Loader />
         ) : (
-          <div className="p-0">
-            <div id="showtheature__myTabContent">
-              <ul className="showtimes__myTab">{renderCumRap()}</ul>
+          <div id="showtheature__myTabContent">
+            <ul className="showtimes__myTab">{renderCumRap()}</ul>
+          </div>
+        )}
+        {!isSM && (
+          <div className="theater__movies">
+            <div className="tab-content" id="nav-tabContent">
+              <div
+                className="tab-pane fade show active "
+                role="tabpanel"
+                aria-labelledby="nav-home-tab"
+              >
+                {renderListMovieHTR()}
+              </div>
             </div>
           </div>
         )}
-
-        <div className="theater__movies d-flex">
-          <div className="tab-content" id="nav-tabContent">
-            <div
-              className="tab-pane fade show active "
-              role="tabpanel"
-              aria-labelledby="nav-home-tab"
-            >
-              {renderListMovieHTR()}
-            </div>
-          </div>
-        </div>
       </Container>
     </ContainerBG>
   );
