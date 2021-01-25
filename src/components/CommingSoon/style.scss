@@ -4,6 +4,7 @@
 }
 .moviesSection {
   width: 100%;
+  padding: 10px;
   .nav-tabs {
     margin: 0;
     padding-top: 75px;
@@ -40,12 +41,12 @@
       margin-bottom: 25px;
       cursor: pointer;
       .img__bg {
-        height: 21vw;
-        width: 14vw;
+        // height: 100%;
+        // width: 14vw;
         border-radius: 5px;
+        padding-top: 150%;
       }
       .movie__image {
-        position: relative;
         width: 100%;
         img:nth-child(1) {
           height: 100%;
@@ -66,8 +67,8 @@
           border-radius: 4px;
           padding: 2px;
           position: absolute;
-          top: 12px;
-          right: 12px;
+          top: 30px;
+          right: 14px;
           color: #fff;
           text-align: center;
           line-height: 1.1;
@@ -81,32 +82,32 @@
             }
           }
         }
-        .black__overlay {
-          position: absolute;
-          top: 0;
-          width: 14vw;
-          height: 21vw;
-          left: 0;
+      }
+      .black__overlay {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        opacity: 0;
+        background: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0));
+        display: flex;
+        border-radius: 5px;
+        align-items: center;
+        justify-content: center;
+        button {
+          display: block;
+          width: 60px;
+          height: 60px;
+          border: 2px solid white;
+          border-radius: 50%;
+          top: 50%;
+          left: 50%;
+          background: rgba(0, 0, 0, 0.39);
           opacity: 0;
-          background: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0));
-          display: flex;
-          border-radius: 5px;
-          align-items: center;
-          justify-content: center;
-          button {
-            display: block;
-            width: 60px;
-            height: 60px;
-            border: 2px solid white;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            background: rgba(0, 0, 0, 0.39);
-            opacity: 0;
-            transition: 0.5s all;
-            svg {
-              color: white;
-            }
+          transition: 0.5s all;
+          svg {
+            color: white;
           }
         }
       }
@@ -208,6 +209,17 @@
     }
   }
 }
+@media screen and (max-width: 1160px) {
+  .a__control {
+    display: none;
+  }
+}
+@media screen and (max-width: 992px) {
+  #moviesSection {
+    padding-top: 80px;
+  }
+}
+
 @media screen and (max-width: 576px) {
   .comingSoon {
     padding: 0;
@@ -229,75 +241,6 @@
           }
         }
         #myTabContent {
-          .moviesList {
-            .movieColumn {
-              // .movie__image {
-              //     // height: 125px;
-              // }
-              .movie__content {
-                display: none;
-                .getTicket {
-                  display: none;
-                }
-              }
-              &:hover {
-                .movie__image {
-                  .black__overlay {
-                    opacity: 1;
-                  }
-                }
-                .movie__content {
-                  p {
-                    opacity: 0;
-                  }
-                  .getTicket {
-                    button {
-                      opacity: 1;
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 991px) {
-  .comingSoon {
-    padding: 0 100px;
-    .comingSoon__content {
-      .moviesSection {
-        .nav-tabs {
-          // margin-top: 100px;
-          .nav-item {
-            padding: 0;
-          }
-        }
-        #home-tab {
-          font-size: 16px;
-          &:focus {
-            font-size: 18px;
-          }
-        }
-        #myTabContent {
-          #playingMoviesCarousel,
-          #comingMoviesCarousel {
-            .left__control {
-              display: none;
-              .ion-ios-arrow-left {
-                display: none;
-              }
-            }
-            .right__control {
-              display: none;
-              .ion-ios-arrow-right {
-                display: none;
-              }
-            }
-          }
           .moviesList {
             .movieColumn {
               // .movie__image {

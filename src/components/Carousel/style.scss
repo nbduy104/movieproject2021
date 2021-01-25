@@ -15,6 +15,10 @@
           background-color: $color-gray-1;
           border: 0;
           border-radius: 50%;
+          @media screen and (max-width: 768px) {
+            width: 12px;
+            height: 10px;
+          }
         }
 
         .active {
@@ -68,6 +72,9 @@
           opacity: 0.5;
           margin-left: 50px;
         }
+        @media screen and (max-width: 992px) {
+          display: none !important;
+        }
       }
       .right__control {
         display: flex;
@@ -78,6 +85,9 @@
           font-size: 60px;
           opacity: 0.5;
           margin-right: 50px;
+        }
+        @media screen and (max-width: 992px) {
+          display: none !important;
         }
       }
     }
@@ -97,10 +107,10 @@
   }
 }
 
-@media screen and (max-width: 576px) {
-  .carouselSection {
-    .carousel__content {
-      display: none;
-    }
-  }
-}
+// @media screen and (max-width: 576px) {
+//   .carouselSection {
+//     .carousel__content {
+//       height: 100px;
+//     }
+//   }
+// }
