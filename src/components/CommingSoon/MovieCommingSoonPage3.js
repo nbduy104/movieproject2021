@@ -10,100 +10,17 @@ import Button from "../Button";
 import { StyledLink } from "../Link";
 import { Heading4 } from "../Heading";
 import Loader from "components/Loader";
-export const renderStar = (movie) => {
-  if (movie.danhGia > 9) {
-    return (
-      <>
-        <img src={Star} alt="Star" />
-        <img src={Star} alt="Star" />
-        <img src={Star} alt="Star" />
-        <img src={Star} alt="Star" />
-        <img src={Star} alt="Star" />
-      </>
-    );
-  } else if (movie.danhGia > 7) {
-    return (
-      <>
-        <img src={Star} alt="Star" />
-        <img src={Star} alt="Star" />
-        <img src={Star} alt="Star" />
-        <img src={Star} alt="Star" />
-      </>
-    );
-  } else if (movie.danhGia >= 5) {
-    return (
-      <>
-        <img src={Star} alt="Star" />
-        <img src={Star} alt="Star" />
-        <img src={Star} alt="Star" />
-      </>
-    );
-  }
-};
-export const renderListMovie = (page) => {
-  if (page) {
-    return page.items.map((movie) => {
-      return (
-        <div
-          className="movieColumn col-12 col-sm-6 col-md-4 col-lg-3"
-          key={movie.maPhim}
-        >
-          <div
-            className="img__bg"
-            style={{
-              background: `url(${movie.hinhAnh})center center / cover no-repeat scroll`,
-              position: "relative",
-            }}
-          >
-            <div className="movie__image">
-              <div className="movie__point__label ">
-                <div className="movie__point text-center">
-                  <span>{movie.danhGia}</span>
-                </div>
-                <div className="movie__star">{renderStar(movie)}</div>
-              </div>
-              <div className="black__overlay">
-                <button className="js-video-button" data-video-id="SoDI4vGGSFY">
-                  <i className="fa fa-play" />
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="movie__content">
-            <div className="movie__name">
-              <span id="redLabel">C18</span>
-              <Heading4>{movie.tenPhim}</Heading4>
-            </div>
-            <div className="getTicket">
-              <Button>MUA VÉ</Button>
-            </div>
-          </div>
-        </div>
-      );
-    });
-  }
-};
-export const renderPageMovie = (data, loading) => {
-  if (loading) return <Loader />;
-  if (data) {
-    return data.map((item, index) => {
-      if (item.count !== 0) {
-        return (
-          <div className="carousel__item" key={index}>
-            <div className="moviesList">{renderListMovie(item)}</div>
-          </div>
-        );
-      } else {
-        return "";
-      }
-    });
-  }
-};
+import ModalVideo from "react-modal-video";
+
 class MovieCommingSoonPage3 extends Component {
   constructor(props) {
     super(props);
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
+    this.state = {
+      isOpen: false,
+      videoID: "",
+    };
   }
   next() {
     this.slider.slickNext();
@@ -111,7 +28,114 @@ class MovieCommingSoonPage3 extends Component {
   previous() {
     this.slider.slickPrev();
   }
-
+  hideVideo = () => {
+    this.setState({
+      isOpen: false,
+    });
+  };
+  showVideo = (trailer) => {
+    let videoID = trailer.split("embed/");
+    console.log(videoID);
+    this.setState({
+      isOpen: true,
+      videoID: videoID[1],
+    });
+  };
+  renderStar = (movie) => {
+    if (movie.danhGia > 9) {
+      return (
+        <>
+          <img src={Star} alt="Star" />
+          <img src={Star} alt="Star" />
+          <img src={Star} alt="Star" />
+          <img src={Star} alt="Star" />
+          <img src={Star} alt="Star" />
+        </>
+      );
+    } else if (movie.danhGia > 7) {
+      return (
+        <>
+          <img src={Star} alt="Star" />
+          <img src={Star} alt="Star" />
+          <img src={Star} alt="Star" />
+          <img src={Star} alt="Star" />
+        </>
+      );
+    } else if (movie.danhGia >= 5) {
+      return (
+        <>
+          <img src={Star} alt="Star" />
+          <img src={Star} alt="Star" />
+          <img src={Star} alt="Star" />
+        </>
+      );
+    }
+  };
+  renderListMovie = (page) => {
+    if (page) {
+      return page.items.map((movie) => {
+        return (
+          <div
+            className="movieColumn col-12 col-sm-6 col-md-4 col-lg-3"
+            key={movie.maPhim}
+          >
+            <div
+              className="img__bg"
+              style={{
+                background: `url(${movie.hinhAnh})center center / cover no-repeat scroll`,
+                position: "relative",
+              }}
+            >
+              <div className="movie__image">
+                <div className="movie__point__label ">
+                  <div className="movie__point text-center">
+                    <span>{movie.danhGia}</span>
+                  </div>
+                  <div className="movie__star">{this.renderStar(movie)}</div>
+                </div>
+                <div className="black__overlay">
+                  <button
+                    className="js-video-button"
+                    onClick={() => {
+                      this.showVideo(movie.trailer);
+                    }}
+                    data-video-id="SoDI4vGGSFY"
+                  >
+                    <i className="fa fa-play" />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="movie__content">
+              <div className="movie__name">
+                <span id="redLabel">C18</span>
+                <Heading4>{movie.tenPhim}</Heading4>
+              </div>
+              <div className="getTicket">
+                <Button>MUA VÉ</Button>
+              </div>
+            </div>
+          </div>
+        );
+      });
+    }
+  };
+  renderPageMovie = (data, loading) => {
+    if (loading) return <Loader />;
+    if (data) {
+      return data.map((item, index) => {
+        if (item.count !== 0) {
+          return (
+            <div className="carousel__item" key={index}>
+              <div className="moviesList">{this.renderListMovie(item)}</div>
+            </div>
+          );
+        } else {
+          return "";
+        }
+      });
+    }
+  };
   render() {
     const settings = {
       arrows: false,
@@ -122,7 +146,6 @@ class MovieCommingSoonPage3 extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
     };
-
     return (
       <ContainerBG id="moviesSection">
         <Container className="moviesSection">
@@ -173,7 +196,7 @@ class MovieCommingSoonPage3 extends Component {
                 {...settings}
                 className="slick__carousel"
               >
-                {renderPageMovie(this.props.dataNow, this.props.loading)}
+                {this.renderPageMovie(this.props.dataNow, this.props.loading)}
               </Slider>
             </div>
             <div
@@ -188,7 +211,10 @@ class MovieCommingSoonPage3 extends Component {
                 {...settings}
                 className="slick__carousel2"
               >
-                {renderPageMovie(this.props.dataComming, this.props.loading)}
+                {this.renderPageMovie(
+                  this.props.dataComming,
+                  this.props.loading
+                )}
               </Slider>
             </div>
             <div style={{ textAlign: "center" }}>
@@ -202,6 +228,13 @@ class MovieCommingSoonPage3 extends Component {
             </div>
           </div>
         </Container>
+        <ModalVideo
+          channel="youtube"
+          autoplay
+          isOpen={this.state.isOpen}
+          videoId={this.state.videoID}
+          onClose={this.hideVideo}
+        />
       </ContainerBG>
     );
   }
