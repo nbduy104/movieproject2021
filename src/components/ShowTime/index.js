@@ -68,7 +68,6 @@ function ShowTime(props) {
       });
     }
   };
-  console.log(isShowCumRap);
   const renderCumRap = () => {
     const { dataCumRap } = props;
     if (dataCumRap) {
