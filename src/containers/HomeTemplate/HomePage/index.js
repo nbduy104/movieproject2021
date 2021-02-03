@@ -8,8 +8,8 @@ import ShowTime from "../../../components/ShowTime";
 import Apps from "../../../components/Apps";
 import Partners from "../../../components/Partners";
 import Infomation from "components/Infomation";
-
-export default class HomePage extends Component {
+import { connect } from "react-redux";
+class HomePage extends Component {
   render() {
     return (
       <>
@@ -26,3 +26,7 @@ export default class HomePage extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  loadingNow: state.listMovieReducer.loadingNow,
+});
+export default connect(mapStateToProps)(HomePage);

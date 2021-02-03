@@ -7,8 +7,7 @@ const initialState = {
   errBookingTicket: null,
   dataBookingTicket: null,
 };
-
-export default (state = initialState, { type, payload }) => {
+const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ActionType.LIST_BOOKING_CHAIR_REQUEST:
       state.loading = true;
@@ -44,3 +43,4 @@ export default (state = initialState, { type, payload }) => {
       return state;
   }
 };
+export default reducer;

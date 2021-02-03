@@ -22,7 +22,7 @@ function NavbarHome(props) {
   // const isXXL = useMediaQuery({ query: "(min-width: 1824px)" });
   const isXL = useMediaQuery({ query: "(max-width: 1224px)" });
   const isLG = useMediaQuery({ query: "(max-width: 900px)" });
-  const isXS = useMediaQuery({ query: "(max-width: 576px)" });
+  // const isXS = useMediaQuery({ query: "(max-width: 576px)" });
   // const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
   // const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
 

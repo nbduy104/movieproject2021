@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import "./style.scss";
 import { connect } from "react-redux";
 import { actListMovieApi, actionName } from "./modules/action";
-
-import { LIST_MOVIE_SUCCESS } from "./modules/constants";
-import { LIST_MOVIE_CHANGE_PAGE } from "./modules/constants";
-
+import * as ActionType from "./modules/constants";
 class CommingSoon extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +13,13 @@ class CommingSoon extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchListMovie("GP10", 1, LIST_MOVIE_SUCCESS);
+    this.props.fetchListMovie(
+      "GP10",
+      1,
+      ActionType.LIST_MOVIE_REQUEST,
+      ActionType.LIST_MOVIE_SUCCESS,
+      ActionType.LIST_MOVIE_FAILED
+    );
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
     const { dataNow } = nextProps;
@@ -28,7 +31,9 @@ class CommingSoon extends Component {
       this.props.fetchListMovie(
         "GP10",
         dataNow[chiSoNow].currentPage + 1,
-        LIST_MOVIE_SUCCESS
+        ActionType.LIST_MOVIE_REQUEST,
+        ActionType.LIST_MOVIE_SUCCESS,
+        ActionType.LIST_MOVIE_FAILED
       );
       this.setState({
         chiSoNow: chiSoNow + 1,
@@ -44,11 +49,11 @@ const mapStateToProps = (state) => ({
   dataNow: state.listMovieReducer.dataNow,
 });
 const mapDispatchToProps = (dispatch) => ({
-  fetchListMovie: (group, page, sucess) => {
-    dispatch(actListMovieApi(group, page, sucess));
+  fetchListMovie: (group, page, request, success, failed) => {
+    dispatch(actListMovieApi(group, page, request, success, failed));
   },
   fetchChangePage: (flag) => {
-    dispatch(actionName(LIST_MOVIE_CHANGE_PAGE, flag));
+    dispatch(actionName(ActionType.LIST_MOVIE_CHANGE_PAGE, flag));
   },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(CommingSoon);

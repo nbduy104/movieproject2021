@@ -34,7 +34,7 @@ function InfoUserPage(props) {
     return () => {
       document.body.style.backgroundColor = null;
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const [state, setState] = useState({
     values: {
       taiKhoan: "",
@@ -77,7 +77,7 @@ function InfoUserPage(props) {
         soDT: user.soDT,
       },
     });
-  }, [props.data, state.matKhau]);
+  }, [props.data, state.matKhau]); // eslint-disable-line react-hooks/exhaustive-deps
   const classes = useStyles();
   const handleOnchange = (e) => {
     const { name, value } = e.target;

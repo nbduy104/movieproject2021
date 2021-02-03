@@ -7,7 +7,7 @@ const initialState = {
   isShowAlert: false,
 };
 
-export default (state = initialState, { type, payload }) => {
+const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case THEME_MODE:
       if (state.themeMode === DarkTheme) {
@@ -46,3 +46,4 @@ export default (state = initialState, { type, payload }) => {
       return state;
   }
 };
+export default reducer;

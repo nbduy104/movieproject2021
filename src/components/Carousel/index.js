@@ -1,8 +1,10 @@
 import "./style.scss";
 import React, { useState } from "react";
 import ModalVideo from "react-modal-video";
-
-export default function Carousel() {
+import { connect } from "react-redux";
+import Loader from "../Loader";
+import { ContainerBG } from "../Container";
+function Carousel(props) {
   const listBannerMovie = [
     {
       hinhAnh:
@@ -35,6 +37,12 @@ export default function Carousel() {
     setVideoID(videoID);
     setOpen(true);
   };
+  if (props.loading)
+    return (
+      <ContainerBG>
+        <Loader />
+      </ContainerBG>
+    );
   return (
     <section className="carouselSection">
       <div className="carousel__content">
@@ -92,3 +100,8 @@ export default function Carousel() {
     </section>
   );
 }
+const mapStateToProps = (state) => ({
+  loadingNow: state.listMovieReducer.loadingNow,
+  loading: state.showTimeReducer.loading,
+});
+export default connect(mapStateToProps)(Carousel);
