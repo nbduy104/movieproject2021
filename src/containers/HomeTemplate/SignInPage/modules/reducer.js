@@ -5,7 +5,7 @@ const initialState = {
   err: null,
 };
 
-export default (state = initialState, { type, payload }) => {
+const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ActionType.SIGN_IN_HOME_REQUEST:
       state.loading = true;
@@ -32,3 +32,4 @@ export default (state = initialState, { type, payload }) => {
       return state;
   }
 };
+export default reducer;

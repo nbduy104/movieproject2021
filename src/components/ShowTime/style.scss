@@ -5,7 +5,7 @@
   .showtimetheature__cover {
     border-right: 1px solid $color-gray-4;
     overflow: hidden;
-    width: 12%;
+    // width: 12%;
   }
   .showtheature__myTab {
     display: block !important;
@@ -54,7 +54,7 @@
     border-right: 1px solid $color-gray-4;
     /* width */
     &::-webkit-scrollbar {
-      width: 0px;
+      width: 2px;
     }
     /* Track */
     &::-webkit-scrollbar-track {
@@ -64,7 +64,7 @@
     &:hover {
       /* width */
       &::-webkit-scrollbar {
-        width: 4px;
+        width: 2px;
       }
 
       /* Track */
@@ -270,10 +270,14 @@
       }
     }
   }
+  .showtimes__container {
+    flex-wrap: nowrap;
+  }
   @media screen and (max-width: 992px) {
     .showtimes__container {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     .showtimetheature__cover {

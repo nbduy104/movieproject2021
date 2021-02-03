@@ -11,6 +11,7 @@ import { StyledLink } from "../Link";
 import { Heading4 } from "../Heading";
 import Loader from "components/Loader";
 import ModalVideo from "react-modal-video";
+// import LoaderImg from "../../Assets/Images/loading.gif";
 
 class MovieCommingSoonPage3 extends Component {
   constructor(props) {
@@ -122,6 +123,7 @@ class MovieCommingSoonPage3 extends Component {
   };
   renderPageMovie = (data, loading) => {
     if (loading) return <Loader />;
+    // if (loading) return <img src={LoaderImg} alt="loading" />;
     if (data) {
       return data.map((item, index) => {
         if (item.count !== 0) {
@@ -196,7 +198,10 @@ class MovieCommingSoonPage3 extends Component {
                 {...settings}
                 className="slick__carousel"
               >
-                {this.renderPageMovie(this.props.dataNow, this.props.loading)}
+                {this.renderPageMovie(
+                  this.props.dataNow,
+                  this.props.loadingNow
+                )}
               </Slider>
             </div>
             <div
@@ -213,7 +218,7 @@ class MovieCommingSoonPage3 extends Component {
               >
                 {this.renderPageMovie(
                   this.props.dataComming,
-                  this.props.loading
+                  this.props.loadingComming
                 )}
               </Slider>
             </div>
@@ -243,7 +248,8 @@ const mapStateToProps = (state) => ({
   dataNow: state.listMovieReducer.dataNow,
   dataComming: state.listMovieReducer.dataComming,
   isShowMovie: state.listMovieReducer.isShowMovie,
-  loading: state.listMovieReducer.loading,
+  loadingNow: state.listMovieReducer.loadingNow,
+  loadingComming: state.listMovieReducer.loadingComming,
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchListMovie: (group, page, success) => {

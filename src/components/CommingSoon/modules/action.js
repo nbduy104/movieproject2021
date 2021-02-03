@@ -1,8 +1,7 @@
 import api from "../../../api/index";
-import * as ActionType from "./constants";
-export const actListMovieApi = (group, page, success) => {
+export const actListMovieApi = (group, page, request, success, failed) => {
   return (dispatch) => {
-    dispatch(actionName(ActionType.LIST_MOVIE_REQUEST));
+    dispatch(actionName(request));
     api
       .get(
         `/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=${group}&soTrang=${page}&soPhanTuTrenTrang=8`
@@ -11,7 +10,7 @@ export const actListMovieApi = (group, page, success) => {
         dispatch(actionName(success, res.data));
       })
       .catch((err) => {
-        dispatch(actionName(ActionType.LIST_MOVIE_FAILED, err));
+        dispatch(actionName(failed, err));
       });
   };
 };

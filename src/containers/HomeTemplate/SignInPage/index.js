@@ -40,6 +40,7 @@ function SignIn(props) {
       taiKhoan: "",
       matKhau: "",
     },
+    keepLogin: false,
   });
   const classes = useStyles();
   const handleOnchange = (e) => {
@@ -59,7 +60,7 @@ function SignIn(props) {
       taiKhoan,
       matKhau,
     };
-    props.handleSubmit(user, props.history, props.maLichChieu);
+    props.handleSubmit(user, props.history, props.maLichChieu, state.keepLogin);
   };
 
   return (
@@ -119,6 +120,12 @@ function SignIn(props) {
                     color="primary"
                     name="notify"
                     className={classes.checkbox}
+                    onClick={(e) => {
+                      setstate({
+                        ...state,
+                        keepLogin: e.target.checked,
+                      });
+                    }}
                   />
                 }
                 label="Ghi nhớ đăng nhập"
@@ -156,8 +163,8 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSubmit: (user, history, maLichChieu) => {
-      dispatch(actSignInHomeApi(user, history, maLichChieu));
+    handleSubmit: (user, history, maLichChieu, keepLogin) => {
+      dispatch(actSignInHomeApi(user, history, maLichChieu, keepLogin));
     },
   };
 };

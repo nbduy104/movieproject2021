@@ -135,11 +135,13 @@ function ShowTime(props) {
     }
   };
   const renderTimeMovie = (lichChieuTheoPhim) => {
-    return lichChieuTheoPhim.map((lichChieu, index) => {
-      if (
-        new Date(lichChieu.ngayChieuGioChieu).toLocaleDateString() ===
-        "1/1/2019"
-      ) {
+    return lichChieuTheoPhim
+      .filter(
+        (lichChieu) =>
+          new Date(lichChieu.ngayChieuGioChieu).toLocaleDateString() ===
+          "1/1/2019"
+      )
+      .map((lichChieu, index) => {
         let now = new Date(lichChieu.ngayChieuGioChieu);
         now.setMinutes(now.getMinutes() + 105);
         now = new Date(now);
@@ -155,10 +157,7 @@ function ShowTime(props) {
             </p>
           </ContainerBG>
         );
-      } else {
-        return "";
-      }
-    });
+      });
   };
   const renderListMovieHTRChild = () => {
     const { dataLichChieuHTR } = props;
@@ -187,7 +186,7 @@ function ShowTime(props) {
                 </div>
               </StyledLink>
               <div
-                className="collapse movie__collapse "
+                className="collapse movie__collapse show"
                 id={`P${movie.maPhim}`}
               >
                 <h1>2D Digital</h1>
@@ -217,6 +216,7 @@ function ShowTime(props) {
       return renderListMovieHTRChild();
     } else if (!isSM) return renderListMovieHTRChild();
   };
+
   return (
     <ContainerBG id="showtimes" className="showtimes">
       <Container className="showtimes__container row">
@@ -230,7 +230,7 @@ function ShowTime(props) {
             <ul className="showtimes__myTab">{renderCumRap()}</ul>
           </div>
         )}
-        {!isSM && (
+        {!isSM && !props.loading && (
           <div className="theater__movies">
             <div className="tab-content" id="nav-tabContent">
               <div
@@ -252,6 +252,7 @@ const mapStateToProps = (state) => ({
   dataCumRap: state.showTimeReducer.dataCumRap,
   dataLichChieuHTR: state.showTimeReducer.dataLichChieuHTR,
   loading: state.showTimeReducer.loading,
+  loadingNow: state.listMovieReducer.loadingNow,
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchHeThongRap: () => {

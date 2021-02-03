@@ -7,6 +7,7 @@ import { actNavBookingApi, actCheckAccount } from "./modules/action";
 import { MenuItem, FormControl } from "@material-ui/core";
 import Select from "../Select";
 import { StyledLinkPage } from "../Link";
+
 class NavbarBooking extends Component {
   constructor(props) {
     super(props);
@@ -30,14 +31,17 @@ class NavbarBooking extends Component {
     switch (typeChange) {
       case "showPhim":
         if (e.target.value !== "") {
-          this.props.fetchBooking(e.target.value);
           this.setState({
             isShowPhim: true,
             isShowRap: false,
             isShowNgay: false,
             isShowSuat: false,
             maPhim: e.target.value,
+            maCumRap: "",
+            ngayChieu: "",
+            suatChieu: "",
           });
+          this.props.fetchBooking(e.target.value);
         }
         break;
       case "showRap":
@@ -48,6 +52,7 @@ class NavbarBooking extends Component {
             isShowSuat: false,
             maCumRap: e.target.value,
             ngayChieu: "",
+            suatChieu: "",
           });
         }
         break;
@@ -57,6 +62,7 @@ class NavbarBooking extends Component {
             isShowNgay: true,
             isShowSuat: false,
             ngayChieu: e.target.value,
+            suatChieu: "",
           });
         }
         break;
@@ -88,18 +94,28 @@ class NavbarBooking extends Component {
     const { data } = this.props;
     let dataNgayChieu = [];
     if (data) {
-      data.heThongRapChieu.map((item) => {
-        return item.cumRapChieu.map((rapChieu) => {
+      // data.heThongRapChieu.map((item) => {
+      //   return item.cumRapChieu.map((rapChieu) => {
+      //     if (rapChieu.maCumRap === this.state.maCumRap) {
+      //       return rapChieu.lichChieuPhim.map((movie) => {
+      //         dataNgayChieu = [
+      //           ...dataNgayChieu,
+      //           new Date(movie.ngayChieuGioChieu).toLocaleDateString(),
+      //         ];
+      //         return dataNgayChieu;
+      //       });
+      //     }
+      //   });
+      // });
+      data.heThongRapChieu.forEach((item) => {
+        item.cumRapChieu.forEach((rapChieu) => {
           if (rapChieu.maCumRap === this.state.maCumRap) {
-            return rapChieu.lichChieuPhim.map((movie) => {
+            rapChieu.lichChieuPhim.forEach((movie) => {
               dataNgayChieu = [
                 ...dataNgayChieu,
                 new Date(movie.ngayChieuGioChieu).toLocaleDateString(),
               ];
-              return dataNgayChieu;
             });
-          } else {
-            return "";
           }
         });
       });
@@ -126,28 +142,45 @@ class NavbarBooking extends Component {
     let dataNgayGioChieu = [];
     let dataSuatChieuTheoNgay = [];
     if (!data) return;
-    data.heThongRapChieu.map((item) => {
-      return item.cumRapChieu.map((rapChieu) => {
+    // data.heThongRapChieu.map((item) => {
+    //   return item.cumRapChieu.map((rapChieu) => {
+    //     if (rapChieu.maCumRap === this.state.maCumRap) {
+    //       return rapChieu.lichChieuPhim.map((movie) => {
+    //         dataNgayGioChieu = [...dataNgayGioChieu, movie.ngayChieuGioChieu];
+    //         return dataNgayGioChieu;
+    //       });
+    //     }
+    //   });
+    // });
+    data.heThongRapChieu.forEach((item) => {
+      item.cumRapChieu.forEach((rapChieu) => {
         if (rapChieu.maCumRap === this.state.maCumRap) {
-          return rapChieu.lichChieuPhim.map((movie) => {
+          rapChieu.lichChieuPhim.forEach((movie) => {
             dataNgayGioChieu = [...dataNgayGioChieu, movie.ngayChieuGioChieu];
-            return dataNgayGioChieu;
           });
-        } else {
-          return "";
         }
       });
     });
     for (let i = 0; i < dataNgayChieu.length; i++) {
-      dataNgayGioChieu.map((lichChieu) => {
-        if (dataNgayChieu[i] === new Date(lichChieu).toLocaleDateString()) {
+      // dataNgayGioChieu.forEach((lichChieu) => {
+      //   if (dataNgayChieu[i] === new Date(lichChieu).toLocaleDateString()) {
+      //     dataSuatChieuTheoNgay = [
+      //       ...dataSuatChieuTheoNgay,
+      //       new Date(lichChieu).toLocaleTimeString(),
+      //     ];
+      //   }
+      // });
+      for (let j = 0; j < dataNgayGioChieu.length; j++) {
+        if (
+          dataNgayChieu[i] ===
+          new Date(dataNgayGioChieu[j]).toLocaleDateString()
+        ) {
           dataSuatChieuTheoNgay = [
             ...dataSuatChieuTheoNgay,
-            new Date(lichChieu).toLocaleTimeString(),
+            new Date(dataNgayGioChieu[j]).toLocaleTimeString(),
           ];
         }
-        return dataSuatChieuTheoNgay;
-      });
+      }
       dataSuatChieuTheoNgay = [...new Set(dataSuatChieuTheoNgay)];
       dataSuatChieu = [
         ...dataSuatChieu,
@@ -161,8 +194,19 @@ class NavbarBooking extends Component {
   };
   renderSuatChieu = () => {
     const { dataSuatChieu, ngayChieu } = this.state;
-    return dataSuatChieu.map((dateShow) => {
-      if (ngayChieu === dateShow.ngayChieu) {
+    // return dataSuatChieu.map((dateShow) => {
+    //   if (ngayChieu !== dateShow.ngayChieu) return;
+    //   return dateShow.suatChieu.map((suatChieu, index) => {
+    //     return (
+    //       <MenuItem key={index} value={suatChieu}>
+    //         {suatChieu}
+    //       </MenuItem>
+    //     );
+    //   });
+    // });
+    return dataSuatChieu
+      .filter((dateShow) => ngayChieu === dateShow.ngayChieu)
+      .map((dateShow) => {
         return dateShow.suatChieu.map((suatChieu, index) => {
           return (
             <MenuItem key={index} value={suatChieu}>
@@ -170,17 +214,14 @@ class NavbarBooking extends Component {
             </MenuItem>
           );
         });
-      } else {
-        return "";
-      }
-    });
+      });
   };
   handleBookingMovie = () => {
     const { data } = this.props;
     let dataFind = [];
     if (data) {
-      data.heThongRapChieu.map((item) => {
-        return item.cumRapChieu.map((rapChieu) => {
+      data.heThongRapChieu.forEach((item) => {
+        item.cumRapChieu.forEach((rapChieu) => {
           if (
             rapChieu.maCumRap === this.state.maCumRap &&
             this.state.ngayChieu &&
@@ -197,12 +238,12 @@ class NavbarBooking extends Component {
               this.props.handleMalichChieu(dataFind[0].maLichChieu);
             }
           }
-          return "";
         });
       });
     }
   };
   render() {
+    if (this.props.loadingNow) return <></>;
     return (
       <ContainerBG className="comingSoon">
         <Container className="comingSoon__content">
@@ -218,10 +259,11 @@ class NavbarBooking extends Component {
                   disableScrollLock: true,
                 }}
                 className="selMovie"
-                value={this.state.maPhim}
+                value={this.state.maPhim === -1 ? "" : this.state.maPhim}
                 onChange={(e) => {
                   this.handleChange(e, "showPhim");
                 }}
+                defaultValue=""
               >
                 {this.props.dataNow.map((item) => {
                   return item.items.map((movie) => (
@@ -239,11 +281,14 @@ class NavbarBooking extends Component {
               ) : (
                 ""
               )}
+
               <Select
+                defaultValue=""
                 MenuProps={{
                   disableScrollLock: true,
                 }}
                 className="selMovie"
+                // value={this.state.maCumRap.split("-")[0]}
                 value={this.state.maCumRap}
                 onChange={(e) => {
                   this.handleChange(e, "showRap");
@@ -264,6 +309,7 @@ class NavbarBooking extends Component {
                 ""
               )}
               <Select
+                defaultValue=""
                 MenuProps={{
                   disableScrollLock: true,
                 }}
@@ -288,6 +334,7 @@ class NavbarBooking extends Component {
                 ""
               )}
               <Select
+                defaultValue=""
                 MenuProps={{
                   disableScrollLock: true,
                 }}
@@ -330,6 +377,7 @@ class NavbarBooking extends Component {
 const mapStateToProps = (state) => ({
   data: state.navBookingReducer.data,
   dataNow: state.listMovieReducer.dataNow,
+  loadingNow: state.listMovieReducer.loadingNow,
   maLichChieu: state.navBookingReducer.maLichChieu,
 });
 const mapDispatchToprops = (dispatch) => ({
