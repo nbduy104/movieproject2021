@@ -11,6 +11,9 @@ import { StyledLink } from "../Link";
 import Loader from "../Loader";
 import { useMediaQuery } from "react-responsive";
 import Alert from "@material-ui/lab/Alert";
+import { StyledLinkPage } from "components/Link/index";
+import Button from "@material-ui/core/Button";
+
 function ShowTime(props) {
   const [isShowHeThongRap, setIsShowHeThongRap] = useState("BHDStar");
   const [isShowCumRap, setIsShowCumRap] = useState("bhd-star-cineplex-bitexco");
@@ -68,10 +71,38 @@ function ShowTime(props) {
       });
     }
   };
+  const renderCinema = (tenCumRap) => {
+    let signCumRap = tenCumRap.split(" ");
+    let srcImg = "";
+    switch (signCumRap[0]) {
+      case "BHD":
+        srcImg = "/img/bhdCinema.png";
+        break;
+      case "CGV":
+        srcImg = "/img/ddcCinema.jpg";
+        break;
+      case "CNS":
+        srcImg = "/img/cinestarCinema.jpg";
+        break;
+      case "GLX":
+        srcImg = "/img/glxCinema.png";
+        break;
+      case "Lotte":
+        srcImg = "/img/lotteCinema.jpg";
+        break;
+      case "MegaGS":
+        srcImg = "/img/megaCinema.jpg";
+        break;
+      default:
+        break;
+    }
+    return <img src={process.env.PUBLIC_URL + srcImg} alt="signCumRap" />;
+  };
   const renderCumRap = () => {
     const { dataCumRap } = props;
     if (dataCumRap) {
       return dataCumRap.map((cumRap, index) => {
+        let tenCumRap = cumRap.tenCumRap.split("-");
         return (
           <li key={index}>
             <div
@@ -91,16 +122,18 @@ function ShowTime(props) {
                 className="div__showtheature__img"
               >
                 <a href="#!">
-                  <img
+                  {/* <img
                     src={`https://picsum.photos/id/${Math.floor(
                       Math.random() * 100 + 1
                     )}/200/200`}
                     alt="CumRap"
-                  />
+                  /> */}
+                  {renderCinema(tenCumRap[0])}
                 </a>
                 <div className="px-1">
                   <div>
-                    <p className="pname__theature ">{cumRap.tenCumRap}</p>
+                    <span style={{ color: "green" }}>{tenCumRap[0]}</span>
+                    <span>- {tenCumRap[1]}</span>
                     <p className="pinfo__theature">{cumRap.diaChi}</p>
                   </div>
                   <a href="#!" className="adetail__theature">
@@ -145,16 +178,19 @@ function ShowTime(props) {
         let now = new Date(lichChieu.ngayChieuGioChieu);
         now.setMinutes(now.getMinutes() + 105);
         now = new Date(now);
+        const hour = new Date().getHours();
         return (
           <ContainerBG className="a__showTime" key={index}>
-            <p>
-              <span>
-                {new Date(lichChieu.ngayChieuGioChieu).getHours() +
-                  ":" +
-                  new Date(lichChieu.ngayChieuGioChieu).getMinutes()}
-              </span>
-              ~{now.getHours() + ":" + now.getMinutes()}
-            </p>
+            <Button disabled={hour >= now.getHours() ? true : false}>
+              <StyledLinkPage to={`/booking/${lichChieu.maLichChieu}`}>
+                <span>
+                  {new Date(lichChieu.ngayChieuGioChieu).getHours() +
+                    ":" +
+                    new Date(lichChieu.ngayChieuGioChieu).getMinutes()}
+                </span>
+                ~{now.getHours() + ":" + now.getMinutes()}
+              </StyledLinkPage>
+            </Button>
           </ContainerBG>
         );
       });

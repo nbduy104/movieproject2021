@@ -3,7 +3,6 @@ import * as ActionType from "./constants";
 import { actSignInHomeApi } from "containers/HomeTemplate/SignInPage/modules/action";
 export const actShowInfoUserApi = (user) => {
   return (dispatch) => {
-    console.log(user.taiKhoan);
     dispatch(actionName(ActionType.UPDATE_INFO_USER_REQUEST));
     api
       .post("/QuanLyNguoiDung/ThongTinTaiKhoan", user)

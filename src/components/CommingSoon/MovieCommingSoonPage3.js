@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { LIST_MOVIE_CHANGE_PAGE } from "./modules/constants";
 import "./style.scss";
 import Star from "../../Assets/Images/star1.png";
-import { actListMovieApi, actionName } from "./modules/action";
+import {
+  actListMovieApi,
+  actionName,
+  actListShowTimeDraft,
+} from "./modules/action";
 import { connect } from "react-redux";
 import Slider from "react-slick";
 import { Container, ContainerBG } from "../Container";
@@ -12,7 +16,7 @@ import { Heading4 } from "../Heading";
 import Loader from "components/Loader";
 import ModalVideo from "react-modal-video";
 // import LoaderImg from "../../Assets/Images/loading.gif";
-
+import { withRouter } from "react-router-dom";
 class MovieCommingSoonPage3 extends Component {
   constructor(props) {
     super(props);
@@ -72,6 +76,11 @@ class MovieCommingSoonPage3 extends Component {
       );
     }
   };
+  //Viết booking draft wait code
+  handleBooking = (movie) => {
+    this.props.fetchDraftLichChieu(movie.maPhim, this.props.history);
+  };
+  //End booking template
   renderListMovie = (page) => {
     if (page) {
       return page.items.map((movie) => {
@@ -113,7 +122,13 @@ class MovieCommingSoonPage3 extends Component {
                 <Heading4>{movie.tenPhim}</Heading4>
               </div>
               <div className="getTicket">
-                <Button>MUA VÉ</Button>
+                <Button
+                  onClick={() => {
+                    this.handleBooking(movie);
+                  }}
+                >
+                  MUA VÉ
+                </Button>
               </div>
             </div>
           </div>
@@ -250,6 +265,7 @@ const mapStateToProps = (state) => ({
   isShowMovie: state.listMovieReducer.isShowMovie,
   loadingNow: state.listMovieReducer.loadingNow,
   loadingComming: state.listMovieReducer.loadingComming,
+  dataShowTimeDraft: state.listMovieReducer.dataShowTimeDraft,
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchListMovie: (group, page, success) => {
@@ -258,9 +274,12 @@ const mapDispatchToProps = (dispatch) => ({
   fetchChangePage: (flag) => {
     dispatch(actionName(LIST_MOVIE_CHANGE_PAGE, flag));
   },
+  fetchDraftLichChieu: (maPhim, history) => {
+    dispatch(actListShowTimeDraft(maPhim, history));
+  },
 });
-
-export default connect(
+const ConnectedComponent = connect(
   mapStateToProps,
   mapDispatchToProps
 )(MovieCommingSoonPage3);
+export default withRouter(ConnectedComponent);

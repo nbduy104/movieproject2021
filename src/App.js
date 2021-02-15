@@ -1,5 +1,5 @@
 import "./App.css";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import { routesHome } from "routes/index";
 import HomeTemplate from "./containers/HomeTemplate";
 import PageNotFound from "containers/PageNotFound/index";
@@ -36,4 +36,5 @@ function App(props) {
 const mapStateToProps = (state) => ({
   themeMode: state.navbarHomeReducer.themeMode,
 });
-export default connect(mapStateToProps)(App);
+const ConnectedComponent = connect(mapStateToProps)(App);
+export default withRouter(ConnectedComponent);
