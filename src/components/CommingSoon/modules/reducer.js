@@ -7,6 +7,9 @@ const initialState = {
   errNow: null,
   errComming: null,
   isShowMovie: true,
+  loadingShowTimeDraft: false,
+  dataShowTimeDraft: null,
+  errShowTimeDraft: null,
 };
 
 const listMovieReducer = (state = initialState, { type, payload }) => {
@@ -43,6 +46,22 @@ const listMovieReducer = (state = initialState, { type, payload }) => {
     case ActionType.LIST_MOVIE_CHANGE_PAGE:
       state.isShowMovie = payload;
       return { ...state };
+    case ActionType.LIST_SHOWTIME_DRAFT_REQUEST:
+      state.loadingShowTimeDraft = true;
+      state.dataShowTimeDraft = null;
+      state.errShowTimeDraft = null;
+      return { ...state };
+    case ActionType.LIST_SHOWTIME_DRAFT_SUCCESS:
+      state.loadingShowTimeDraft = false;
+      state.dataShowTimeDraft = payload;
+      state.errShowTimeDraft = null;
+      return { ...state };
+    case ActionType.LIST_SHOWTIME_DRAFT_FAILED:
+      state.loadingShowTimeDraft = false;
+      state.dataShowTimeDraft = null;
+      state.errShowTimeDraft = payload;
+      return { ...state };
+
     default:
       return state;
   }
