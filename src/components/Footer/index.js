@@ -29,6 +29,10 @@ export default function Footer() {
             <StyledLinkPage className="d-inline" to="/">
               support@tix.vn
             </StyledLinkPage>
+            <p>
+              Đây là trang web được clone bởi Ngô Bửu Anh Duy với mục đích học
+              tập.
+            </p>
           </div>
           <div className="text-center">
             <img
