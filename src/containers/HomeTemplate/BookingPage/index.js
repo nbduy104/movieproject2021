@@ -879,26 +879,32 @@ function BookingPage(props) {
             </FormControl>
           </GridBorder>
           <GridBorder className={classes.info__booking}>
-            <Checkbox
-              // checked={checked}
-              onChange={(e) => {
-                setstate({
-                  ...state,
-                  isChecked: e.target.checked,
-                });
-              }}
-              inputProps={{ "aria-label": "primary checkbox" }}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  // checked={checked}
+                  onChange={(e) => {
+                    setstate({
+                      ...state,
+                      isChecked: e.target.checked,
+                    });
+                  }}
+                  inputProps={{ "aria-label": "primary checkbox" }}
+                />
+              }
+              label={
+                <div>
+                  <img
+                    src={process.env.PUBLIC_URL + "/img/exclamation.png"}
+                    alt="exclamation"
+                  />
+                  <span>
+                    Vé đã mua không thể đổi hoặc hoàn tiền Mã vé sẽ được gửi qua
+                    tin nhắn ZMS (tin nhắn Zalo) và Email đã nhập.
+                  </span>
+                </div>
+              }
             />
-            <div>
-              <img
-                src={process.env.PUBLIC_URL + "/img/exclamation.png"}
-                alt="exclamation"
-              />
-              <span>
-                Vé đã mua không thể đổi hoặc hoàn tiền Mã vé sẽ được gửi qua tin
-                nhắn ZMS (tin nhắn Zalo) và Email đã nhập.
-              </span>
-            </div>
           </GridBorder>
           <Grid item className={classes.btn__booking}>
             <Button
