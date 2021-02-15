@@ -10,7 +10,6 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { CssTextField, useStyles } from "../../../style/SignUp";
 import Alert from "@material-ui/lab/Alert";
-import "./style.scss";
 import { connect } from "react-redux";
 import { actSignUpHomeApi } from "./modules/action";
 function Copyright() {

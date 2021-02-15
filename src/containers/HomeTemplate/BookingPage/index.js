@@ -35,7 +35,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { useMediaQuery } from "react-responsive";
 function BookingPage(props) {
   //Time Booking
-  const TIME_COUNTDOWN = 1000000000000000;
+  const TIME_COUNTDOWN = 90000;
   //responsive
   const isMD = useMediaQuery({ query: "(max-width: 960px)" });
   const isXS = useMediaQuery({ query: "(max-width: 600px)" });
