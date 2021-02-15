@@ -203,14 +203,12 @@ function ShowTime(props) {
       if (item.maCumRap === isShowCumRap) {
         flagExistFilm = true;
         return item.danhSachPhim.map((movie, index) => {
-          let hinhAnh = movie.hinhAnh.split("http");
-          let linkHinhAnh = "https" + hinhAnh[1];
           return (
             <div key={index}>
               <StyledLink data-toggle="collapse" href={`#P${movie.maPhim}`}>
                 <div className="movie__info movie__info__top">
                   <div className="movie__img">
-                    <img src={linkHinhAnh} alt="hinhAnh" />
+                    <img src={movie.hinhAnh} alt="hinhAnh" />
                   </div>
                   <div className="movie__name">
                     <div className="d-flex">
