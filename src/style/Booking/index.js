@@ -1,16 +1,19 @@
 import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme) => ({
-  // bgColor: {
-  //     backgroundColor: "white",
-  // },
+  leftSide__container: {
+    height: "100vh",
+  },
   navbar: {
     boxShadow: "0 0 15px rgba(0, 0, 0, 0.3)",
     zIndex: 3,
     position: "fixed",
     width: "75%",
+    height: "60px",
   },
   logo: {
-    width: 50,
+    position: "absolute",
+    top: 4,
+    width: 70,
     height: 50,
     marginLeft: 20,
   },
@@ -25,11 +28,14 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   spanNumber: {
-    fontSize: 25,
+    "& span": {
+      fontSize: 35,
+    },
   },
   avatar: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "flex-end",
     "& img": {
       height: "auto",
       width: 30,
@@ -107,8 +113,10 @@ export const useStyles = makeStyles((theme) => ({
   infoChair: {
     display: "flex",
     justifyContent: "center",
+
     "& div": {
-      width: 20,
+      width: "100%",
+      maxWidth: 20,
       height: 20,
       marginRight: 5,
     },
@@ -152,7 +160,7 @@ export const useStyles = makeStyles((theme) => ({
     width: "25%",
     boxShadow: "0 0 15px rgba(0, 0, 0, 0.3)",
     zIndex: 3,
-    height: "90vh",
+    height: "100vh",
   },
   div__content: {
     justifyContent: "space-between",
@@ -183,7 +191,7 @@ export const useStyles = makeStyles((theme) => ({
   info__booking: {
     display: "flex",
     alignItems: "start",
-    padding: "20px 10px",
+    padding: "20px 10px 100px",
 
     "& img": {
       width: 20,
@@ -195,7 +203,20 @@ export const useStyles = makeStyles((theme) => ({
     width: "25%",
     position: "fixed",
     right: 0,
-    bottom: 2,
+    bottom: 0,
+    "& button": {
+      width: "100%",
+      padding: "25px 0",
+      "&.Mui-disabled": {
+        color: "#fb422693",
+      },
+    },
+  },
+  btn__bookingSmall: {
+    position: "fixed",
+    display: "flex",
+    width: "100%",
+    bottom: 0,
     "& button": {
       width: "100%",
       padding: "25px 0",
@@ -212,6 +233,7 @@ export const useStyles = makeStyles((theme) => ({
   payment: {
     justyfyContent: "space-around",
     alignItems: "center",
+    flexWrap: "nowrap",
     "& label": {
       marginBottom: 0,
       marginRight: 0,
@@ -245,6 +267,7 @@ export const useStyles = makeStyles((theme) => ({
     position: "relative",
     paddingBottom: "40px !important",
     overflow: "auto",
+    height: "auto",
     zIndex: 2,
   },
   leftSide: {
@@ -252,9 +275,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   contain__chair: {
     position: "relative",
-    height: 400,
+    height: 380,
     zIndex: "-1",
   },
+
   overlay: {
     position: "fixed",
     width: "100%",
@@ -302,6 +326,108 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     "& button": {
       minWidth: 0,
+    },
+  },
+  nameChair: {
+    textAlign: "center",
+    color: "white",
+  },
+  div__bookingRES: {
+    marginTop: 10,
+    borderTop: "1px dashed #fb422693",
+    paddingTop: 20,
+  },
+  chair__bookingRES: {
+    // border: "1px solid red",
+  },
+  btn__bookingRES: {
+    width: "100%",
+    "&.Mui-disabled": {
+      color: "#fb422693",
+    },
+  },
+  "@media screen and (max-width: 1400px)": {
+    contain__chair: {
+      height: 300,
+    },
+  },
+  "@media screen and (max-width: 1280px)": {
+    nameChair: {
+      fontSize: 13,
+    },
+    spanNumber: {
+      fontSize: "0.9rem",
+      "& span": {
+        fontSize: 28,
+      },
+    },
+  },
+  "@media screen and (max-width: 1100px)": {
+    nameChair: {
+      fontSize: 12,
+    },
+  },
+  "@media screen and (max-width: 1030px)": {
+    nameChair: {
+      fontSize: 11,
+    },
+    spanNumber: {
+      fontSize: "0.835rem",
+      "& span": {
+        fontSize: 26,
+      },
+    },
+    infoChair: {
+      justifyContent: "flex-start",
+      "& span": {
+        fontSize: 15,
+      },
+    },
+  },
+  "@media screen and (max-width:960px)": {
+    navbar: {
+      width: "100%",
+    },
+    spanNumber: {
+      fontSize: "1rem",
+      "& span": {
+        fontSize: 28,
+      },
+    },
+    infoChair: {
+      justifyContent: "flex-start",
+    },
+  },
+  "@media screen and (max-width:896px)": {
+    contain__chair: {
+      height: 200,
+    },
+  },
+  "@media screen and (max-width:706px)": {
+    nameChair: {
+      fontSize: 10,
+    },
+    themeMode: {
+      display: "none",
+    },
+    avatar: {
+      justifyContent: "center",
+    },
+  },
+  "@media screen and (max-width:620px)": {
+    contain__chair: {
+      height: 140,
+    },
+    nameChair: {
+      fontSize: 8,
+    },
+  },
+  "@media screen and (max-width:568px)": {
+    contain__chair: {
+      height: 120,
+    },
+    nameChair: {
+      fontSize: 6,
     },
   },
 }));

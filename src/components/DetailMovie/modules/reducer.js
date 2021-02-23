@@ -1,29 +1,31 @@
 import * as ActionType from "./constants";
-const initialState = {
+
+let initialState = {
   loading: false,
   data: null,
   err: null,
 };
 
-const reducer = (state = initialState, { type, payload }) => {
-  switch (type) {
-    case ActionType.LIST_MOVIE_NEW_REQUEST:
+const detailMovieReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case ActionType.DETAIL_MOVIE_REQUEST:
       state.loading = true;
       state.data = null;
       state.err = null;
       return { ...state };
-    case ActionType.LIST_MOVIE_NEW_SUCCESS:
+    case ActionType.DETAIL_MOVIE_SUCCESS:
       state.loading = false;
-      state.data = payload;
+      state.data = action.payload;
       state.err = null;
       return { ...state };
-    case ActionType.LIST_MOVIE_NEW_FAILED:
+    case ActionType.DETAIL_MOVIE_FAILED:
       state.loading = false;
       state.data = null;
-      state.err = payload;
+      state.err = action.payload;
       return { ...state };
     default:
-      return state;
+      return { ...state };
   }
 };
-export default reducer;
+
+export default detailMovieReducer;

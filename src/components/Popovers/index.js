@@ -15,7 +15,7 @@ function Popovers(props) {
   const target = useRef(null);
   useEffect(() => {
     props.handleTryLogin(props.history);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const user = JSON.parse(localStorage.getItem("User"));
   const _handleHideNavbar = (isHidden) => {
     props.handleHideNavbar(isHidden);
@@ -32,7 +32,7 @@ function Popovers(props) {
 
   return (
     <>
-      <a ref={target} onClick={() => setShow(!show)}>
+      <span ref={target} onClick={() => setShow(!show)}>
         {!user ? (
           <img src={avatar} alt="avatar" />
         ) : (
@@ -41,7 +41,7 @@ function Popovers(props) {
             <span style={{ cursor: "pointer" }}>{user.hoTen}</span>
           </>
         )}
-      </a>
+      </span>
       <Overlay target={target.current} show={show} placement="bottom">
         {(props) => (
           <StyledTooltip id="overlay-example" {...props}>

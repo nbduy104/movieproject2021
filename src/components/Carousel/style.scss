@@ -1,9 +1,9 @@
 @import "../../sass/Helper/_variables.scss";
-
+@import 'node_modules/react-modal-video/scss/modal-video.scss';
 .carouselSection {
   .carousel__content {
     position: relative;
-    #carouselExampleIndicators {
+   
       .carousel-indicators {
         position: absolute;
         bottom: 12%;
@@ -15,6 +15,10 @@
           background-color: $color-gray-1;
           border: 0;
           border-radius: 50%;
+          @media screen and (max-width: 768px) {
+            width: 12px;
+            height: 10px;
+          }
         }
 
         .active {
@@ -47,14 +51,35 @@
               border: 0;
               outline: none;
             }
-            i {
-              color: white;
-              font-size: 20px;
+            .fa-play {
+              font-size: 30px;
               border: 0;
+              transform: translateX(15%);
+            }
+
+            @media screen and (max-width: 768px) {
+              width: 50px;
+              height: 50px;
+              .fa-play {
+                font-size: 15px;
+              }
             }
           }
           &:hover button {
             opacity: 1;
+            color: $color-orange-0;
+            border: 2px solid $color-orange-0;
+          }
+          .modal-video-close-btn{
+            position:absolute;
+            left:98%;
+            top:5%;
+            height:20px;
+            width:20px;
+            border:none !important;
+            &::before,&::after{
+              top:65%;
+            }
           }
         }
       }
@@ -68,6 +93,9 @@
           opacity: 0.5;
           margin-left: 50px;
         }
+        @media screen and (max-width: 992px) {
+          display: none !important;
+        }
       }
       .right__control {
         display: flex;
@@ -79,9 +107,12 @@
           opacity: 0.5;
           margin-right: 50px;
         }
+        @media screen and (max-width: 992px) {
+          display: none !important;
+        }
       }
     }
-  }
+  
 }
 
 .modal-video {
@@ -93,14 +124,6 @@
         right: 0;
         transform: translate(50%, -50%);
       }
-    }
-  }
-}
-
-@media screen and (max-width: 576px) {
-  .carouselSection {
-    .carousel__content {
-      display: none;
     }
   }
 }

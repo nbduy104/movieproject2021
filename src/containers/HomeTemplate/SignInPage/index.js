@@ -40,6 +40,7 @@ function SignIn(props) {
       taiKhoan: "",
       matKhau: "",
     },
+    keepLogin: false,
   });
   const classes = useStyles();
   const handleOnchange = (e) => {
@@ -59,14 +60,14 @@ function SignIn(props) {
       taiKhoan,
       matKhau,
     };
-    props.handleSubmit(user, props.history, props.maLichChieu);
+    props.handleSubmit(user, props.history, props.maLichChieu, state.keepLogin);
   };
 
   return (
     <Container className={classes.container} component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <img className={classes.avatar} src="./img/group@2x.png" />
+        <img className={classes.avatar} src="./img/group@2x.png" alt="avatar" />
         <form onSubmit={_handleSubmit} className={classes.form} noValidate>
           {props.err && props.err.response ? (
             <Alert className={classes.alertSignIn} severity="error">
@@ -88,7 +89,7 @@ function SignIn(props) {
                 onChange={handleOnchange}
               />{" "}
             </Grid>
-            <Grid item item xs={12}>
+            <Grid item xs={12}>
               <CssTextField
                 variant="outlined"
                 required
@@ -119,6 +120,12 @@ function SignIn(props) {
                     color="primary"
                     name="notify"
                     className={classes.checkbox}
+                    onClick={(e) => {
+                      setstate({
+                        ...state,
+                        keepLogin: e.target.checked,
+                      });
+                    }}
                   />
                 }
                 label="Ghi nhớ đăng nhập"
@@ -156,8 +163,8 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSubmit: (user, history, maLichChieu) => {
-      dispatch(actSignInHomeApi(user, history, maLichChieu));
+    handleSubmit: (user, history, maLichChieu, keepLogin) => {
+      dispatch(actSignInHomeApi(user, history, maLichChieu, keepLogin));
     },
   };
 };

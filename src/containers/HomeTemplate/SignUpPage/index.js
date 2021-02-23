@@ -10,7 +10,6 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { CssTextField, useStyles } from "../../../style/SignUp";
 import Alert from "@material-ui/lab/Alert";
-import "./style.scss";
 import { connect } from "react-redux";
 import { actSignUpHomeApi } from "./modules/action";
 function Copyright() {
@@ -201,7 +200,7 @@ function SignUp(props) {
     <Container className={classes.container} component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <img className={classes.avatar} src="./img/group@2x.png" />
+        <img className={classes.avatar} src="./img/group@2x.png" alt="avatar" />
         <form onSubmit={_handleSubmit} className={classes.form} noValidate>
           {props.err && props.err.response ? (
             <Alert className={classes.alertSignIn} severity="error">
@@ -275,7 +274,7 @@ function SignUp(props) {
                 ""
               )}
             </Grid>
-            <Grid item item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <CssTextField
                 error={state.errors.matKhau ? true : false}
                 variant="outlined"
@@ -297,7 +296,7 @@ function SignUp(props) {
                 ""
               )}
             </Grid>
-            <Grid item item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <CssTextField
                 error={state.errors.checkmatKhau ? true : false}
                 variant="outlined"

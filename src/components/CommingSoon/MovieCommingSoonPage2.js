@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LIST_MOVIE_COMMING_SUCCESS } from "./modules/constants";
+import * as ActionType from "./modules/constants";
 import "./style.scss";
 import { actListMovieApi } from "./modules/action";
 import { connect } from "react-redux";
@@ -12,7 +12,13 @@ class MovieCommingSoonPage2 extends Component {
     };
   }
   componentDidMount() {
-    this.props.fetchListMovie("GP02", 1, LIST_MOVIE_COMMING_SUCCESS);
+    this.props.fetchListMovie(
+      "GP02",
+      1,
+      ActionType.LIST_MOVIE_COMMING_REQUEST,
+      ActionType.LIST_MOVIE_COMMING_SUCCESS,
+      ActionType.LIST_MOVIE_COMMING_FAILED
+    );
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
     const { dataComming } = nextProps;
@@ -24,7 +30,9 @@ class MovieCommingSoonPage2 extends Component {
       this.props.fetchListMovie(
         "GP02",
         dataComming[chiSo].currentPage + 1,
-        LIST_MOVIE_COMMING_SUCCESS
+        ActionType.LIST_MOVIE_COMMING_REQUEST,
+        ActionType.LIST_MOVIE_COMMING_SUCCESS,
+        ActionType.LIST_MOVIE_COMMING_FAILED
       );
       this.setState({
         chiSo: chiSo + 1,
@@ -40,8 +48,8 @@ const mapStateToProps = (state) => ({
   dataComming: state.listMovieReducer.dataComming,
 });
 const mapDispatchToProps = (dispatch) => ({
-  fetchListMovie: (group, page, success) => {
-    dispatch(actListMovieApi(group, page, success));
+  fetchListMovie: (group, page, request, success, failed) => {
+    dispatch(actListMovieApi(group, page, request, success, failed));
   },
 });
 

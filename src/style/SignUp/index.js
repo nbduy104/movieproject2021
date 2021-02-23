@@ -83,6 +83,12 @@ export const CssTextField = withStyles({
         backgroundColor: "rgba(63,81,181) !important",
         opacity: "0.5",
       },
+      "& input": {
+        "&:-webkit-autofill": {
+          boxShadow: "0 0 0 50px #5c6bc0bb inset",
+          WebkitTextFillColor: "white !important",
+        },
+      },
     },
   },
 })(TextField);

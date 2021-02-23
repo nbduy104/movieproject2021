@@ -34,7 +34,7 @@ function InfoUserPage(props) {
     return () => {
       document.body.style.backgroundColor = null;
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const [state, setState] = useState({
     values: {
       taiKhoan: "",
@@ -77,7 +77,7 @@ function InfoUserPage(props) {
         soDT: user.soDT,
       },
     });
-  }, [props.data, state.matKhau]);
+  }, [props.data, state.matKhau]); // eslint-disable-line react-hooks/exhaustive-deps
   const classes = useStyles();
   const handleOnchange = (e) => {
     const { name, value } = e.target;
@@ -190,7 +190,7 @@ function InfoUserPage(props) {
     <Container className={classes.container} component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <img className={classes.avatar} src="./img/group@2x.png" />
+        <img className={classes.avatar} src="./img/group@2x.png" alt="avatar" />
         <form onSubmit={_handleSubmit} className={classes.form} noValidate>
           {props.err && props.err.response ? (
             <Alert className={classes.alertSignIn} severity="error">
@@ -247,7 +247,7 @@ function InfoUserPage(props) {
               )}
             </Grid>
 
-            <Grid item item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <CssTextField
                 error={state.errors.matKhau ? true : false}
                 variant="outlined"
@@ -270,7 +270,7 @@ function InfoUserPage(props) {
                 ""
               )}
             </Grid>
-            <Grid item item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <CssTextField
                 error={state.errors.checkmatKhau ? true : false}
                 variant="outlined"

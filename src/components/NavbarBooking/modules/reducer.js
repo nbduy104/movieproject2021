@@ -6,7 +6,7 @@ const initialState = {
   maLichChieu: 0,
 };
 
-export default (state = initialState, { type, payload }) => {
+const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ActionType.NAV_BOOKING_REQUEST:
       state.loading = true;
@@ -30,3 +30,4 @@ export default (state = initialState, { type, payload }) => {
       return state;
   }
 };
+export default reducer;

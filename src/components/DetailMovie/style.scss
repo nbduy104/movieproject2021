@@ -1,0 +1,69 @@
+@import "../../sass/Helper/_variables.scss";
+.title_detailMovie {
+    border-bottom: 2px solid #222;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.img_detailMovie{
+    .img-fluid{
+        .header__img{
+            display: none;
+        }
+    }
+}
+
+.sub-title_detailMovie{
+    border-bottom: 1px solid #d9d6c8;
+    margin-bottom: 10px;
+    width: 100%;
+    padding-bottom: 15px;
+}
+.detailMovie_tab{
+    align-content: center;
+
+    .nav-tabs{
+        border-bottom: 0px solid #dee2e6;
+        margin: 0;
+        padding-top: 75px;
+        display: flex;
+        justify-content: center;
+        border: 0;
+        padding: 50px 15px 30px;
+        .nav-item{
+            .nav-link{
+    
+                border: none;
+                color: #000;
+                transition: all .5s;
+                cursor: pointer;
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 24px;
+                height: 24px;
+    
+                &.active{
+                    border: none;
+                    font-size: 24px;
+                    color: #fa5238;
+                }
+    
+                &:hover{
+                    font-size: 24px;
+                }
+            }
+        }
+    }
+    .tab-content{
+        text-align: center;
+        padding-top: 10px;
+    }
+}
+
+.container{
+    max-width: 300px;
+    border-bottom: none;
+    border: none;
+}
+
+

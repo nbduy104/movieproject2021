@@ -51,46 +51,58 @@ export default function Partners() {
           <div className="partners__item3 d-none d-lg-block  col-lg-4 partners__img">
             <h3 className="mb-2">Đối tác</h3>
             <div className="d-flex mb-3">
-              <img className="img__border" src={cgv} />
-              <img src={bhd} />
-              <img src={galaxycine} />
-              <img src={cinestar} />
-              <img src={lotte} />
+              <img className="img__border" src={cgv} alt="cgv" />
+              <img src={bhd} alt="bhd" />
+              <img src={galaxycine} alt="galaxycine" />
+              <img src={cinestar} alt="cinestar" />
+              <img src={lotte} alt="lotte" />
             </div>
             <div className="d-flex mb-3">
-              <img className="img__border" src={megags} />
-              <img className="img__border" src={bt} />
-              <img className="img__border" src={dongdacinema} />
-              <img src={TOUCH} />
-              <img className="img__border" src={cnx} />
+              <img className="img__border" src={megags} alt="megags" />
+              <img className="img__border" src={bt} alt="bt" />
+              <img
+                className="img__border"
+                src={dongdacinema}
+                alt="dongdacinema"
+              />
+              <img src={TOUCH} alt="TOUCH" />
+              <img className="img__border" src={cnx} alt="cnx" />
             </div>
             <div className="d-flex mb-3">
-              <img className="img__border" src={STARLIGHT} />
-              <img className="img__border" src={dcine} />
-              <img src={zalopay_icon} />
-              <img className="img__border" src={payoo} />
-              <img className="img__border" src={VCB} />
+              <img className="img__border" src={STARLIGHT} alt="STARLIGHT" />
+              <img className="img__border" src={dcine} alt="dcine" />
+              <img src={zalopay_icon} alt="zalopay_icon" />
+              <img className="img__border" src={payoo} alt="payoo" />
+              <img className="img__border" src={VCB} alt="VCB" />
             </div>
             <div className="d-flex">
-              <img className="img__border" src={AGRIBANK} />
-              <img className="img__border" src={VIETTINBANK} />
-              <img className="img__border" src={IVB} />
-              <img className="img__border img__123go" src={P123go} />
-              <img src={laban} />
+              <img className="img__border" src={AGRIBANK} alt="AGRIBANK" />
+              <img
+                className="img__border"
+                src={VIETTINBANK}
+                alt="VIETTINBANK"
+              />
+              <img className="img__border" src={IVB} alt="IVB" />
+              <img
+                className="img__border img__123go"
+                src={P123go}
+                alt="P123go"
+              />
+              <img src={laban} alt="laban" />
             </div>
           </div>
           <div className="partners__item4 d-none d-lg-block  col-lg-2 partners__app text-center">
             <h3>MOBILE APP</h3>
             <div className="d-flex">
-              <img src={androidLogo} />
-              <img src={appleLogo} />
+              <img src={androidLogo} alt="androidLogo" />
+              <img src={appleLogo} alt="appleLogo" />
             </div>
           </div>
           <div className="partners__item4 d-lg-block col- col-md-4 col-lg-2 partners__app text-center">
             <h3 className="d-none d-lg-block">SOCIAL</h3>
             <div className="d-flex">
-              <img src={facebookLogo} />
-              <img src={zaloLogo} />
+              <img src={facebookLogo} alt="facebookLogo" />
+              <img src={zaloLogo} alt="zaloLogo" />
             </div>
           </div>
         </div>

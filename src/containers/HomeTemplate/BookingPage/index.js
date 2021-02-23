@@ -32,8 +32,13 @@ import Rodal from "rodal";
 import listCombo from "../../../Assets/data/listCombo.json";
 import { StyledLink } from "../../../components/Link";
 import Checkbox from "@material-ui/core/Checkbox";
+import { useMediaQuery } from "react-responsive";
 function BookingPage(props) {
+  //Time Booking
   const TIME_COUNTDOWN = 90000;
+  //responsive
+  const isMD = useMediaQuery({ query: "(max-width: 960px)" });
+  const isXS = useMediaQuery({ query: "(max-width: 600px)" });
   //radioBtn hình thức thanh toán
   const [value, setValue] = React.useState("zaloPay");
 
@@ -51,6 +56,7 @@ function BookingPage(props) {
     isBookingCompleted: false,
     isChangeStateSumCombo: false,
     isChecked: false,
+    isCheckedSmall: false,
     listComboDetail: [],
   });
   useEffect(() => {
@@ -61,7 +67,7 @@ function BookingPage(props) {
     return () => {
       document.body.style.backgroundColor = null;
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   //Sum Money Booking
 
   const handleNumberChair = (word, number) => {
@@ -118,15 +124,23 @@ function BookingPage(props) {
     // let tenGhe = handleNumberChair(word, number);
     let chairInfo = getInfoChair(word, number);
     if (!chairInfo || chairInfo.daDat === true) return;
-    listBookingChair.map((item, index) => {
-      if (item.maGhe === chairInfo.maGhe) {
+    // listBookingChair.map((item, index) => {
+    //   if (item.maGhe === chairInfo.maGhe) {
+    //     sumMoneyChair -= chairInfo.giaVe;
+    //     listBookingChair.splice(index, 1);
+    //     listNumberChair.splice(index, 1);
+    //     flag = true;
+    //     return flag;
+    //   }
+    // });
+    for (let i = 0; i < listBookingChair.length; i++) {
+      if (listBookingChair[i].maGhe === chairInfo.maGhe) {
         sumMoneyChair -= chairInfo.giaVe;
-        listBookingChair.splice(index, 1);
-        listNumberChair.splice(index, 1);
+        listBookingChair.splice(i, 1);
+        listNumberChair.splice(i, 1);
         flag = true;
-        return;
       }
-    });
+    }
     if (!flag) {
       listBookingChair.push({ maGhe: chairInfo.maGhe, giaVe: chairInfo.giaVe });
       listNumberChair.push(word + number);
@@ -163,9 +177,10 @@ function BookingPage(props) {
             }}
           >
             <span
+              className={classes.nameChair}
               style={
                 state.listNumberChair.includes(word + number)
-                  ? { display: "block", textAlign: "center", color: "white" }
+                  ? { display: "block" }
                   : { display: "none" }
               }
             >
@@ -200,11 +215,13 @@ function BookingPage(props) {
     if (!props.data) return;
     const { thongTinPhim } = props.data;
     if (!thongTinPhim) return;
+    let tenCumRap = thongTinPhim.tenCumRap.split("-");
     return (
       <>
         <img src={thongTinPhim.hinhAnh} alt={thongTinPhim.tenPhim} />
         <div>
-          <span>{thongTinPhim.tenCumRap}</span>
+          <span style={{ color: "green" }}>{tenCumRap[0]}</span>
+          <span>- {tenCumRap[1]}</span>
           <span>{` - ${thongTinPhim.tenRap}`}</span>
           <p>{thongTinPhim.diaChi}</p>
         </div>
@@ -397,16 +414,17 @@ function BookingPage(props) {
     let { sumMoneyChair, listComboDetail } = state;
     let sumMoney = 0;
     let sumMoneyCombo = 0;
-    listComboDetail.map((item) => {
-      sumMoneyCombo += item.gia * item.count;
-    });
+    listComboDetail.forEach((item) => (sumMoneyCombo += item.gia * item.count));
+    // listComboDetail.map((item) => {
+    //   sumMoneyCombo += item.gia * item.count;
+    // });
     sumMoney = sumMoneyChair + sumMoneyCombo;
     setstate({
       ...state,
       sumMoneyCombo,
       sumMoney,
     });
-  }, [state.sumMoneyChair, state.isChangeStateSumCombo, state.listComboDetail]);
+  }, [state.sumMoneyChair, state.isChangeStateSumCombo, state.listComboDetail]); // eslint-disable-line react-hooks/exhaustive-deps
   const renderSumMoney = () => {
     return (
       <p className={classes.p__sumMoney}>
@@ -416,39 +434,83 @@ function BookingPage(props) {
   };
   return (
     <Grid container>
-      <Grid item xs={9}>
+      <Grid item md={9} style={{ width: "100%" }}>
         <GridNav item xs={12} container className={classes.navbar}>
           <Grid item xs={2}>
             <Link exact="true" to="/">
               <img className={classes.logo} src={Logo} alt="logo" />
             </Link>
           </Grid>
-          <Grid item xs={8} container>
-            <Grid item xs={2}></Grid>
-
-            <Grid
-              item
-              xs={4}
-              className={
-                state.isSetPage
-                  ? classes.navContent
-                  : clsx(classes.active, classes.navContent)
-              }
-            >
-              <span>
-                <span className={classes.spanNumber}>01</span>
-                CHỌN GHẾ & THANH TOÁN
-              </span>
-            </Grid>
-            <Grid item xs={4} className={classes.navContent}>
-              <span>
-                <span className={classes.spanNumber}>02</span>
-                KẾT QUẢ ĐẶT VÉ
-              </span>
-            </Grid>
-            <Grid item xs={2}></Grid>
+          <Grid item xs={7} lg={7} container>
+            {!isMD ? (
+              <>
+                <Grid
+                  item
+                  xs={6}
+                  className={clsx(classes.active, classes.navContent)}
+                >
+                  <span className={classes.spanNumber}>
+                    <span>01</span>
+                    CHỌN GHẾ & THANH TOÁN
+                  </span>
+                </Grid>
+                <Grid item xs={6} className={classes.navContent}>
+                  <span className={classes.spanNumber}>
+                    <span>02</span>
+                    KẾT QUẢ ĐẶT VÉ
+                  </span>
+                </Grid>
+              </>
+            ) : (
+              <>
+                <Grid
+                  item
+                  sm={6}
+                  xs={12}
+                  className={
+                    state.isSetPage
+                      ? classes.navContent
+                      : clsx(classes.active, classes.navContent)
+                  }
+                >
+                  <span
+                    style={
+                      isXS && state.isSetPage
+                        ? { display: "none" }
+                        : { display: "block" }
+                    }
+                    className={classes.spanNumber}
+                  >
+                    <span>01</span>
+                    CHỌN GHẾ
+                  </span>
+                </Grid>
+                <Grid
+                  item
+                  sm={6}
+                  xs={12}
+                  className={
+                    !state.isSetPage
+                      ? classes.navContent
+                      : clsx(classes.active, classes.navContent)
+                  }
+                >
+                  <span
+                    style={
+                      isXS && !state.isSetPage
+                        ? { display: "none" }
+                        : { display: "block" }
+                    }
+                    className={classes.spanNumber}
+                  >
+                    <span>02</span>
+                    THANH TOÁN
+                  </span>
+                </Grid>
+              </>
+            )}
           </Grid>
-          <Grid item xs={2} className={classes.avatar}>
+          <Grid item xs={3} lg={3} className={classes.avatar}>
             <Popovers />
             <Button
               className={classes.themeMode}
@@ -464,77 +526,270 @@ function BookingPage(props) {
             </Button>
           </Grid>
         </GridNav>
-        <Grid item xs={12} style={{ height: 50 }}></Grid>
-        <Grid item xs={12} container>
-          <Grid item xs={1}></Grid>
-          <GridBG item xs={11} container className={classes.leftSide__contain}>
-            <Grid container className={classes.info}>
-              <Grid item xs={8} className={classes.infoTheater}>
-                {renderThongTinRap()}
-              </Grid>
-              <Grid item xs={4} className={classes.timeAccess}>
-                <span>Thời gian giữ ghế</span>
-                <Countdown
-                  date={getDateMemo}
-                  renderer={renderer}
-                  zeroPadTime={2}
-                  onComplete={alertShow}
-                />
-              </Grid>
-            </Grid>
-            <Grid item xs={12} className={classes.contain__screen}>
-              <img src={screen} className={classes.screen} alt="screen" />
-              <GridSide item xs={12} className={classes.screenLine}></GridSide>
-            </Grid>
-            <Grid item xs={12} className={classes.contain__chair}>
-              <div className="theatre">
-                <div className="cinema-seats left">
-                  <div className="cinema-row row-0">{renderLableChair()}</div>
-                  {renderRowMovieChair(1)}
+        <Grid item xs={12} style={{ height: 60 }}></Grid>
+        {/* Responsive Booking */}
+        {state.isSetPage && isMD ? (
+          <GridNav
+            // className={classes.position__rightSide}
+            style={
+              !state.isSetPage ? { display: "none" } : { display: "block" }
+            }
+          >
+            <Grid item xs={12}>
+              <GridBorder className={classes.div__content}>
+                {renderSumMoney()}
+              </GridBorder>
+              {renderTenPhim()}
+              <GridBorder container className={classes.div__content}>
+                <div>
+                  {state.listNumberChair[0] ? <span>Ghế: </span> : ""}
+                  {fetchBookChair()}
                 </div>
-                <div className="cinema-seats right">
-                  <div className="cinema-row row-0">{renderLableChair()}</div>
-                  {renderRowMovieChair(9)}
-                </div>
-              </div>
-            </Grid>
-            <GridNav className="collapse__Combo">
-              <div id="collapse__Combo" className="collapse width">
-                <div style={{ width: 400 }}>
-                  {renderCombo()}
-                  <div
-                    role="button"
-                    data-toggle="collapse"
-                    data-target="#collapse__Combo"
-                    className={classes.overlay}
-                  ></div>
-                </div>
-              </div>
-            </GridNav>
+                <p>{`${state.sumMoneyChair.toLocaleString()} đ`}</p>
+              </GridBorder>
+              <GridBorder container className={classes.div__content}>
+                {/* Start Drawer */}
 
-            <Grid container>
-              {/* <Grid item xs={2}></Grid> */}
-              <Grid item xs={3} className={classes.infoChair}>
-                <div className={classes.infoChair__1} />
-                <span>Ghế thường</span>
-              </Grid>
-              <Grid item xs={3} className={classes.infoChair}>
-                <div className={classes.infoChair__2} />
-                <span>Ghế VIP</span>
-              </Grid>
-              <Grid item xs={3} className={classes.infoChair}>
-                <div className={classes.infoChair__3} />
-                <span>Ghế đang chọn</span>
-              </Grid>
-              <Grid item xs={3} className={classes.infoChair}>
-                <div className={classes.infoChair__4} />
-                <span>Ghế đã có người chọn</span>
+                <Button
+                  role="button"
+                  data-toggle="collapse"
+                  data-target="#collapse__Combo"
+                >
+                  <p> Chọn combo</p>
+                </Button>
+
+                {/* End Drawer */}
+                <p>{`${state.sumMoneyCombo.toLocaleString()} đ`}</p>
+              </GridBorder>
+              <GridBorder className="collapse__Combo">
+                <div id="collapse__Combo" className="collapse">
+                  <div style={{ width: "100%", height: 300, zIndex: 2 }}>
+                    {renderCombo()}
+                  </div>
+                </div>
+              </GridBorder>
+              <GridBorder container className={classes.div__content}>
+                <TextFieldM
+                  label="Mã giảm giá"
+                  className={classes.textfield__salesoff}
+                ></TextFieldM>
+                <button className="btn btn-danger" disabled>
+                  Áp dụng
+                </button>
+              </GridBorder>
+              <GridBorder className={classes.div__content}>
+                <FormControl component="fieldset">
+                  <LabelM component="legend" className={classes.label__payment}>
+                    Hình thức thanh toán
+                  </LabelM>
+                  <RadioGroup
+                    aria-label="payment"
+                    name="payment"
+                    value={value}
+                    onChange={handleChange}
+                  >
+                    <FormControlLabel
+                      value="zaloPay"
+                      control={<Radio />}
+                      label={
+                        <Grid container className={classes.payment}>
+                          <img
+                            src={
+                              process.env.PUBLIC_URL + "/img/zalopay_icon.png"
+                            }
+                            alt="ZaloPay"
+                          />
+                          <p>Thanh toán qua ZaloPay</p>
+                        </Grid>
+                      }
+                    />
+                    <FormControlLabel
+                      value="visaMaster"
+                      control={<Radio />}
+                      label={
+                        <Grid container className={classes.payment}>
+                          <img
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/img/visa_mastercard.png"
+                            }
+                            alt="visa"
+                          />
+                          <p>Visa, Master, JCB</p>
+                        </Grid>
+                      }
+                    />
+                    <FormControlLabel
+                      value="atm"
+                      control={<Radio />}
+                      label={
+                        <Grid container className={classes.payment}>
+                          <img
+                            src={process.env.PUBLIC_URL + "/img/atm.png"}
+                            alt="atm"
+                          />
+                          <p>Thẻ ATM nội địa</p>
+                        </Grid>
+                      }
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </GridBorder>
+              <GridBorder className={classes.info__booking}>
+                <Checkbox
+                  // checked={checked}
+                  onChange={(e) => {
+                    setstate({
+                      ...state,
+                      isCheckedSmall: e.target.checked,
+                    });
+                  }}
+                  inputProps={{ "aria-label": "primary checkbox" }}
+                />
+                <div>
+                  <img
+                    src={process.env.PUBLIC_URL + "/img/exclamation.png"}
+                    alt="exclamation"
+                  />
+                  <span>
+                    Vé đã mua không thể đổi hoặc hoàn tiền Mã vé sẽ được gửi qua
+                    tin nhắn ZMS (tin nhắn Zalo) và Email đã nhập.
+                  </span>
+                </div>
+              </GridBorder>
+
+              <Grid item className={classes.btn__bookingSmall}>
+                <Button
+                  onClick={() => {
+                    setstate({
+                      ...state,
+                      isSetPage: false,
+                    });
+                  }}
+                >
+                  Trở lại
+                </Button>
+                <Button
+                  onClick={handleBooking}
+                  disabled={
+                    !state.isCheckedSmall || !state.listBookingChair[0]
+                      ? true
+                      : false
+                  }
+                >
+                  Thanh Toán
+                </Button>
               </Grid>
             </Grid>
-          </GridBG>
-        </Grid>
+          </GridNav>
+        ) : (
+          <Grid item xs={12} container className={classes.leftSide__container}>
+            <Grid item sm={1}></Grid>
+            <GridBG
+              item
+              sm={11}
+              container
+              className={classes.leftSide__contain}
+            >
+              <Grid container className={classes.info}>
+                <Grid item xs={8} className={classes.infoTheater}>
+                  {renderThongTinRap()}
+                </Grid>
+                <Grid item xs={4} className={classes.timeAccess}>
+                  <span>Thời gian giữ ghế</span>
+                  <Countdown
+                    date={getDateMemo}
+                    renderer={renderer}
+                    zeroPadTime={2}
+                    onComplete={alertShow}
+                  />
+                </Grid>
+              </Grid>
+              <Grid item xs={12} className={classes.contain__screen}>
+                <img src={screen} className={classes.screen} alt="screen" />
+                <GridSide
+                  item
+                  xs={12}
+                  className={classes.screenLine}
+                ></GridSide>
+              </Grid>
+              <Grid item xs={12} className={classes.contain__chair}>
+                <div className="theatre">
+                  <div className="cinema-seats left">
+                    <div className="cinema-row row-0">{renderLableChair()}</div>
+                    {renderRowMovieChair(1)}
+                  </div>
+                  <div className="cinema-seats right">
+                    <div className="cinema-row row-0">{renderLableChair()}</div>
+                    {renderRowMovieChair(9)}
+                  </div>
+                </div>
+              </Grid>
+              {!isMD && (
+                <GridNav className="collapse__Combo">
+                  <div id="collapse__Combo" className="collapse width">
+                    <div style={{ width: 400 }}>
+                      {renderCombo()}
+                      <div
+                        role="button"
+                        data-toggle="collapse"
+                        data-target="#collapse__Combo"
+                        className={classes.overlay}
+                      ></div>
+                    </div>
+                  </div>
+                </GridNav>
+              )}
+              <Grid container>
+                {/* <Grid item xs={2}></Grid> */}
+                <Grid item xs={6} md={3} className={classes.infoChair}>
+                  <div className={classes.infoChair__1} />
+                  <span>Ghế thường</span>
+                </Grid>
+                <Grid item xs={6} md={3} className={classes.infoChair}>
+                  <div className={classes.infoChair__2} />
+                  <span>Ghế VIP</span>
+                </Grid>
+                <Grid item xs={6} md={3} className={classes.infoChair}>
+                  <div className={classes.infoChair__3} />
+                  <span>Ghế đang chọn</span>
+                </Grid>
+                <Grid item xs={6} md={3} className={classes.infoChair}>
+                  <div className={classes.infoChair__4} />
+                  <span>Ghế đã có người chọn</span>
+                </Grid>
+              </Grid>
+              {isMD && (
+                <Grid container className={classes.div__bookingRES}>
+                  <Grid item xs={6} className={classes.chair__bookingRES}>
+                    {state.listNumberChair[0] ? <span>Ghế: </span> : ""}
+                    {fetchBookChair()}
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Button
+                      className={clsx(classes.btn__bookingRES)}
+                      disabled={!state.listBookingChair[0] ? true : false}
+                      onClick={() => {
+                        setstate({
+                          ...state,
+                          isSetPage: true,
+                        });
+                      }}
+                    >
+                      Tiếp tục
+                    </Button>
+                  </Grid>
+                </Grid>
+              )}
+            </GridBG>
+          </Grid>
+        )}
       </Grid>
-      <GridNav className={classes.position__rightSide}>
+      {/* Start Bill Booking */}
+      <GridNav
+        className={classes.position__rightSide}
+        style={isMD ? { display: "none" } : { display: "block" }}
+      >
         <Grid item xs={12}>
           <GridBorder className={classes.div__content}>
             {renderSumMoney()}
@@ -624,26 +879,32 @@ function BookingPage(props) {
             </FormControl>
           </GridBorder>
           <GridBorder className={classes.info__booking}>
-            <Checkbox
-              // checked={checked}
-              onChange={(e) => {
-                setstate({
-                  ...state,
-                  isChecked: e.target.checked,
-                });
-              }}
-              inputProps={{ "aria-label": "primary checkbox" }}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  // checked={checked}
+                  onChange={(e) => {
+                    setstate({
+                      ...state,
+                      isChecked: e.target.checked,
+                    });
+                  }}
+                  inputProps={{ "aria-label": "primary checkbox" }}
+                />
+              }
+              label={
+                <div>
+                  <img
+                    src={process.env.PUBLIC_URL + "/img/exclamation.png"}
+                    alt="exclamation"
+                  />
+                  <span>
+                    Vé đã mua không thể đổi hoặc hoàn tiền Mã vé sẽ được gửi qua
+                    tin nhắn ZMS (tin nhắn Zalo) và Email đã nhập.
+                  </span>
+                </div>
+              }
             />
-            <div>
-              <img
-                src={process.env.PUBLIC_URL + "/img/exclamation.png"}
-                alt="exclamation"
-              />
-              <span>
-                Vé đã mua không thể đổi hoặc hoàn tiền Mã vé sẽ được gửi qua tin
-                nhắn ZMS (tin nhắn Zalo) và Email đã nhập.
-              </span>
-            </div>
           </GridBorder>
           <Grid item className={classes.btn__booking}>
             <Button
@@ -657,6 +918,8 @@ function BookingPage(props) {
           </Grid>
         </Grid>
       </GridNav>
+
+      {/* End Bill Booking */}
       <AlertRodal />
       <Rodal
         visible={state.visible}
