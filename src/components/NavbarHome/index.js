@@ -146,13 +146,13 @@ function NavbarHome(props) {
         {props.themeMode === DarkTheme ? (
           <img
             className="img-fluid header__img"
-            src="./img/line-header-dark.jpg"
+            src={process.env.PUBLIC_URL + "/img/line-header-dark.jpg"}
             alt="lineheader"
           />
         ) : (
           <img
             className="img-fluid header__img"
-            src="./img/line-header-light.jpg"
+            src={process.env.PUBLIC_URL + "/img/line-header-light.jpg"}
             alt="lineheader"
           />
         )}

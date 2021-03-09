@@ -59,7 +59,7 @@ function Popovers(props) {
                   to="/info-user"
                   style={{ whiteSpace: "nowrap" }}
                   onClick={() => {
-                    _handleHideNavbar(true);
+                    // _handleHideNavbar(true);
                   }}
                 >
                   Thông tin tài khoản
