@@ -17,6 +17,7 @@ import Loader from "components/Loader";
 import ModalVideo from "react-modal-video";
 // import LoaderImg from "../../Assets/Images/loading.gif";
 import { withRouter } from "react-router-dom";
+import { actHideNavbar } from "../NavbarHome/modules/action";
 class MovieCommingSoonPage3 extends Component {
   constructor(props) {
     super(props);
@@ -78,6 +79,7 @@ class MovieCommingSoonPage3 extends Component {
   };
   //Viết booking draft wait code
   handleBooking = (movie) => {
+    // this.props.handleHideNavbar(true);
     this.props.fetchDraftLichChieu(movie.maPhim, this.props.history);
   };
   //End booking template
@@ -276,6 +278,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   fetchDraftLichChieu: (maPhim, history) => {
     dispatch(actListShowTimeDraft(maPhim, history));
+  },
+  handleHideNavbar: (isHidden) => {
+    dispatch(actHideNavbar(isHidden));
   },
 });
 const ConnectedComponent = connect(

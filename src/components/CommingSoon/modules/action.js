@@ -23,7 +23,8 @@ export const actListShowTimeDraft = (maPhim, history) => {
       .get(`/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`)
       .then((res) => {
         history.push(
-          `/booking/${res.data.heThongRapChieu[0].cumRapChieu[0].lichChieuPhim[0].maLichChieu}`
+          // `/booking/${res.data.heThongRapChieu[0].cumRapChieu[0].lichChieuPhim[0].maLichChieu}`
+          `/detail-movie/${maPhim}`
         );
         dispatch(actionName(ActionType.LIST_SHOWTIME_DRAFT_SUCCESS, res.data));
       })
