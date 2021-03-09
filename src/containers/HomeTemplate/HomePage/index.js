@@ -6,7 +6,7 @@ import React, { Component } from "react";
 import NavbarBooking from "components/NavbarBooking";
 import ShowTime from "../../../components/ShowTime";
 import Apps from "../../../components/Apps";
-import Partners from "../../../components/Partners";
+
 import Infomation from "components/Infomation";
 import { connect } from "react-redux";
 class HomePage extends Component {
@@ -21,7 +21,6 @@ class HomePage extends Component {
         <ShowTime />
         <Infomation />
         <Apps />
-        <Partners />
       </>
     );
   }

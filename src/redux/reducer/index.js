@@ -8,6 +8,7 @@ import signUpHomeReducer from "../../containers/HomeTemplate/SignUpPage/modules/
 import signInHomeReducer from "../../containers/HomeTemplate/SignInPage/modules/reducer";
 import updateInfoReducer from "../../containers/HomeTemplate/InfoUserPage/modules/reducer";
 import listBookingChairReducer from "../../containers/HomeTemplate/BookingPage/modules/reducer";
+import detailMovieReducer from "../../containers/HomeTemplate/DetailMovie/modules/reducer";
 const rootReducer = combineReducers({
   navbarHomeReducer,
   listMovieReducer,
@@ -18,5 +19,6 @@ const rootReducer = combineReducers({
   signInHomeReducer,
   updateInfoReducer,
   listBookingChairReducer,
+  detailMovieReducer,
 });
 export default rootReducer;
