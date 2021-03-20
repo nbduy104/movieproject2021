@@ -1,3 +1,4 @@
+import Dashboard from "containers/AdminTemplate/Dashboard/index";
 import HomePage from "../containers/HomeTemplate/HomePage";
 import InfoUserPage from "../containers/HomeTemplate/InfoUserPage";
 export const routesHome = [
@@ -12,3 +13,11 @@ export const routesHome = [
     component: InfoUserPage,
   },
 ];
+export const routesAdmin = [
+  {
+    exact: true,
+    path: "/dashboard",
+    component: Dashboard,
+  },
+];
+
