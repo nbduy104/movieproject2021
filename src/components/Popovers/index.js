@@ -17,14 +17,14 @@ function Popovers(props) {
     props.handleTryLogin(props.history);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const user = JSON.parse(localStorage.getItem("User"));
-  const _handleHideNavbar = (isHidden) => {
-    props.handleHideNavbar(isHidden);
-    const userNew = {
-      taiKhoan: user.taiKhoan,
-    };
-    props.fetchInfoUser(userNew);
-    setShow(!show);
-  };
+  // const _handleHideNavbar = (isHidden) => {
+  //   props.handleHideNavbar(isHidden);
+  //   const userNew = {
+  //     taiKhoan: user.taiKhoan,
+  //   };
+  //   props.fetchInfoUser(userNew);
+  //   setShow(!show);
+  // };
   const _handleShowAlert = () => {
     props.handleShowAlert(true);
     setShow(!show);
