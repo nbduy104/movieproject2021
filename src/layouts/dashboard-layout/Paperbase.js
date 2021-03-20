@@ -14,7 +14,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://movieproject-cv.netlify.app/">
-        Your Website
+        Link WepApp
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
