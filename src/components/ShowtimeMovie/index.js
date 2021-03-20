@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "./style.scss";
 export default function ShowtimeMovie() {
-  const [state, setState] = useState({
-    listTime: [],
-  });
+  // const [state, setState] = useState({
+  //   listTime: [],
+  // });
   const { data } = useSelector((state) => state.showTimeReducer);
   const renderHTR = () => {
     if (!data) return;
@@ -21,7 +21,7 @@ export default function ShowtimeMovie() {
   };
   const handleShowTimeMovie = () => {};
   const renderShowTimeMovie = () => {
-    return state.listTime.map((item) => <div>{item}</div>);
+    // return state.listTime.map((item) => <div>{item}</div>);
   };
   return (
     <div className="container">
