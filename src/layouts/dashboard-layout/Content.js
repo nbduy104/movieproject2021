@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import UserAdmin from 'containers/AdminTemplate/User/index';
 
 const styles = (theme) => ({
   paper: {
@@ -72,7 +73,7 @@ function Content(props) {
       </AppBar>
       <div className={classes.contentWrapper}>
         <Typography color="textSecondary" align="center">
-          No users for this project yet
+          <UserAdmin/>
         </Typography>
       </div>
     </Paper>
