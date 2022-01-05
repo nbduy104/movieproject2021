@@ -157,6 +157,8 @@
   .theater__movies {
     width: 50% !important;
     display: flex;
+    overflow-y: scroll;
+    overflow-x: hidden;
     &::-webkit-scrollbar-track {
       border: 1px solid rgb(232, 227, 227);
       padding: 2px 0;
@@ -314,7 +316,6 @@
           }
           .theater__movies {
             width: 100% !important;
-
             .tab-content {
               height: auto !important;
             }
